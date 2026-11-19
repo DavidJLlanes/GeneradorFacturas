@@ -3,6 +3,7 @@ import { SHORTCUTS, type Shortcut } from './shortcut-table';
 
 function isTypingTarget(target: EventTarget | null): boolean {
   if (!(target instanceof HTMLElement)) return false;
+  if (target.closest('dialog[open]')) return true;
   return target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName);
 }
 

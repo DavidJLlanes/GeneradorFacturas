@@ -66,6 +66,12 @@
   box-shadow: 0 1px 12px rgb(0 0 0 / 0.25);
 }
 
+.cv-margins {
+  position: absolute;
+  pointer-events: none;
+  border: calc(1px / var(--zoom, 1)) dashed var(--margin-line, #d9480f);
+}
+
 .cv-grid {
   position: absolute;
   inset: 0;

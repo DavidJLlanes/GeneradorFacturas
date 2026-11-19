@@ -1,0 +1,73 @@
+.pd {
+  width: min(92vw, 380px);
+  padding: 16px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.pd::backdrop {
+  background: rgb(0 0 0 / 0.5);
+}
+
+.pd h2 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.pd-fields {
+  display: grid;
+  gap: 8px;
+}
+
+.pd-row {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.pd-row input[type='number'],
+.pd-row select {
+  font: inherit;
+  padding: 4px 6px;
+  color: var(--text);
+  background: var(--control);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.pd-check {
+  grid-template-columns: auto 1fr;
+  direction: rtl;
+  text-align: left;
+}
+
+.pd-check span {
+  direction: ltr;
+}
+
+.pd-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.pd-btn {
+  font: inherit;
+  padding: 6px 14px;
+  color: var(--text);
+  background: var(--control);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pd-primary {
+  background: var(--accent, #3b82f6);
+  border-color: transparent;
+  color: #fff;
+}

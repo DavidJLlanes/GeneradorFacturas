@@ -18,7 +18,9 @@ export function createWorldView(): {
   const grid = document.createElement('div');
   grid.className = 'cv-grid';
   const elements = createElementsLayer();
-  page.append(grid, elements.element);
+  const margins = document.createElement('div');
+  margins.className = 'cv-margins';
+  page.append(grid, margins, elements.element);
   world.append(page);
 
   return {
@@ -33,6 +35,10 @@ export function createWorldView(): {
       const spacing = mmToPx(ui.snap.gridMm);
       grid.style.display = ui.showGrid && spacing * zoom >= MIN_GRID_SPACING_PX ? 'block' : 'none';
       grid.style.backgroundSize = `${spacing}px ${spacing}px`;
+
+      const m = doc.page.marginsMm;
+      margins.style.display = ui.showMargins ? 'block' : 'none';
+      margins.style.inset = `${mmToPx(m.top)}px ${mmToPx(m.right)}px ${mmToPx(m.bottom)}px ${mmToPx(m.left)}px`;
 
       elements.update(doc.elements);
     },

@@ -32,6 +32,13 @@ export const snapGroup: ButtonGroup = {
       pressed: (e) => e.ui.get().snap.snapGuides,
     },
     {
+      id: 'margins-visible',
+      label: 'Márgenes',
+      title: 'Mostrar u ocultar la zona de seguridad de impresión',
+      run: (e) => updateUi(e, (s) => ({ showMargins: !s.showMargins })),
+      pressed: (e) => e.ui.get().showMargins,
+    },
+    {
       id: 'grid-step',
       label: (e) => `Paso ${e.ui.get().snap.gridMm} mm`,
       title: 'Cambiar el tamaño de la rejilla',

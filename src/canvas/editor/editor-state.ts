@@ -10,6 +10,7 @@ export interface EditorUiState {
   containerSize: Size;
   snap: SnapPreferences;
   showGrid: boolean;
+  showMargins: boolean;
   guides: readonly GuideLine[];
   marquee: Rect | null;
   panning: boolean;
@@ -22,6 +23,7 @@ export const createInitialUiState = (): EditorUiState => ({
   containerSize: { w: 0, h: 0 },
   snap: { gridMm: 5, snapGrid: true, snapGuides: true },
   showGrid: true,
+  showMargins: true,
   guides: [],
   marquee: null,
   panning: false,

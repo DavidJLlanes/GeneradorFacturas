@@ -100,11 +100,11 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 2 — Tamaños y proporciones de papel**
 
-- [ ] A3, A4, A5, A6, Carta, Legal
-- [ ] Ticket (80 y 58 mm, largo continuo), cuadrado, apaisado
-- [ ] Tamaño personalizado en mm y proporción libre
-- [ ] Orientación, márgenes y zona de seguridad
-- [ ] Cambiar el papel de un diseño adaptando las piezas
+- [x] A3, A4, A5, A6, Carta, Legal
+- [x] Ticket (80 y 58 mm, largo continuo), cuadrado, apaisado
+- [x] Tamaño personalizado en mm y proporción libre
+- [x] Orientación, márgenes y zona de seguridad
+- [x] Cambiar el papel de un diseño adaptando las piezas
 
 **Fase 3 — Motor de tipos de documento**
 
