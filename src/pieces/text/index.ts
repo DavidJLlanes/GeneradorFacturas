@@ -6,6 +6,7 @@ import {
   PADDING_PROPS,
   SHADOW_PROPS,
 } from '../shared/box-style';
+import { FONT_PROP } from '../shared/font-prop';
 import { TEXT_STYLE_PROPS } from '../shared/text-style';
 import { renderText } from './render';
 
@@ -16,6 +17,7 @@ const definition: PieceDefinition = {
   defaultProps: { text: 'Texto', ...TEXT_STYLE_PROPS, ...BOX_DEFAULTS },
   props: [
     { key: 'text', label: 'Texto', kind: 'multiline' },
+    FONT_PROP,
     { key: 'fontSize', label: 'Tamaño (pt)', kind: 'number', min: 4, max: 200, step: 0.5 },
     { key: 'color', label: 'Color', kind: 'color' },
     { key: 'lineHeight', label: 'Interlineado', kind: 'number', min: 0.8, max: 3, step: 0.05 },

@@ -2,6 +2,7 @@ import type { ColumnSpec, LineRow } from '../../core/document-type/types';
 import { formatCents } from '../../data/money';
 import { mmToPx } from '../../core/units/units';
 import { bool, num, str } from '../shared/props';
+import { applyFont } from '../shared/text-style';
 import type { PieceRenderInput } from '../types';
 
 const PX_PER_PT = 96 / 72;
@@ -69,6 +70,7 @@ export function renderTable(node: HTMLElement, { props, schema, value }: PieceRe
   node.style.gridTemplateColumns = columns.map((c) => `${c.width}fr`).join(' ');
   node.style.gridAutoRows = `${rowHeight}px`;
   node.style.alignContent = 'start';
+  applyFont(node, str(props, 'fontFamily'));
   node.style.fontSize = `${num(props, 'fontSize') * PX_PER_PT}px`;
   node.style.color = str(props, 'color');
   node.style.whiteSpace = 'nowrap';

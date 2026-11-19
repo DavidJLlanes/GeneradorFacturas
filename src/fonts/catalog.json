@@ -1,0 +1,188 @@
+[
+  {
+    "id": "inter",
+    "name": "Inter",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "roboto",
+    "name": "Roboto",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "open-sans",
+    "name": "Open Sans",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "lato",
+    "name": "Lato",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "montserrat",
+    "name": "Montserrat",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "poppins",
+    "name": "Poppins",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "source-sans-3",
+    "name": "Source Sans 3",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "nunito",
+    "name": "Nunito",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "work-sans",
+    "name": "Work Sans",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "raleway",
+    "name": "Raleway",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "dm-sans",
+    "name": "DM Sans",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "ibm-plex-sans",
+    "name": "IBM Plex Sans",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "fira-sans",
+    "name": "Fira Sans",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "barlow",
+    "name": "Barlow",
+    "category": "sans",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "space-grotesk",
+    "name": "Space Grotesk",
+    "category": "sans",
+    "styles": ["400", "700"]
+  },
+  {
+    "id": "manrope",
+    "name": "Manrope",
+    "category": "sans",
+    "styles": ["400", "700"]
+  },
+  {
+    "id": "quicksand",
+    "name": "Quicksand",
+    "category": "sans",
+    "styles": ["400", "700"]
+  },
+  {
+    "id": "merriweather",
+    "name": "Merriweather",
+    "category": "serif",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "playfair-display",
+    "name": "Playfair Display",
+    "category": "serif",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "lora",
+    "name": "Lora",
+    "category": "serif",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "pt-serif",
+    "name": "PT Serif",
+    "category": "serif",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "source-serif-4",
+    "name": "Source Serif 4",
+    "category": "serif",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "libre-baskerville",
+    "name": "Libre Baskerville",
+    "category": "serif",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "roboto-slab",
+    "name": "Roboto Slab",
+    "category": "serif",
+    "styles": ["400", "700"]
+  },
+  {
+    "id": "roboto-mono",
+    "name": "Roboto Mono",
+    "category": "mono",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "jetbrains-mono",
+    "name": "JetBrains Mono",
+    "category": "mono",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "ibm-plex-mono",
+    "name": "IBM Plex Mono",
+    "category": "mono",
+    "styles": ["400", "400i", "700", "700i"]
+  },
+  {
+    "id": "oswald",
+    "name": "Oswald",
+    "category": "display",
+    "styles": ["400", "700"]
+  },
+  {
+    "id": "bebas-neue",
+    "name": "Bebas Neue",
+    "category": "display",
+    "styles": ["400"]
+  },
+  {
+    "id": "dancing-script",
+    "name": "Dancing Script",
+    "category": "script",
+    "styles": ["400", "700"]
+  },
+  {
+    "id": "caveat",
+    "name": "Caveat",
+    "category": "script",
+    "styles": ["400", "700"]
+  }
+]

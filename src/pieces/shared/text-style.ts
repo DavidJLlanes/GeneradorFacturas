@@ -1,4 +1,6 @@
 import type { PieceProps } from '../../core/document/types';
+import { fontStack } from '../../fonts/catalog';
+import { ensureFont } from '../../fonts/load-font';
 import { bool, num, str } from './props';
 
 const PX_PER_PT = 96 / 72;
@@ -10,11 +12,18 @@ const ALIGN_ITEMS: Record<string, string> = {
   bottom: 'flex-end',
 };
 
+// Fuente de una pieza: la del catálogo (cargada bajo demanda) o, sin elegir, la del sistema.
+export function applyFont(node: HTMLElement, fontId: string): void {
+  ensureFont(fontId);
+  node.style.fontFamily = fontStack(fontId);
+}
+
 // Aplica a un nodo el estilo de texto común (tamaño en pt, color, negrita, cursiva, alineación).
 // Espera las propiedades fontSize, color, bold, italic, align y valign.
 export function applyTextStyle(node: HTMLElement, props: PieceProps): void {
   const s = node.style;
   s.display = 'flex';
+  applyFont(node, str(props, 'fontFamily'));
   s.fontSize = `${num(props, 'fontSize') * PX_PER_PT}px`;
   s.color = str(props, 'color');
   s.fontWeight = bool(props, 'bold') ? '700' : '400';
@@ -30,6 +39,7 @@ export function applyTextStyle(node: HTMLElement, props: PieceProps): void {
 // Propiedades de texto compartidas por las piezas que muestran texto.
 export const TEXT_STYLE_PROPS = {
   fontSize: 11,
+  fontFamily: '',
   color: '@text',
   bold: false,
   italic: false,

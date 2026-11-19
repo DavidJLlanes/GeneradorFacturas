@@ -10,6 +10,7 @@ const valueType: Record<PropKind, 'string' | 'number' | 'boolean'> = {
   select: 'string',
   toggle: 'boolean',
   image: 'string',
+  font: 'string',
 };
 
 // Comprueba que una pieza cumple el contrato. Devuelve los problemas (vacío = válida).

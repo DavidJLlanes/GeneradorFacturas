@@ -1,4 +1,5 @@
 import type { PropSpec } from '../types';
+import { FONT_PROP } from './font-prop';
 import { TEXT_STYLE_PROPS } from './text-style';
 
 export const BAND_DEFAULTS = {
@@ -13,6 +14,7 @@ export const BAND_DEFAULTS = {
 
 export const BAND_PROPS: readonly PropSpec[] = [
   { key: 'text', label: 'Texto', kind: 'multiline' },
+  FONT_PROP,
   { key: 'fontSize', label: 'Tamaño (pt)', kind: 'number', min: 4, max: 200, step: 0.5 },
   { key: 'color', label: 'Color del texto', kind: 'color' },
   { key: 'bold', label: 'Negrita', kind: 'toggle' },

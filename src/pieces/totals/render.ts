@@ -1,5 +1,6 @@
 import { mmToPx } from '../../core/units/units';
 import { bool, num, str } from '../shared/props';
+import { applyFont } from '../shared/text-style';
 import type { PieceRenderInput } from '../types';
 
 const PX_PER_PT = 96 / 72;
@@ -22,6 +23,7 @@ export function renderTotals(
   node.style.gridTemplateColumns = '1fr auto';
   node.style.gridAutoRows = `${mmToPx(Math.max(num(props, 'rowHeight'), 2))}px`;
   node.style.alignContent = 'start';
+  applyFont(node, str(props, 'fontFamily'));
   node.style.fontSize = `${num(props, 'fontSize') * PX_PER_PT}px`;
   node.style.color = str(props, 'color');
   node.style.overflow = 'hidden';

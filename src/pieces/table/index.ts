@@ -1,4 +1,5 @@
 import type { PieceDefinition } from '../types';
+import { FONT_PROP } from '../shared/font-prop';
 import { renderTable } from './render';
 
 const definition: PieceDefinition = {
@@ -7,6 +8,7 @@ const definition: PieceDefinition = {
   defaultSize: { w: 180, h: 100 },
   defaultProps: {
     field: 'lineas',
+    fontFamily: '',
     fontSize: 9,
     color: '@text',
     headerFill: '@primary',
@@ -23,6 +25,7 @@ const definition: PieceDefinition = {
   },
   props: [
     { key: 'field', label: 'Campo de líneas', kind: 'text' },
+    FONT_PROP,
     { key: 'fontSize', label: 'Tamaño (pt)', kind: 'number', min: 4, max: 40, step: 0.5 },
     { key: 'color', label: 'Color del texto', kind: 'color' },
     { key: 'headerFill', label: 'Fondo de cabecera', kind: 'color' },

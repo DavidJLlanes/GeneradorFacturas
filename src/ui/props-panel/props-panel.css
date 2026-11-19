@@ -80,3 +80,11 @@
 .imgf-error {
   color: #d9480f;
 }
+
+.fof-button {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}

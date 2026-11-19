@@ -4,7 +4,8 @@ import type { PieceProps } from '../core/document/types';
 // Contrato de una pieza genérica. Cada pieza vive en `src/pieces/<kind>/` y exporta su definición
 // por defecto desde `index.ts`; el motor las descubre solas.
 
-export type PropKind = 'text' | 'multiline' | 'number' | 'color' | 'select' | 'toggle' | 'image';
+export type PropKind =
+  'text' | 'multiline' | 'number' | 'color' | 'select' | 'toggle' | 'image' | 'font';
 
 export interface PropOption {
   value: string;

@@ -210,3 +210,17 @@ describe('estilos de caja y tabla', () => {
     );
   });
 });
+
+describe('fuente de las piezas', () => {
+  it('sin fuente elegida heredan la del sistema', () => {
+    expect(draw('text', {}).style.fontFamily).toBe('inherit');
+  });
+
+  it('con fuente del catálogo la aplican y la declaran para cargarla', () => {
+    for (const kind of ['text', 'header', 'footer', 'table', 'totals']) {
+      const node = draw(kind, { fontFamily: 'merriweather' });
+      expect(node.style.fontFamily, kind).toContain('Merriweather');
+    }
+    expect(document.head.querySelector('style[data-font="merriweather"]')).not.toBeNull();
+  });
+});

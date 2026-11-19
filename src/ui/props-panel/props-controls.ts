@@ -2,6 +2,7 @@ import type { PropValue } from '../../core/document/types';
 import type { PropSpec } from '../../pieces/types';
 import type { Palette } from '../../styles/palette';
 import { createImageField } from '../fields/image-field';
+import { createFontField } from '../fields/font-field';
 import { createPaletteColorField } from '../fields/palette-color-field';
 import {
   checkField,
@@ -16,7 +17,7 @@ import {
 export interface PropControl {
   key: string;
   row: HTMLElement;
-  input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+  input: HTMLElement;
   set(value: PropValue | undefined): void;
   onChange(listener: (value: PropValue) => void): void;
 }
@@ -53,6 +54,16 @@ export function createPropControl(spec: PropSpec, getPalette: () => Palette): Pr
     }
     case 'color': {
       const field = createPaletteColorField(spec.label, getPalette);
+      return {
+        key: spec.key,
+        row: field.row,
+        input: field.input,
+        set: (v) => field.set(typeof v === 'string' ? v : undefined),
+        onChange: (fn) => field.onChange(fn),
+      };
+    }
+    case 'font': {
+      const field = createFontField(spec.label);
       return {
         key: spec.key,
         row: field.row,
