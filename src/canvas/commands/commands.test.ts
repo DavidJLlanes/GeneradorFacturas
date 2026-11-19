@@ -1,18 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { createPage } from '../../core/document/page';
 import type { DocElement, DocumentModel } from '../../core/document/types';
+import { pieces } from '../../pieces/discover';
 import { createEditor } from '../editor/create-editor';
 import { alignSelection, distributeSelection } from './align-commands';
-import {
-  addTestBox,
-  deleteSelection,
-  duplicateSelection,
-  nudgeSelection,
-  selectAll,
-} from './element-commands';
+import { deleteSelection, duplicateSelection, nudgeSelection, selectAll } from './element-commands';
 import { toggleHideSelection, toggleLockSelection } from './flag-commands';
 import { redo, undo } from './history-commands';
 import { bringToFront } from './order-commands';
+import { insertPiece } from './piece-commands';
 import { zoomToFit, zoomToSelection } from './view-commands';
 
 const el = (id: string, x: number, y = 0, extra: Partial<DocElement> = {}): DocElement => ({
@@ -37,7 +33,7 @@ const make = (...elements: DocElement[]) => {
 describe('comandos del editor', () => {
   it('añade, deshace y rehace', () => {
     const editor = make();
-    addTestBox(editor);
+    insertPiece(editor, pieces.get('text')!);
     expect(editor.doc().elements).toHaveLength(1);
     expect(editor.ui.get().selection).toHaveLength(1);
     undo(editor);

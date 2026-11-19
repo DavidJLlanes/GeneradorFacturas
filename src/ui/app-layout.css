@@ -7,13 +7,20 @@
 .app-main {
   flex: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 240px;
+  grid-template-columns: minmax(0, 1fr) 270px;
+  min-height: 0;
+}
+
+/* Columna lateral: capas arriba, propiedades abajo. */
+.app-side {
+  display: grid;
+  grid-template-rows: minmax(0, 2fr) minmax(0, 3fr);
   min-height: 0;
 }
 
 @media (max-width: 720px) {
   .app-main {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: minmax(0, 1fr) 150px;
+    grid-template-rows: minmax(0, 1fr) 260px;
   }
 }

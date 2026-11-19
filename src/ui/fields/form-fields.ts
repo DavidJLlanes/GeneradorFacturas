@@ -55,3 +55,21 @@ export function selectField(
   }
   return wrap(text, select);
 }
+
+export function colorField(text: string): Field<HTMLInputElement> {
+  const input = document.createElement('input');
+  input.type = 'color';
+  return wrap(text, input);
+}
+
+export function textField(text: string): Field<HTMLInputElement> {
+  const input = document.createElement('input');
+  input.type = 'text';
+  return wrap(text, input);
+}
+
+export function textareaField(text: string, rows = 3): Field<HTMLTextAreaElement> {
+  const input = document.createElement('textarea');
+  input.rows = rows;
+  return wrap(text, input);
+}

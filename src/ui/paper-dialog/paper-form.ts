@@ -5,7 +5,7 @@ import { orientationOf, withOrientation, type Orientation } from '../../paper/or
 import { pageForPreset, pageWithMargins, pageWithSize } from '../../paper/page-builders';
 import { GROUP_NAMES, PAPER_PRESETS, presetById } from '../../paper/paper-presets';
 import { MAX_PAGE_MM, MIN_PAGE_MM } from '../../paper/size-limits';
-import { checkField, numberField, selectField } from './form-fields';
+import { checkField, numberField, selectField } from '../fields/form-fields';
 
 const CUSTOM = 'custom';
 

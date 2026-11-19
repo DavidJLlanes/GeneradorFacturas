@@ -1,27 +1,10 @@
 import { rectOf } from '../../core/document/element-rect';
-import { addElement } from '../../core/document/operations/add-element';
 import { duplicateElements } from '../../core/document/operations/duplicate-elements';
 import { removeElements } from '../../core/document/operations/remove-elements';
 import { applyRects } from '../../core/document/operations/update-rects';
-import { translateRect, type Rect } from '../../core/geometry/rect';
+import { translateRect } from '../../core/geometry/rect';
 import type { Editor } from '../editor/create-editor';
 import { transformableElements } from '../selection/selection-queries';
-
-export function addTestBox(editor: Editor): void {
-  const doc = editor.doc();
-  const n = doc.elements.length + 1;
-  const w = 40;
-  const h = 25;
-  const rect: Rect = {
-    x: (doc.page.widthMm - w) / 2 + (n % 5) * 5,
-    y: (doc.page.heightMm - h) / 2 + (n % 5) * 5,
-    w,
-    h,
-  };
-  const { doc: next, id } = addElement(doc, rect, `Caja ${n}`);
-  editor.apply(next);
-  editor.select([id]);
-}
 
 export function deleteSelection(editor: Editor): void {
   const doc = editor.doc();
