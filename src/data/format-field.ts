@@ -1,4 +1,5 @@
 import type { FieldKind } from '../core/document-type/types';
+import { isImageDataUrl } from '../images/image-limits';
 import { formatCents } from './money';
 
 const DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
@@ -17,7 +18,7 @@ export function formatFieldValue(kind: FieldKind, value: unknown): string {
       return match ? `${match[3]}/${match[2]}/${match[1]}` : String(value);
     }
     case 'image':
-      return '';
+      return isImageDataUrl(value) ? value : '';
     default:
       return String(value);
   }

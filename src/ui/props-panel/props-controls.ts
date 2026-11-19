@@ -1,5 +1,6 @@
 import type { PropValue } from '../../core/document/types';
 import type { PropSpec } from '../../pieces/types';
+import { createImageField } from '../fields/image-field';
 import {
   checkField,
   colorField,
@@ -77,6 +78,16 @@ export function createPropControl(spec: PropSpec): PropControl {
         input,
         set: (v) => void (input.value = String(v ?? '')),
         onChange: (fn) => input.addEventListener('change', () => fn(input.value)),
+      };
+    }
+    case 'image': {
+      const field = createImageField(spec.label);
+      return {
+        key: spec.key,
+        row: field.row,
+        input: field.input,
+        set: (v) => field.set(v),
+        onChange: (fn) => field.onChange((src) => fn(src ?? '')),
       };
     }
     default: {

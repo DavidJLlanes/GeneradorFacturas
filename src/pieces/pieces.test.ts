@@ -122,4 +122,37 @@ describe('dibujo de piezas', () => {
     expect(Number(line.getAttribute('stroke-width'))).toBeCloseTo((96 / 25.4) * 1);
     expect(Number(line.getAttribute('y1'))).toBeGreaterThan(Number(line.getAttribute('y2')));
   });
+
+  it('la imagen usa la propia o la del campo de datos, y solo data URLs de imagen', () => {
+    const png = 'data:image/png;base64,AAAA';
+    const bound = 'data:image/jpeg;base64,BBBB';
+    const piece = pieces.get('image')!;
+    const render = (props: Record<string, string>, resolve: (t: string) => string): HTMLElement => {
+      const node = document.createElement('div');
+      const e = el('image', props);
+      piece.render(node, { props: pieces.propsOf(e), widthMm: 40, heightMm: 20, resolve });
+      return node;
+    };
+    const same = (t: string): string => t;
+    expect(render({ src: png }, same).querySelector('img')?.getAttribute('src')).toBe(png);
+    expect(render({}, same).querySelector('img')).toBeNull();
+    expect(render({ src: 'javascript:alert(1)' }, same).querySelector('img')).toBeNull();
+    const filled = (t: string): string => (t === '{{logo}}' ? bound : t);
+    expect(
+      render({ src: png, field: 'logo' }, filled).querySelector('img')?.getAttribute('src'),
+    ).toBe(bound);
+    expect(
+      render({ src: png, field: 'logo' }, same).querySelector('img')?.getAttribute('src'),
+    ).toBe(png);
+  });
+
+  it('cabecera y pie ponen la línea en el borde que da al contenido', () => {
+    const header = draw('header', { text: 'Mi empresa' });
+    const footer = draw('footer');
+    expect(header.textContent).toBe('Mi empresa');
+    expect(header.style.borderBottom).toMatch(/solid/);
+    expect(header.style.borderTop).not.toMatch(/solid/);
+    expect(footer.style.borderTop).toMatch(/solid/);
+    expect(footer.style.borderBottom).not.toMatch(/solid/);
+  });
 });

@@ -85,6 +85,7 @@ describe('rellenar con datos', () => {
     expect(formatFieldValue('money', 5)).toContain('0,05');
     expect(formatFieldValue('text', '')).toBe('');
     expect(formatFieldValue('image', 'data:...')).toBe('');
+    expect(formatFieldValue('image', 'data:image/png;base64,AA')).toBe('data:image/png;base64,AA');
   });
 
   it('resuelve textos con datos y deja pendientes los vacíos', () => {

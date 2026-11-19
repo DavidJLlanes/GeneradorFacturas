@@ -7,14 +7,25 @@ import type { Rect } from '../../core/geometry/rect';
 import type { PieceDefinition } from '../../pieces/types';
 import type { Editor } from '../editor/create-editor';
 
+const anchoredRect = (area: Rect, h: number, anchor: 'top' | 'bottom'): Rect => ({
+  x: area.x,
+  y: anchor === 'top' ? area.y : area.y + area.h - h,
+  w: area.w,
+  h,
+});
+
+const centredRect = (area: Rect, piece: PieceDefinition, h: number): Rect => {
+  const w = Math.min(piece.defaultSize.w, area.w);
+  return { x: area.x + (area.w - w) / 2, y: area.y + (area.h - h) / 2, w, h };
+};
+
 // Añade una pieza nueva centrada en la zona útil de la página y la deja seleccionada.
 export function insertPiece(editor: Editor, piece: PieceDefinition): void {
   const doc = editor.doc();
   const area = contentRect(doc.page);
-  const w = Math.min(piece.defaultSize.w, area.w);
   const h = Math.min(piece.defaultSize.h, area.h);
   const count = doc.elements.filter((e) => e.kind === piece.kind).length + 1;
-  const rect: Rect = { x: area.x + (area.w - w) / 2, y: area.y + (area.h - h) / 2, w, h };
+  const rect = piece.anchor ? anchoredRect(area, h, piece.anchor) : centredRect(area, piece, h);
   const { doc: next, id } = addElement(doc, rect, `${piece.name} ${count}`, {
     kind: piece.kind,
     props: piece.defaultProps,

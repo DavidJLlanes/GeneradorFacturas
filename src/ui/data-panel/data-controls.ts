@@ -1,5 +1,6 @@
 import type { FieldSpec } from '../../core/document-type/types';
 import { centsToInput, parseMoneyToCents } from '../../data/money';
+import { createImageField } from '../fields/image-field';
 import { dateField, numberField, textareaField, textField } from '../fields/form-fields';
 
 export interface DataControl {
@@ -15,7 +16,7 @@ export interface DataControl {
 const show = (value: unknown): string =>
   value === undefined || value === null ? '' : String(value);
 
-export function createDataControl(spec: FieldSpec): DataControl | null {
+export function createDataControl(spec: FieldSpec): DataControl {
   const label = spec.required ? `${spec.label} *` : spec.label;
   const make = <T extends HTMLInputElement | HTMLTextAreaElement>(
     row: HTMLElement,
@@ -69,8 +70,16 @@ export function createDataControl(spec: FieldSpec): DataControl | null {
         () => parseMoneyToCents(input.value) ?? undefined,
       );
     }
-    case 'image':
-      return null;
+    case 'image': {
+      const field = createImageField(label);
+      return {
+        key: spec.key,
+        row: field.row,
+        input: field.input,
+        set: (v) => field.set(v),
+        onChange: (fn) => field.onChange(fn),
+      };
+    }
     default: {
       const { row, input } = textField(label);
       return make(

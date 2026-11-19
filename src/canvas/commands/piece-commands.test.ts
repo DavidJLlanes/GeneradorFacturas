@@ -53,4 +53,14 @@ describe('setProps y setRect', () => {
     setRect(editor, id, { x: 12, y: 34, w: 0, h: 20 });
     expect(editor.doc().elements[0]).toMatchObject({ x: 12, y: 34, w: 1, h: 20 });
   });
+
+  it('cabecera y pie se pegan arriba y abajo de la zona útil, a todo su ancho', () => {
+    const editor = make();
+    insertPiece(editor, pieces.get('header')!);
+    insertPiece(editor, pieces.get('footer')!);
+    const [header, footer] = editor.doc().elements;
+    expect(header).toMatchObject({ x: 10, y: 10, w: 190, h: 20 });
+    expect(footer).toMatchObject({ x: 10, w: 190, h: 15 });
+    expect(footer!.y + footer!.h).toBeCloseTo(287);
+  });
 });

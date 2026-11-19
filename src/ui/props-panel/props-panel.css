@@ -52,3 +52,31 @@
   height: 26px;
   padding: 0;
 }
+
+.imgf-box {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.imgf-box input[type='file'] {
+  width: 100%;
+  font-size: 0.72rem;
+}
+
+.imgf-thumb {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+  background: repeating-conic-gradient(#d8dbe0 0 25%, #fff 0 50%) 0 0 / 10px 10px;
+  border: 1px solid var(--border);
+}
+
+.imgf-remove {
+  padding: 3px 8px;
+  font-size: 0.72rem;
+}
+
+.imgf-error {
+  color: #d9480f;
+}

@@ -38,6 +38,8 @@ export interface PieceDefinition {
   props: readonly PropSpec[];
   /** Propiedad de texto que se edita directamente sobre la página con doble clic. */
   inlineProp?: string;
+  /** Al insertarla, se pega al borde superior o inferior de la zona útil y ocupa todo su ancho. */
+  anchor?: 'top' | 'bottom';
   /** Dibuja la pieza dentro de `node`. Debe ser idempotente: se llama cada vez que algo cambia. */
   render(node: HTMLElement, input: PieceRenderInput): void;
 }
