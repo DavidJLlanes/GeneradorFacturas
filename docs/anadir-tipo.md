@@ -13,6 +13,8 @@ ningún registro: el motor descubre `src/documents/<tipo>/index.ts` por sí solo
 4. En `labels.es.ts` pon los textos propios del tipo.
 5. En `templates/` crea las plantillas de partida (un archivo por plantilla) y añádelas en `index.ts`.
    - Un campo `kind: 'lines'` define una tabla de líneas con `columns` (clave, etiqueta, tipo, anchura).
+   - Un campo `choice` (o una columna `choice`) lleva `options`; la primera es la de las líneas nuevas.
+     Un campo `toggle` es sí/no.
    - Un campo o columna con `computed: true` lo calcula el tipo: no aparece en el panel de datos.
 6. Cálculos propios (totales, impuestos) van en `calc.ts` y se exponen como `compute` en `index.ts`: recibe los datos y
    devuelve los valores derivados (importes de línea, subtotal, IVA, total), siempre en céntimos.
@@ -35,3 +37,12 @@ y piezas sin ids repetidos. Si algo falla, el error dice qué tipo y qué regla.
 
 Parar. Ampliar el núcleo **en una iteración aparte y de forma genérica** (archivo nuevo en su propia
 carpeta), subirlo, y después usarlo desde el tipo. Nunca mezclar ambos cambios en el mismo diff.
+
+## Arranque, plantillas y datos de ejemplo
+
+- La aplicación abre el primer tipo que no sea `internal` y su primera plantilla.
+- `#tipo=<id>` y `#plantilla=<id>` en la dirección eligen otro (por ejemplo `#tipo=factura&plantilla=moderna`).
+- `sampleData` (opcional) alimenta el botón "Datos de ejemplo"; solo puede usar campos del esquema.
+- Si un campo calculado no tiene valor, el bloque de totales con `hideUnresolved` omite esa fila.
+
+Referencia completa: `src/documents/factura/`.

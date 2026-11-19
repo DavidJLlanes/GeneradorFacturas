@@ -126,11 +126,11 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 5 — Tipo Factura (primer tipo, referencia)**
 
-- [ ] Carpeta `documents/factura/` completa según el contrato
-- [ ] Emisor, cliente, número y fecha, notas, forma de pago/IBAN
-- [ ] IVA por línea (21/10/4/0 %), IRPF, recargo de equivalencia, exenciones
-- [ ] Series de numeración y fecha de operación
-- [ ] Demuestra que el núcleo aguanta sin ser modificado por el tipo
+- [x] Carpeta `documents/factura/` completa según el contrato
+- [x] Emisor, cliente, número y fecha, notas, forma de pago/IBAN
+- [x] IVA por línea (21/10/4/0 %), IRPF, recargo de equivalencia, exenciones
+- [x] Series de numeración y fecha de operación
+- [x] Demuestra que el núcleo aguanta sin ser modificado por el tipo
 
 **Fase 6 — Estilos**
 

@@ -34,11 +34,12 @@ src/
   core/        núcleo sin interfaz: geometría, unidades, documento y operaciones, historial, store
   canvas/      lienzo: editor, comandos, gestos, atajos, selección, imán, alinear, vista (ver docs/lienzo.md)
   ui/          interfaz: barra de herramientas, panel de capas, diálogo de papel, estilos base
+  app/         arranque: elige el tipo y la plantilla y crea el editor
   paper/       papeles: catálogo de tamaños, orientación, márgenes, adaptación de piezas (ver docs/papel.md)
   pieces/      piezas genéricas, una carpeta por pieza (ver docs/piezas.md)
   data/        importes en céntimos, variables y formato de datos
   images/      reglas y lectura de imágenes subidas
-  documents/   un tipo de documento por carpeta; se descubren solos (ver docs/anadir-tipo.md)
+  documents/   un tipo de documento por carpeta; se descubren solos (ver docs/anadir-tipo.md) (hoy: factura; ejemplo es interno)
   demo/        documento de prueba temporal (se retira en la Fase 4)
   main.ts      punto de entrada
 docs/          documentación (despliegue, lienzo)
