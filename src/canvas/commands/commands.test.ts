@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { createPage } from '../../core/document/page';
 import type { DocElement, DocumentModel } from '../../core/document/types';
 import { createEditor } from '../editor/create-editor';
 import { alignSelection, distributeSelection } from './align-commands';
@@ -27,7 +28,7 @@ const el = (id: string, x: number, y = 0, extra: Partial<DocElement> = {}): DocE
 });
 
 const make = (...elements: DocElement[]) => {
-  const doc: DocumentModel = { page: { widthMm: 210, heightMm: 297 }, elements };
+  const doc: DocumentModel = { page: createPage(210, 297), elements };
   return createEditor(doc);
 };
 

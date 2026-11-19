@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
+import { createPage } from '../../core/document/page';
 import { snapEdges } from './snap-edges';
 import { snapMove } from './snap-move';
 import { snapResize } from './snap-resize';
 import type { SnapSettings } from './snap-settings';
 import { buildTargets } from './targets';
 
-const page = { widthMm: 210, heightMm: 297 };
+const page = createPage(210, 297);
 const on: SnapSettings = { gridMm: 5, snapGrid: false, snapGuides: true, thresholdMm: 2 };
 
 describe('snapEdges', () => {

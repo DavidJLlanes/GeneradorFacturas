@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { createPage } from '../../core/document/page';
 import type { DocElement, DocumentModel } from '../../core/document/types';
 import { hitTestElement } from './hit-test';
 import { elementsInRect } from './marquee';
@@ -18,7 +19,7 @@ const el = (id: string, x: number, extra: Partial<DocElement> = {}): DocElement 
 });
 
 const doc: DocumentModel = {
-  page: { widthMm: 210, heightMm: 297 },
+  page: createPage(210, 297),
   elements: [
     el('a', 0),
     el('b', 10),

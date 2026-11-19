@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { createPage } from '../page';
 import type { DocElement, DocumentModel } from '../types';
 import { addElement } from './add-element';
 import { duplicateElements } from './duplicate-elements';
@@ -19,7 +20,7 @@ const el = (id: string, x = 0): DocElement => ({
 });
 
 const docOf = (...ids: string[]): DocumentModel => ({
-  page: { widthMm: 210, heightMm: 297 },
+  page: createPage(210, 297),
   elements: ids.map((id) => el(id)),
 });
 
