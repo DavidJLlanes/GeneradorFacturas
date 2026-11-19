@@ -19,7 +19,7 @@ import {
   type Theme,
 } from './parts';
 
-const theme: Theme = { accent: '#1f2937', ink: '#111827', muted: '#4b5563', soft: '#f3f4f6' };
+const theme: Theme = { accent: '@primary', ink: '@text', muted: '@muted', soft: '@soft' };
 
 // Clásica: sobria, con el emisor a la izquierda y los datos de la factura a la derecha.
 export const clasica: DocumentTemplate = {

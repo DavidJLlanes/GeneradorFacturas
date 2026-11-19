@@ -97,7 +97,7 @@ export const linesTable = (box: Box, t: Theme): DocElement =>
   piece('tabla', 'Líneas', 'table', box, {
     field: 'lineas',
     headerFill: t.accent,
-    headerColor: '#ffffff',
+    headerColor: '@onPrimary',
     zebraFill: t.soft,
     color: t.ink,
     minRows: 14,

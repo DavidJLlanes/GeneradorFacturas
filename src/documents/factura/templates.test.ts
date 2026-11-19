@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { findVariables } from '../../data/variables';
 import { pieces } from '../../pieces/discover';
+import { paletteOf } from '../../styles/palette';
+import { paletteKeyOf } from '../../styles/resolve-color';
 import definition from './index';
 
 const keys = new Set(definition.schema.fields.map((f) => f.key));
@@ -28,6 +30,23 @@ describe.each(definition.templates)('plantilla $name', (template) => {
       if (el.kind === 'image' && el.props['field']) {
         expect(kindOf.get(String(el.props['field'])), el.id).toBe('image');
       }
+    }
+  });
+
+  it('los colores de las piezas son de la paleta (así un tema las recolorea)', () => {
+    const colorKeys = new Set(
+      pieces.list().flatMap((p) => p.props.filter((s) => s.kind === 'color').map((s) => s.key)),
+    );
+    for (const el of elements) {
+      for (const [key, value] of Object.entries(el.props)) {
+        if (colorKeys.has(key)) expect(paletteKeyOf(value), `${el.id}.${key}`).not.toBeNull();
+      }
+    }
+  });
+
+  it('la paleta es completa', () => {
+    for (const color of Object.values(paletteOf(template.document))) {
+      expect(color).toMatch(/^#[0-9a-f]{6}$/);
     }
   });
 

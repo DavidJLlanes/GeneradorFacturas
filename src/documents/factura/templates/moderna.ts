@@ -19,8 +19,8 @@ import {
   type Theme,
 } from './parts';
 
-const theme: Theme = { accent: '#0f766e', ink: '#0f172a', muted: '#475569', soft: '#ecfdf5' };
-const WHITE = '#ffffff';
+const theme: Theme = { accent: '@primary', ink: '@text', muted: '@muted', soft: '@soft' };
+const WHITE = '@onPrimary';
 
 // Moderna: banda de color a todo el ancho arriba, con el título y el número en blanco.
 export const moderna: DocumentTemplate = {
@@ -28,6 +28,15 @@ export const moderna: DocumentTemplate = {
   name: 'Moderna',
   document: {
     page: createPage(210, 297),
+    // Paleta propia de esta plantilla; los colores de las piezas siguen a la paleta.
+    palette: {
+      primary: '#0f766e',
+      text: '#0f172a',
+      muted: '#475569',
+      soft: '#ecfdf5',
+      line: '#99d6cc',
+      onPrimary: '#ffffff',
+    },
     elements: [
       piece('banda', 'Banda superior', 'shape', [0, 0, 210, 40], {
         fill: theme.accent,
