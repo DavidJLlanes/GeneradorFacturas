@@ -1,5 +1,6 @@
 import { chooseTemplate, chooseType } from './app/choose-type';
 import { createAppEditor } from './app/create-app-editor';
+import { opensFilled } from './app/initial-view';
 import { restoreSession, templateOf } from './app/restore-session';
 import { documentTypes } from './core/document-type/discover';
 import { createBestStore } from './storage/local/idb-store';
@@ -17,6 +18,7 @@ async function start(root: HTMLElement): Promise<void> {
   const saved = await restoreSession(store, type, hash);
   const editor = createAppEditor(type, saved ? templateOf(saved) : chooseTemplate(type, hash));
   if (saved) editor.ui.update((s) => ({ ...s, data: saved.datos }));
+  if (opensFilled(hash)) editor.ui.update((s) => ({ ...s, fillMode: true }));
 
   mountApp(root, editor);
   attachAutosave(editor, type.id, store);

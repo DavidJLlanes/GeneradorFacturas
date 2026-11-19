@@ -1,5 +1,4 @@
 import type { Editor } from '../../canvas/editor/create-editor';
-import { documentTypes } from '../../core/document-type/discover';
 import { applyData } from '../../storage/data-file/apply-data';
 import {
   buildDataFile,
@@ -7,15 +6,13 @@ import {
   DATA_EXTENSION,
   parseDataFile,
 } from '../../storage/data-file/data-file';
-import { applyDesign } from '../../storage/design-file/apply-design';
 import { buildDesign, designToJson } from '../../storage/design-file/build-design';
 import { DESIGN_EXTENSION } from '../../storage/design-file/format';
 import { parseDesign } from '../../storage/design-file/parse-design';
 import { downloadText } from '../../storage/files/download-text';
 import { fileSlug } from '../../storage/files/file-name';
 import { pickTextFile } from '../../storage/files/pick-text-file';
-import { currentId } from '../../storage/local/record';
-import { recordFromDesign } from '../../storage/local/records';
+import { openDesign } from '../../storage/session/open-design';
 import { getSession } from '../../storage/session/session-context';
 
 // Acciones de archivo del diálogo. Devuelven el mensaje que se muestra al usuario.
@@ -34,19 +31,10 @@ export async function importDesign(editor: Editor): Promise<string> {
   const picked = await pickTextFile('.json,application/json');
   if (!picked) return '';
   const file = parseDesign(picked.text);
-  const { typeId, store } = getSession();
-  if (file.tipoDocumento === typeId) {
-    applyDesign(editor, file);
-    return `Diseño «${file.nombre}» abierto. Se puede deshacer.`;
-  }
-  const other = documentTypes.get(file.tipoDocumento);
-  if (!other)
-    throw new Error(`Este diseño es de un tipo que no existe aquí («${file.tipoDocumento}»).`);
-  // Otro tipo de documento: se deja como sesión de ese tipo y se recarga la página en él.
-  await store.put(recordFromDesign(file, 'actual', currentId(other.id)));
-  window.location.hash = `#tipo=${other.id}`;
-  window.location.reload();
-  return `Abriendo el diseño como ${other.name}…`;
+  const result = await openDesign(editor, file);
+  return result === 'here'
+    ? `Diseño «${file.nombre}» abierto. Se puede deshacer.`
+    : 'Abriendo el diseño en su tipo de documento…';
 }
 
 export function exportData(editor: Editor): string {

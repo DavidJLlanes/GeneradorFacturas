@@ -1,0 +1,40 @@
+.gl {
+  width: min(94vw, 640px);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+.gl-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.gl-chip {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  color: var(--text);
+  cursor: pointer;
+  background: var(--control);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.gl-chip[aria-pressed='true'] {
+  color: #fff;
+  background: var(--accent, #2563eb);
+  border-color: var(--accent, #2563eb);
+}
+
+.gl-sub {
+  font-size: 0.72rem;
+  color: var(--muted, #6b7280);
+}
+
+.gl-preview {
+  max-height: 300px;
+  margin: 8px 0;
+  border: 1px solid var(--border);
+}

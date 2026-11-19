@@ -1,4 +1,5 @@
 import type { Editor } from '../../canvas/editor/create-editor';
+import type { DocumentData } from '../../core/document-type/types';
 import { newId } from '../../core/document/ids';
 import { buildDesign } from '../design-file/build-design';
 import type { DesignFile } from '../design-file/format';
@@ -95,7 +96,12 @@ export function openRecord(editor: Editor, record: SavedRecord): void {
 }
 
 // Registro construido a partir de un archivo de diseño (sin pasar por el editor), con sus datos vacíos.
-export const recordFromDesign = (file: DesignFile, kind: RecordKind, id: string): SavedRecord => ({
+export const recordFromDesign = (
+  file: DesignFile,
+  kind: RecordKind,
+  id: string,
+  data: DocumentData = {},
+): SavedRecord => ({
   id,
   version: RECORD_VERSION,
   kind,
@@ -104,5 +110,5 @@ export const recordFromDesign = (file: DesignFile, kind: RecordKind, id: string)
   actualizado: new Date().toISOString(),
   miniatura: thumbnailSvg(file.documento),
   diseno: file,
-  datos: {},
+  datos: data,
 });
