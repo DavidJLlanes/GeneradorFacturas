@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { fontById } from '../../fonts/catalog';
 import { findVariables } from '../../data/variables';
 import { pieces } from '../../pieces/discover';
 import { paletteOf } from '../../styles/palette';
@@ -41,6 +42,14 @@ describe.each(definition.templates)('plantilla $name', (template) => {
       for (const [key, value] of Object.entries(el.props)) {
         if (colorKeys.has(key)) expect(paletteKeyOf(value), `${el.id}.${key}`).not.toBeNull();
       }
+    }
+  });
+
+  it('todas las piezas con texto usan una fuente del catálogo', () => {
+    for (const el of elements.filter((e) =>
+      ['text', 'header', 'footer', 'table', 'totals'].includes(e.kind),
+    )) {
+      expect(fontById(String(el.props['fontFamily'])), el.id).toBeDefined();
     }
   });
 

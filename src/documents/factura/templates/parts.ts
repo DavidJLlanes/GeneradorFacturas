@@ -27,6 +27,14 @@ export const piece = (
 const text = (id: string, name: string, box: Box, props: PieceProps): DocElement =>
   piece(id, name, 'text', box, props);
 
+const TEXT_KINDS = new Set(['text', 'header', 'footer', 'table', 'totals']);
+
+// Pone la misma fuente del catálogo a todas las piezas con texto de una plantilla.
+export const withFont = (elements: readonly DocElement[], fontFamily: string): DocElement[] =>
+  elements.map((el) =>
+    TEXT_KINDS.has(el.kind) ? { ...el, props: { fontFamily, ...el.props } } : el,
+  );
+
 export const logo = (box: Box): DocElement =>
   piece('logo', 'Logo', 'image', box, { field: 'emisor.logo' });
 

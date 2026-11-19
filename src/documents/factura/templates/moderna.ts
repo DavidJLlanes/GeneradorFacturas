@@ -17,6 +17,7 @@ import {
   title,
   totalsBlock,
   type Theme,
+  withFont,
 } from './parts';
 
 const theme: Theme = { accent: '@primary', ink: '@text', muted: '@muted', soft: '@soft' };
@@ -37,25 +38,28 @@ export const moderna: DocumentTemplate = {
       line: '#99d6cc',
       onPrimary: '#ffffff',
     },
-    elements: [
-      piece('banda', 'Banda superior', 'shape', [0, 0, 210, 40], {
-        fill: theme.accent,
-        bordered: false,
-      }),
-      title([10, 9, 110, 13], WHITE, 'left'),
-      number([10, 24, 110, 7], WHITE, 'left'),
-      logo([150, 7, 50, 26]),
-      issuerName([10, 48, 90, 7], theme),
-      issuerDetails([10, 55, 90, 16], theme),
-      dates([105, 48, 95, 14], theme.muted),
-      clientLabel([10, 76, 90, 5], theme),
-      clientName([10, 81, 110, 7], theme),
-      clientDetails([10, 88, 110, 16], theme),
-      linesTable([10, 108, 190, 106], theme),
-      basesBlock([10, 220, 80, 28], theme),
-      totalsBlock([125, 220, 75, 39], theme),
-      paymentBlock([10, 252, 110, 22], theme),
-      footerBand([10, 277, 190, 10], theme),
-    ],
+    elements: withFont(
+      [
+        piece('banda', 'Banda superior', 'shape', [0, 0, 210, 40], {
+          fill: theme.accent,
+          bordered: false,
+        }),
+        title([10, 9, 110, 13], WHITE, 'left'),
+        number([10, 24, 110, 7], WHITE, 'left'),
+        logo([150, 7, 50, 26]),
+        issuerName([10, 48, 90, 7], theme),
+        issuerDetails([10, 55, 90, 16], theme),
+        dates([105, 48, 95, 14], theme.muted),
+        clientLabel([10, 76, 90, 5], theme),
+        clientName([10, 81, 110, 7], theme),
+        clientDetails([10, 88, 110, 16], theme),
+        linesTable([10, 108, 190, 106], theme),
+        basesBlock([10, 220, 80, 28], theme),
+        totalsBlock([125, 220, 75, 39], theme),
+        paymentBlock([10, 252, 110, 22], theme),
+        footerBand([10, 277, 190, 10], theme),
+      ],
+      'montserrat',
+    ),
   },
 };
