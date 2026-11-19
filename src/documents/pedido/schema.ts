@@ -1,0 +1,62 @@
+import type { DataSchema } from '../../core/document-type/types';
+import { VAT_OPTIONS } from './vat';
+
+export const schema: DataSchema = {
+  version: 1,
+  fields: [
+    { key: 'serie', label: 'Serie', kind: 'text', group: 'Pedido' },
+    { key: 'numero', label: 'Número', kind: 'number', group: 'Pedido', required: true },
+    {
+      key: 'numeroPedido',
+      label: 'Número completo',
+      kind: 'text',
+      group: 'Pedido',
+      computed: true,
+    },
+    { key: 'fecha', label: 'Fecha del pedido', kind: 'date', group: 'Pedido', required: true },
+    { key: 'fechaEntrega', label: 'Entrega prevista', kind: 'date', group: 'Pedido' },
+    { key: 'emisor.logo', label: 'Logo', kind: 'image', group: 'Comprador' },
+    {
+      key: 'emisor.nombre',
+      label: 'Nombre o razón social',
+      kind: 'text',
+      group: 'Comprador',
+      required: true,
+    },
+    { key: 'emisor.nif', label: 'NIF', kind: 'text', group: 'Comprador' },
+    { key: 'emisor.direccion', label: 'Domicilio', kind: 'multiline', group: 'Comprador' },
+    { key: 'emisor.email', label: 'Email', kind: 'text', group: 'Comprador' },
+    { key: 'emisor.telefono', label: 'Teléfono', kind: 'text', group: 'Comprador' },
+    {
+      key: 'proveedor.nombre',
+      label: 'Nombre o razón social',
+      kind: 'text',
+      group: 'Proveedor',
+      required: true,
+    },
+    { key: 'proveedor.nif', label: 'NIF', kind: 'text', group: 'Proveedor' },
+    { key: 'proveedor.direccion', label: 'Domicilio', kind: 'multiline', group: 'Proveedor' },
+    { key: 'proveedor.email', label: 'Email', kind: 'text', group: 'Proveedor' },
+    { key: 'lugarEntrega', label: 'Lugar de entrega', kind: 'multiline', group: 'Entrega' },
+    {
+      key: 'lineas',
+      label: 'Artículos',
+      kind: 'lines',
+      group: 'Artículos',
+      columns: [
+        { key: 'concepto', label: 'Descripción', kind: 'text', width: 5 },
+        { key: 'cantidad', label: 'Cant.', kind: 'number', width: 1.1 },
+        { key: 'precio', label: 'Precio', kind: 'money', width: 1.8 },
+        { key: 'iva', label: 'IVA', kind: 'choice', width: 1.2, options: VAT_OPTIONS },
+        { key: 'importe', label: 'Importe', kind: 'money', width: 1.9, computed: true },
+      ],
+    },
+    { key: 'baseTotal', label: 'Base imponible', kind: 'money', group: 'Totales', computed: true },
+    { key: 'iva21', label: 'IVA 21 %', kind: 'money', group: 'Totales', computed: true },
+    { key: 'iva10', label: 'IVA 10 %', kind: 'money', group: 'Totales', computed: true },
+    { key: 'iva4', label: 'IVA 4 %', kind: 'money', group: 'Totales', computed: true },
+    { key: 'ivaTotal', label: 'Total IVA', kind: 'money', group: 'Totales', computed: true },
+    { key: 'total', label: 'Total', kind: 'money', group: 'Totales', computed: true },
+    { key: 'condiciones', label: 'Condiciones', kind: 'multiline', group: 'Condiciones' },
+  ],
+};
