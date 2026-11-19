@@ -2,9 +2,11 @@ import type { DocumentTypeDefinition } from '../../core/document-type/types';
 import { compute } from './calc';
 import { DEFAULT_PAPER_ID, DESCRIPTION, ID, NAME, NUMBERING } from './definition';
 import { labels } from './labels.es';
+import { refineRandomData } from './random';
 import { sampleData } from './sample';
 import { schema } from './schema';
 import { clasica } from './templates/clasica';
+import { moderna } from './templates/moderna';
 
 // Única entrada del tipo: el motor la descubre solo.
 const definition: DocumentTypeDefinition = {
@@ -15,9 +17,10 @@ const definition: DocumentTypeDefinition = {
   numbering: NUMBERING,
   schema,
   labels,
-  templates: [clasica],
+  templates: [clasica, moderna],
   sampleData,
   compute,
+  refineRandomData,
 };
 
 export default definition;
