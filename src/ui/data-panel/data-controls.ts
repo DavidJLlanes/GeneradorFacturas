@@ -3,7 +3,14 @@ import type { FieldSpec } from '../../core/document-type/types';
 import { centsToInput, parseMoneyToCents } from '../../data/money';
 import { createLinesControl } from './lines-control';
 import { createImageField } from '../fields/image-field';
-import { dateField, numberField, textareaField, textField } from '../fields/form-fields';
+import {
+  checkField,
+  dateField,
+  numberField,
+  selectField,
+  textareaField,
+  textField,
+} from '../fields/form-fields';
 
 export interface DataControl {
   key: string;
@@ -34,6 +41,27 @@ export function createDataControl(spec: FieldSpec): DataControl {
   });
 
   switch (spec.kind) {
+    case 'choice': {
+      const blank = spec.required ? [] : [{ value: '', label: '—' }];
+      const { row, input } = selectField(label, [...blank, ...(spec.options ?? [])]);
+      return {
+        key: spec.key,
+        row,
+        input,
+        set: (v) => void (input.value = show(v)),
+        onChange: (fn) => input.addEventListener('change', () => fn(input.value || undefined)),
+      };
+    }
+    case 'toggle': {
+      const { row, input } = checkField(label);
+      return {
+        key: spec.key,
+        row,
+        input,
+        set: (v) => void (input.checked = v === true),
+        onChange: (fn) => input.addEventListener('change', () => fn(input.checked || undefined)),
+      };
+    }
     case 'lines':
       return createLinesControl(spec);
     case 'multiline': {

@@ -33,6 +33,8 @@ export interface PieceRenderInput {
   schema: DataSchema | null;
   /** Valor sin formatear de un campo; solo con la vista "Con datos" activa (si no, undefined). */
   value(key: string): unknown;
+  /** true con la vista "Con datos"; false con la plantilla limpia. */
+  fillMode: boolean;
 }
 
 export type { DocumentData };

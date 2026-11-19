@@ -1,13 +1,39 @@
 import { presetById } from '../../paper/paper-presets';
 import { MAX_PAGE_MM, MIN_PAGE_MM } from '../../paper/size-limits';
-import type { DocumentTypeDefinition, FieldSpec } from './types';
+import type { ChoiceOption, DocumentTypeDefinition, FieldSpec } from './types';
 
 const ID_PATTERN = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
 const KEY_PATTERN = /^[a-z][A-Za-z0-9]*(\.[a-z][A-Za-z0-9]*)*$/;
-const FIELD_KINDS = ['text', 'multiline', 'number', 'money', 'date', 'image', 'lines'];
-const COLUMN_KINDS = ['text', 'number', 'money'];
+const FIELD_KINDS = [
+  'text',
+  'multiline',
+  'number',
+  'money',
+  'date',
+  'image',
+  'lines',
+  'choice',
+  'toggle',
+];
+const COLUMN_KINDS = ['text', 'number', 'money', 'choice'];
 
 type Report = (message: string) => number;
+
+function validateOptions(
+  owner: string,
+  options: readonly ChoiceOption[] | undefined,
+  bad: Report,
+): void {
+  if (!options || options.length === 0) {
+    bad(`${owner} es de lista y necesita opciones`);
+    return;
+  }
+  const values = options.map((o) => o.value);
+  for (const v of values.filter((x, i) => values.indexOf(x) !== i))
+    bad(`${owner} repite la opción "${v}"`);
+  if (options.some((o) => !o.label.trim() || o.value === ''))
+    bad(`${owner} tiene opciones sin valor o etiqueta`);
+}
 
 function validateColumns(
   field: string,
@@ -25,6 +51,9 @@ function validateColumns(
     if (!COLUMN_KINDS.includes(c.kind))
       bad(`tipo de columna desconocido en "${field}": "${c.kind}"`);
     if (!c.label.trim()) bad(`la columna "${c.key}" de "${field}" necesita etiqueta`);
+    if (c.kind === 'choice') validateOptions(`la columna "${c.key}" de "${field}"`, c.options, bad);
+    else if (c.options)
+      bad(`la columna "${c.key}" de "${field}" tiene opciones pero no es de lista`);
     if (!(c.width > 0)) bad(`la columna "${c.key}" de "${field}" necesita anchura positiva`);
   }
 }
@@ -60,6 +89,12 @@ export function validateDocumentType(def: DocumentTypeDefinition, folder: string
     if (f.kind !== 'lines' && f.columns)
       bad(`el campo "${f.key}" tiene columnas pero no es de líneas`);
     if (f.kind === 'lines') validateColumns(f.key, f.columns ?? [], bad);
+    if (f.kind === 'choice') validateOptions(`el campo "${f.key}"`, f.options, bad);
+    else if (f.options) bad(`el campo "${f.key}" tiene opciones pero no es de lista`);
+  }
+
+  for (const key of Object.keys(def.sampleData ?? {})) {
+    if (!keys.includes(key)) bad(`los datos de ejemplo usan un campo que no existe: "${key}"`);
   }
 
   if (def.templates.length === 0) bad('necesita al menos una plantilla');

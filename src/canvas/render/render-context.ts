@@ -21,6 +21,7 @@ export function createRenderContextProvider(): (ui: EditorUiState) => PieceRende
     resolve: identity,
     schema: null,
     value: noValue,
+    fillMode: false,
     version: 0,
   };
 
@@ -40,6 +41,7 @@ export function createRenderContextProvider(): (ui: EditorUiState) => PieceRende
       resolve: ui.fillMode ? makeResolver(ui.schema, derived) : identity,
       schema: ui.schema,
       value: ui.fillMode ? (key) => derived[key] : noValue,
+      fillMode: ui.fillMode,
       version: Number(context.version) + 1,
     };
     return context;

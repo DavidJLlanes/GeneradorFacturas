@@ -145,4 +145,39 @@ describe('tipos descubiertos en src/documents', () => {
     }
     expect(documentTypes.list().length).toBe(found.length);
   });
+
+  it('valida campos de lista, columnas de lista y datos de ejemplo', () => {
+    const def = valid();
+    const withField = (field: object, sampleData?: object) =>
+      ({
+        ...def,
+        sampleData,
+        schema: { version: 1, fields: [{ key: 'c', label: 'C', group: 'g', ...field }] },
+      }) as unknown as DocumentTypeDefinition;
+    const opts = [{ value: 'a', label: 'A' }];
+    expect(validateDocumentType(withField({ kind: 'choice', options: opts }), 'prueba')).toEqual(
+      [],
+    );
+    expect(validateDocumentType(withField({ kind: 'toggle' }), 'prueba')).toEqual([]);
+    expect(validateDocumentType(withField({ kind: 'choice' }), 'prueba').join()).toMatch(
+      /necesita opciones/,
+    );
+    const dup = [...opts, ...opts];
+    expect(
+      validateDocumentType(withField({ kind: 'choice', options: dup }), 'prueba').join(),
+    ).toMatch(/repite la opción/);
+    expect(
+      validateDocumentType(withField({ kind: 'text', options: opts }), 'prueba').join(),
+    ).toMatch(/no es de lista/);
+    const col = (c: object) =>
+      withField({ kind: 'lines', columns: [{ key: 'k', label: 'K', width: 1, ...c }] });
+    expect(validateDocumentType(col({ kind: 'choice', options: opts }), 'prueba')).toEqual([]);
+    expect(validateDocumentType(col({ kind: 'choice' }), 'prueba').join()).toMatch(
+      /necesita opciones/,
+    );
+    expect(validateDocumentType(withField({ kind: 'text' }, { c: 'x' }), 'prueba')).toEqual([]);
+    expect(
+      validateDocumentType(withField({ kind: 'text' }, { zzz: 'x' }), 'prueba').join(),
+    ).toMatch(/no existe/);
+  });
 });

@@ -6,10 +6,16 @@ const PX_PER_PT = 96 / 72;
 
 // Bloque de totales: una fila por línea del texto, con formato `Etiqueta | {{variable}}`.
 // La última fila puede destacarse (negrita, fondo y línea encima).
-export function renderTotals(node: HTMLElement, { props, resolve }: PieceRenderInput): void {
+export function renderTotals(
+  node: HTMLElement,
+  { props, resolve, fillMode }: PieceRenderInput,
+): void {
+  const hide = bool(props, 'hideUnresolved') && fillMode;
   const lines = str(props, 'rows')
     .split('\n')
-    .filter((l) => l.trim() !== '');
+    .filter((l) => l.trim() !== '')
+    // Con datos y la opción activa, se omiten las filas cuyo valor no se pudo calcular.
+    .filter((l) => !hide || !resolve(l.slice(l.indexOf('|') + 1)).includes('{{'));
   node.style.border = 'none';
   node.style.background = 'transparent';
   node.style.display = 'grid';

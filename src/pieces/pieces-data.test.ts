@@ -39,6 +39,7 @@ const draw = (
     resolve,
     schema,
     value: (key) => (fill ? data[key] : undefined),
+    fillMode: fill,
   });
   return node;
 };
@@ -128,5 +129,32 @@ describe('totales', () => {
       'Total',
       '{{total}}',
     ]);
+  });
+});
+
+describe('totales: filas sin valor', () => {
+  const rows = 'Base | {{total}}\nRecargo | {{recargo}}';
+
+  it('con datos y la opción activa se omiten las filas sin valor', () => {
+    const node = draw(
+      'totals',
+      { rows, hideUnresolved: true, highlightLast: false },
+      { total: 100 },
+    );
+    expect([...node.children].map((c) => c.textContent)).toEqual([
+      'Base',
+      expect.stringContaining('1,00'),
+    ]);
+  });
+
+  it('en plantilla limpia se muestran todas aunque la opción esté activa', () => {
+    const node = draw('totals', { rows, hideUnresolved: true }, { total: 100 }, false);
+    expect(node.children.length).toBe(4);
+  });
+
+  it('sin la opción se conservan las filas pendientes', () => {
+    const node = draw('totals', { rows, hideUnresolved: false }, { total: 100 });
+    expect(node.children.length).toBe(4);
+    expect(node.textContent).toContain('{{recargo}}');
   });
 });

@@ -10,6 +10,7 @@ const definition: DocumentTypeDefinition = {
   id: ID,
   name: NAME,
   description: DESCRIPTION,
+  internal: true,
   defaultPaperId: DEFAULT_PAPER_ID,
   numbering: NUMBERING,
   schema,

@@ -10,6 +10,8 @@ const numberFormat = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 6 }
 function cellText(column: ColumnSpec, value: string | number | undefined): string {
   if (value === undefined || value === '') return '';
   if (column.kind === 'money') return typeof value === 'number' ? formatCents(value) : '';
+  if (column.kind === 'choice')
+    return column.options?.find((o) => o.value === value)?.label ?? String(value);
   if (column.kind === 'number')
     return typeof value === 'number' ? numberFormat.format(value) : String(value);
   return String(value);

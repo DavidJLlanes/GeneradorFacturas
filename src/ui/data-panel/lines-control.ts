@@ -1,6 +1,6 @@
 import type { ColumnSpec, FieldSpec, LineRow } from '../../core/document-type/types';
 import { centsToInput, parseMoneyToCents } from '../../data/money';
-import { numberField, textField } from '../fields/form-fields';
+import { numberField, selectField, textField } from '../fields/form-fields';
 import type { DataControl } from './data-controls';
 
 type Cell = string | number | undefined;
@@ -12,6 +12,12 @@ function cellInput(column: ColumnSpec, value: Cell, onChange: (value: Cell) => v
     input.addEventListener('change', () =>
       onChange(input.value.trim() === '' ? undefined : Number(input.value.replace(',', '.'))),
     );
+    return row;
+  }
+  if (column.kind === 'choice') {
+    const { row, input } = selectField(column.label, column.options ?? []);
+    input.value = String(value ?? column.options?.[0]?.value ?? '');
+    input.addEventListener('change', () => onChange(input.value));
     return row;
   }
   const { row, input } = textField(column.label);
@@ -47,8 +53,16 @@ export function createLinesControl(spec: FieldSpec): DataControl {
   title.textContent = spec.label;
   const list = document.createElement('div');
   list.className = 'dl-list';
-  const add = button('+ Añadir línea', 'dl-add', () => commit([...rows, {}]));
+  const add = button('+ Añadir línea', 'dl-add', () => commit([...rows, newRow()]));
   row.append(title, list, add);
+
+  // Una línea nueva empieza con la primera opción de cada columna de lista.
+  const newRow = (): LineRow =>
+    Object.fromEntries(
+      columns.flatMap((c) =>
+        c.kind === 'choice' && c.options?.[0] ? [[c.key, c.options[0].value]] : [],
+      ),
+    );
 
   let rows: readonly LineRow[] = [];
   const listeners: ((value: readonly LineRow[]) => void)[] = [];

@@ -44,6 +44,7 @@ const draw = (kind: string, props = {}): HTMLElement => {
     resolve: (t) => t,
     schema: null,
     value: () => undefined,
+    fillMode: false,
   });
   return node;
 };
@@ -139,6 +140,7 @@ describe('dibujo de piezas', () => {
         resolve,
         schema: null,
         value: () => undefined,
+        fillMode: false,
       });
       return node;
     };

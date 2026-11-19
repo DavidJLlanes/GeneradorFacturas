@@ -8,9 +8,10 @@ export function makeResolver(
   data: DocumentData,
   missing: MissingPolicy = 'keep',
 ): (text: string) => string {
-  const kinds = new Map(schema?.fields.map((f) => [f.key, f.kind]));
+  const fields = new Map(schema?.fields.map((f) => [f.key, f]));
   const lookup = (key: string): string | undefined => {
-    const text = formatFieldValue(kinds.get(key) ?? 'text', data[key]);
+    const field = fields.get(key);
+    const text = formatFieldValue(field?.kind ?? 'text', data[key], field?.options);
     return text === '' ? undefined : text;
   };
   return (text) => resolveVariables(text, lookup, missing);

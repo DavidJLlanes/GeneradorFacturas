@@ -94,4 +94,17 @@ describe('rellenar con datos', () => {
     expect(text).toContain('{{nombre}}|05/01/2026|120,50');
     expect(text.endsWith('|{{otro}}')).toBe(true);
   });
+
+  it('las listas muestran la etiqueta y el sí/no solo si está activo', () => {
+    const options = [{ value: '21', label: '21 %' }];
+    expect(formatFieldValue('choice', '21', options)).toBe('21 %');
+    expect(formatFieldValue('choice', '99', options)).toBe('99');
+    expect(formatFieldValue('toggle', true)).toBe('Sí');
+    expect(formatFieldValue('toggle', false)).toBe('');
+    const schema: DataSchema = {
+      version: 1,
+      fields: [{ key: 'iva', label: 'IVA', kind: 'choice', group: 'g', options }],
+    };
+    expect(makeResolver(schema, { iva: '21' })('{{iva}}')).toBe('21 %');
+  });
 });

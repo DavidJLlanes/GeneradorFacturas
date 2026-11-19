@@ -1,4 +1,4 @@
-import type { FieldKind } from '../core/document-type/types';
+import type { ChoiceOption, FieldKind } from '../core/document-type/types';
 import { isImageDataUrl } from '../images/image-limits';
 import { formatCents } from './money';
 
@@ -6,7 +6,11 @@ const DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
 const numberFormat = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 6 });
 
 // Texto con el que se muestra un dato en el documento, según el tipo de campo.
-export function formatFieldValue(kind: FieldKind, value: unknown): string {
+export function formatFieldValue(
+  kind: FieldKind,
+  value: unknown,
+  options?: readonly ChoiceOption[],
+): string {
   if (value === undefined || value === null || value === '') return '';
   switch (kind) {
     case 'money':
@@ -21,6 +25,10 @@ export function formatFieldValue(kind: FieldKind, value: unknown): string {
       return isImageDataUrl(value) ? value : '';
     case 'lines':
       return '';
+    case 'choice':
+      return options?.find((o) => o.value === value)?.label ?? String(value);
+    case 'toggle':
+      return value === true ? 'Sí' : '';
     default:
       return String(value);
   }

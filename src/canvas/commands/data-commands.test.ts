@@ -52,3 +52,23 @@ describe('contexto de dibujo', () => {
     expect(provide(editor.ui.get()).version).not.toBe(first.version);
   });
 });
+
+describe('datos de ejemplo', () => {
+  it('se cargan, pasan a la vista rellena y se pueden vaciar', async () => {
+    const { loadSampleData, clearData } = await import('./data-commands');
+    const editor = make();
+    setDataSource(editor, { schema, sample: { nombre: 'Ana' } });
+    loadSampleData(editor);
+    expect(editor.ui.get()).toMatchObject({ data: { nombre: 'Ana' }, fillMode: true });
+    clearData(editor);
+    expect(editor.ui.get().data).toEqual({});
+    expect(editor.history.canUndo).toBe(false);
+  });
+
+  it('sin datos de muestra no hace nada', async () => {
+    const { loadSampleData } = await import('./data-commands');
+    const editor = make();
+    loadSampleData(editor);
+    expect(editor.ui.get().fillMode).toBe(false);
+  });
+});

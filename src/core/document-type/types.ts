@@ -3,10 +3,17 @@ import type { DocumentModel } from '../document/types';
 // Contrato que cumple cada tipo de documento (factura, presupuesto, albarán…).
 // Un tipo vive entero en `src/documents/<tipo>/` y exporta su definición por defecto.
 
-export type FieldKind = 'text' | 'multiline' | 'number' | 'money' | 'date' | 'image' | 'lines';
+export type FieldKind =
+  'text' | 'multiline' | 'number' | 'money' | 'date' | 'image' | 'lines' | 'choice' | 'toggle';
+
+// Opción de un campo o columna de tipo 'choice'. Se guarda `value`; se muestra `label`.
+export interface ChoiceOption {
+  value: string;
+  label: string;
+}
 
 // Columna de un campo de tipo 'lines' (tabla de líneas: conceptos, cantidades, precios…).
-export type ColumnKind = 'text' | 'number' | 'money';
+export type ColumnKind = 'text' | 'number' | 'money' | 'choice';
 
 export interface ColumnSpec {
   key: string;
@@ -14,6 +21,8 @@ export interface ColumnSpec {
   kind: ColumnKind;
   /** Anchura relativa respecto a las demás columnas. */
   width: number;
+  /** Para 'choice': las opciones; la primera es la de las líneas nuevas. */
+  options?: readonly ChoiceOption[];
   /** Calculada por el tipo (en `compute`): no se edita a mano. */
   computed?: boolean;
 }
@@ -31,6 +40,8 @@ export interface FieldSpec {
   required?: boolean;
   /** Solo para 'lines': las columnas de la tabla. */
   columns?: readonly ColumnSpec[];
+  /** Solo para 'choice': las opciones. */
+  options?: readonly ChoiceOption[];
   /** Calculado por el tipo: se muestra y se puede usar en variables, pero no se edita. */
   computed?: boolean;
 }
@@ -60,12 +71,16 @@ export interface DocumentTypeDefinition {
   id: string;
   name: string;
   description: string;
+  /** Tipo interno (de prueba o de ejemplo): no se ofrece al abrir la aplicación. */
+  internal?: boolean;
   /** Papel con el que arranca un diseño nuevo (id del catálogo de `paper/`). */
   defaultPaperId: string;
   numbering: Numbering;
   schema: DataSchema;
   /** Textos propios del tipo, por clave. */
   labels: Readonly<Record<string, string>>;
+  /** Datos de muestra para ver el diseño relleno (botón "Datos de ejemplo"). */
+  sampleData?: DocumentData;
   /** Plantillas de partida; la primera es la que se abre por defecto. */
   templates: readonly DocumentTemplate[];
   /** Valores derivados de los datos (totales, impuestos…). Opcional: un albarán puede no tenerlos. */

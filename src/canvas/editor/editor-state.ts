@@ -21,6 +21,8 @@ export interface EditorUiState {
   schema: DataSchema | null;
   /** Cálculos del tipo: devuelve valores derivados (totales…) a partir de los datos. */
   compute: ((data: DocumentData) => DocumentData) | null;
+  /** Datos de muestra del tipo, para el botón "Datos de ejemplo". */
+  sample: DocumentData | null;
   /** Mostrar las variables rellenas con los datos (true) o la plantilla limpia (false). */
   fillMode: boolean;
 }
@@ -39,5 +41,6 @@ export const createInitialUiState = (): EditorUiState => ({
   data: {},
   schema: null,
   compute: null,
+  sample: null,
   fillMode: false,
 });
