@@ -85,9 +85,9 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 0 — Base y despliegue**
 
-- [ ] Repo, TypeScript, Vite con base `/factura/`
-- [ ] Linter, formato y pruebas (Vitest)
-- [ ] README con privacidad y aviso legal
+- [x] Repo, TypeScript, Vite con base `/factura/`
+- [x] Linter, formato y pruebas (Vitest)
+- [x] README con privacidad y aviso legal
 - [ ] Nginx y primer despliegue en `/factura`
 
 **Fase 1 — Lienzo (pizarra)**

@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "description": "Motor visual de documentos (facturas, presupuestos, albaranes…) tipo pizarra. Sin registro, todo en el navegador.",
   "scripts": {
     "dev": "vite",
