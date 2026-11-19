@@ -1,0 +1,56 @@
+/* Documento preparado para imprimir / guardar como PDF. Está maquetado fuera de pantalla (para que las
+   fuentes e imágenes se carguen) y solo se muestra al imprimir. */
+.pdf-root {
+  position: fixed;
+  top: 0;
+  left: -100000px;
+}
+
+.pdf-page {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+
+.pdf-root .cv-elements {
+  position: absolute;
+  inset: 0;
+}
+
+.pdf-root .cv-el {
+  position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.pdf-root .cv-el[hidden] {
+  display: none !important;
+}
+
+@media print {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  body > *:not(.pdf-root) {
+    display: none !important;
+  }
+
+  .pdf-root {
+    position: static;
+  }
+
+  .pdf-page {
+    break-after: page;
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .pdf-page:last-child {
+    break-after: auto;
+  }
+}

@@ -1,5 +1,6 @@
 import { rectOf } from '../../core/document/element-rect';
 import type { DocElement, DocumentModel } from '../../core/document/types';
+import { withPageVariables } from '../../data/page-variables';
 import { createMeasure } from '../../layout/measure-element';
 import { layoutDocument } from '../../layout/layout-document';
 import type { Layout, PlacedItem } from '../../layout/types';
@@ -70,8 +71,14 @@ function createProvider(): Provider {
     const pages = layout!.pages;
     const pageIndex = Math.min(Math.max(0, ui.pageIndex), pages.length - 1);
     if (last && last.key === layout && last.pageIndex === pageIndex) return last.model;
+    // Cada página conoce su número para los textos con {{pagina}} y {{paginas}}.
+    const pageContext: PieceRenderContext = {
+      ...context,
+      resolve: withPageVariables(context.resolve, pageIndex + 1, pages.length),
+      version: `${String(context.version)}:${pageIndex}/${pages.length}`,
+    };
     const model: ViewModel = {
-      context,
+      context: pageContext,
       items: pages[pageIndex]!.items,
       pageCount: pages.length,
       pageIndex,

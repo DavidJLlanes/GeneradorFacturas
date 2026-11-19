@@ -31,6 +31,7 @@ export function createWorldView(): {
       const { zoom, panX, panY } = ui.viewport;
       world.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
       world.style.setProperty('--zoom', String(zoom));
+      world.classList.toggle('is-preview', ui.fillMode);
       page.style.width = `${mmToPx(doc.page.widthMm)}px`;
       page.style.height = `${mmToPx(doc.page.heightMm)}px`;
 

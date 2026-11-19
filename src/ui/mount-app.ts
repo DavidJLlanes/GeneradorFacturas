@@ -3,6 +3,7 @@ import { attachPointerInput } from '../canvas/input/pointer-input';
 import { attachInlineEdit } from '../canvas/input/inline-edit';
 import { attachWheelInput } from '../canvas/input/wheel-input';
 import { createCanvasView } from '../canvas/render/create-canvas-view';
+import { attachPrint } from '../pdf/print-document';
 import { attachKeyboardShortcuts } from '../canvas/shortcuts/keyboard-shortcuts';
 import { createDataPanel } from './data-panel/data-panel';
 import { createLayersPanel } from './layers-panel/layers-panel';
@@ -37,4 +38,5 @@ export function mountApp(root: HTMLElement, editor: Editor): void {
   attachWheelInput(editor, view.stage);
   attachInlineEdit(editor, view.stage);
   attachKeyboardShortcuts(editor);
+  attachPrint(editor);
 }

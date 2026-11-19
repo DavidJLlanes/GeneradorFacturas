@@ -217,3 +217,7 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 - PDF con librería propia o con impresión del navegador (prueba de concepto en la Fase 9).
 - Alcance en móvil: edición completa o modo reducido.
 - Licencia del repositorio.
+
+## Fase 9 — PDF (hecha)
+
+PDF vectorial mediante la impresión del navegador (`src/pdf/`): modo relleno y modelo limpio, todos los papeles vía `@page`, `{{pagina}}`/`{{paginas}}`. Ver `docs/pdf.md`. Descarga directa con pdf-lib: opcional más adelante.

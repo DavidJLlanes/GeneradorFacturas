@@ -259,3 +259,8 @@
   min-width: 7.5em;
   text-align: center;
 }
+
+/* Con datos se ve el documento tal como saldrá: sin los contornos de ayuda de cada pieza. */
+.cv-world.is-preview .cv-el {
+  outline: none;
+}

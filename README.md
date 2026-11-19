@@ -37,6 +37,7 @@ src/
   app/         arranque: elige el tipo y la plantilla y crea el editor
   paper/       papeles: catálogo de tamaños, orientación, márgenes, adaptación de piezas (ver docs/papel.md)
   layout/      reparto del documento en páginas: tabla elástica, partida por filas, piezas repetidas (ver docs/paginas.md)
+  pdf/         exportar a PDF con la impresión del navegador (ver docs/pdf.md)
   pieces/      piezas genéricas, una carpeta por pieza (ver docs/piezas.md)
   styles/      paleta del documento, colores enlazados y temas (ver docs/estilos.md)
   fonts/       catálogo de fuentes locales y carga bajo demanda (ver docs/fuentes.md)

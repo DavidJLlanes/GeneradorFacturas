@@ -6,6 +6,7 @@ import { historyGroup } from './history-group';
 import { insertGroup } from './insert-group';
 import { orderGroup } from './order-group';
 import { paperGroup } from './paper-group';
+import { pdfGroup } from './pdf-group';
 import { snapGroup } from './snap-group';
 import { styleGroup } from './style-group';
 import { viewGroup } from './view-group';
@@ -19,6 +20,7 @@ export const TOOLBAR_GROUPS: readonly ButtonGroup[] = [
   viewGroup,
   paperGroup,
   styleGroup,
+  pdfGroup,
   dataGroup,
   snapGroup,
 ];
