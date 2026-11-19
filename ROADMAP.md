@@ -176,10 +176,10 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 11 — Tipos: presupuesto, albarán, recibo**
 
-- [ ] `documents/presupuesto/` (validez de la oferta y aceptación)
-- [ ] `documents/albaran/` (cantidades sin precios, espacio de firma)
-- [ ] `documents/recibo/` (importe, concepto y forma de pago)
-- [ ] Cada tipo solo añade su carpeta; el núcleo no se modifica
+- [x] `documents/presupuesto/` (validez de la oferta y aceptación)
+- [x] `documents/albaran/` (cantidades sin precios, espacio de firma)
+- [x] `documents/recibo/` (importe, concepto y forma de pago)
+- [x] Cada tipo solo añade su carpeta; el núcleo no se modifica
 
 **Fase 12 — Más tipos**
 
