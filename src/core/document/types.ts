@@ -1,3 +1,4 @@
+import type { Palette } from '../../styles/palette';
 import type { Rect } from '../geometry/rect';
 
 // Márgenes en mm: delimitan la zona de seguridad de impresión.
@@ -32,4 +33,6 @@ export interface DocElement extends Rect {
 export interface DocumentModel {
   page: Page;
   elements: readonly DocElement[];
+  /** Colores con nombre del documento; si falta, se usa la paleta por defecto. */
+  palette?: Palette;
 }

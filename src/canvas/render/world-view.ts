@@ -1,5 +1,6 @@
 import type { DocumentModel } from '../../core/document/types';
 import { mmToPx } from '../../core/units/units';
+import { paletteOf } from '../../styles/palette';
 import type { EditorUiState } from '../editor/editor-state';
 import { createElementsLayer } from './elements-layer';
 import { createRenderContextProvider } from './render-context';
@@ -42,7 +43,7 @@ export function createWorldView(): {
       margins.style.display = ui.showMargins ? 'block' : 'none';
       margins.style.inset = `${mmToPx(m.top)}px ${mmToPx(m.right)}px ${mmToPx(m.bottom)}px ${mmToPx(m.left)}px`;
 
-      elements.update(doc.elements, renderContext(ui));
+      elements.update(doc.elements, renderContext(ui), paletteOf(doc));
     },
   };
 }
