@@ -92,11 +92,11 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 1 — Lienzo (pizarra)**
 
-- [ ] Zoom y desplazamiento (rueda, táctil, atajos), con zoom al detalle
-- [ ] Seleccionar, mover y redimensionar; selección múltiple
-- [ ] Guías magnéticas, rejilla con ajuste y reglas en mm
-- [ ] Alinear y distribuir; capas, bloquear, ocultar, duplicar
-- [ ] Deshacer/rehacer ilimitado y atajos de teclado
+- [x] Zoom y desplazamiento (rueda, táctil, atajos), con zoom al detalle
+- [x] Seleccionar, mover y redimensionar; selección múltiple
+- [x] Guías magnéticas, rejilla con ajuste y reglas en mm
+- [x] Alinear y distribuir; capas, bloquear, ocultar, duplicar
+- [x] Deshacer/rehacer ilimitado y atajos de teclado
 
 **Fase 2 — Tamaños y proporciones de papel**
 

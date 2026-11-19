@@ -1,0 +1,191 @@
+.cv {
+  --ruler: 20px;
+  --ruler-bg: light-dark(#f1f2f4, #2b2d32);
+  --ruler-text: light-dark(#5b6068, #9aa0a8);
+  --canvas-bg: light-dark(#dfe2e7, #202226);
+  --grid-line: light-dark(rgb(47 111 237 / 0.18), rgb(47 111 237 / 0.28));
+  --el-bg: light-dark(#e8f0ff, #dbe7ff);
+  --el-border: #2f6fed;
+  --accent: #2f6fed;
+  --guide: #ff3d81;
+
+  display: grid;
+  grid-template-columns: var(--ruler) minmax(0, 1fr);
+  grid-template-rows: var(--ruler) minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+}
+
+.cv-corner {
+  background: var(--ruler-bg);
+}
+
+.cv-ruler {
+  position: relative;
+  overflow: hidden;
+  background: var(--ruler-bg);
+  color: var(--ruler-text);
+}
+
+.cv-ruler canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cv-stage {
+  position: relative;
+  overflow: hidden;
+  background: var(--canvas-bg);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cv-stage.is-space {
+  cursor: grab;
+}
+
+.cv-stage.is-panning {
+  cursor: grabbing;
+}
+
+.cv-world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}
+
+.cv-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 1px 12px rgb(0 0 0 / 0.25);
+}
+
+.cv-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid-line) calc(1px / var(--zoom, 1)), transparent 0),
+    linear-gradient(to bottom, var(--grid-line) calc(1px / var(--zoom, 1)), transparent 0);
+}
+
+.cv-el {
+  position: absolute;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 2px;
+  background: var(--el-bg);
+  border: calc(1px / var(--zoom, 1)) solid var(--el-border);
+  color: #1b2a4a;
+  font-size: 13px;
+  text-align: center;
+  cursor: default;
+}
+
+.cv-el.is-locked {
+  background: #eceef2;
+  border-color: #8a919c;
+  color: #5a606a;
+}
+
+.cv-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cv-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.cv-sel,
+.cv-sel-box,
+.cv-marquee {
+  position: absolute;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.cv-sel {
+  border: 1px solid var(--accent);
+}
+
+.cv-sel.is-locked {
+  border-style: dashed;
+  border-color: #8a919c;
+}
+
+.cv-sel-box {
+  border: 1px solid var(--accent);
+}
+
+.cv-marquee {
+  background: rgb(47 111 237 / 0.12);
+  border: 1px solid var(--accent);
+}
+
+.cv-handle {
+  position: absolute;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border: 1.5px solid var(--accent);
+  border-radius: 2px;
+  pointer-events: auto;
+}
+
+/* Zona táctil ampliada, sin agrandar el tirador visible. */
+.cv-handle::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+}
+
+.cv-handle[data-handle='nw'],
+.cv-handle[data-handle='se'] {
+  cursor: nwse-resize;
+}
+
+.cv-handle[data-handle='ne'],
+.cv-handle[data-handle='sw'] {
+  cursor: nesw-resize;
+}
+
+.cv-handle[data-handle='n'],
+.cv-handle[data-handle='s'] {
+  cursor: ns-resize;
+}
+
+.cv-handle[data-handle='e'],
+.cv-handle[data-handle='w'] {
+  cursor: ew-resize;
+}
+
+.cv-guide {
+  position: absolute;
+  background: var(--guide);
+  pointer-events: none;
+}
+
+.cv-guide-x {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.cv-guide-y {
+  left: 0;
+  right: 0;
+  height: 1px;
+}

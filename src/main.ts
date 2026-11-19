@@ -1,12 +1,7 @@
-import { APP_NAME, APP_TAGLINE } from './core/app-info';
+import { createEditor } from './canvas/editor/create-editor';
+import { createDemoDocument } from './demo/demo-document';
+import { mountApp } from './ui/mount-app';
 import './ui/base.css';
 
 const root = document.getElementById('app');
-
-if (root) {
-  const title = document.createElement('h1');
-  title.textContent = APP_NAME;
-  const tagline = document.createElement('p');
-  tagline.textContent = `${APP_TAGLINE} En construcción.`;
-  root.append(title, tagline);
-}
+if (root) mountApp(root, createEditor(createDemoDocument()));

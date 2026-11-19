@@ -31,10 +31,12 @@ Otros comandos: `npm test`, `npm run lint`, `npm run format`, `npm run build`, `
 
 ```
 src/
-  core/        núcleo: modelo, historial, contrato de tipo
-  ui/          interfaz
+  core/        núcleo sin interfaz: geometría, unidades, documento y operaciones, historial, store
+  canvas/      lienzo: editor, comandos, gestos, atajos, selección, imán, alinear, vista (ver docs/lienzo.md)
+  ui/          interfaz: barra de herramientas, panel de capas, estilos base
+  demo/        documento de prueba temporal (se retira en la Fase 4)
   main.ts      punto de entrada
-docs/          documentación (despliegue, guías)
+docs/          documentación (despliegue, lienzo)
 scripts/       herramientas de construcción y despliegue
 ```
 

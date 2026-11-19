@@ -1,0 +1,79 @@
+.lp {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+}
+
+.lp-title {
+  margin: 0;
+  padding: 10px 12px 6px;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.lp-list {
+  flex: 1;
+  margin: 0;
+  padding: 0 6px 8px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.lp-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.lp-row:hover {
+  background: var(--control-hover);
+}
+
+.lp-row.is-selected {
+  background: rgb(47 111 237 / 0.18);
+}
+
+.lp-row.is-hidden .lp-name {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+
+.lp-icon {
+  font: inherit;
+  font-size: 0.8rem;
+  width: 26px;
+  padding: 2px 0;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.lp-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 0.85rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lp-empty {
+  padding: 8px;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+@media (max-width: 720px) {
+  .lp {
+    border-left: 0;
+    border-top: 1px solid var(--border);
+  }
+}
