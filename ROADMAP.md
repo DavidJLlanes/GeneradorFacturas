@@ -183,10 +183,10 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 12 — Más tipos**
 
-- [ ] Rectificativa y abono, pedido/orden de compra
-- [ ] Parte de trabajo, ticket y vale, carta de reclamación
-- [ ] Hoja de encargo, etiquetas y tarjetas
-- [ ] Un tipo por carpeta, en cualquier orden
+- [x] Rectificativa y abono, pedido/orden de compra
+- [x] Parte de trabajo, ticket y vale, carta de reclamación
+- [x] Hoja de encargo, etiquetas y tarjetas
+- [x] Un tipo por carpeta, en cualquier orden
 
 **Fase 13 — Galería de plantillas**
 
