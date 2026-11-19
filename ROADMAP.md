@@ -74,7 +74,7 @@ src/documents/<tipo>/
   calc.ts           cálculos propios (un albarán no tiene precios)
   labels.es.ts      textos del tipo
   pieces/           piezas exclusivas del tipo, un archivo por pieza
-  templates/        plantillas de partida (*.json)
+  templates/        plantillas de partida, un archivo .ts por plantilla
 ```
 
 ## Formato del archivo de diseño
@@ -108,12 +108,12 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 3 — Motor de tipos de documento**
 
-- [ ] Contrato que debe cumplir un tipo (definición, esquema, cálculos, piezas, textos, plantillas)
-- [ ] Descubrimiento automático de `src/documents/*` sin registros manuales
-- [ ] Prueba automática que valida cada carpeta de tipo contra el contrato
-- [ ] Comprobación que falla si añadir un tipo modifica archivos fuera de su carpeta
-- [ ] Tipo de ejemplo mínimo para probar el motor
-- [ ] Guía "cómo añadir un tipo de documento" en `docs/`
+- [x] Contrato que debe cumplir un tipo (definición, esquema, cálculos, piezas, textos, plantillas)
+- [x] Descubrimiento automático de `src/documents/*` sin registros manuales
+- [x] Prueba automática que valida cada carpeta de tipo contra el contrato
+- [x] Comprobación que falla si añadir un tipo modifica archivos fuera de su carpeta
+- [x] Tipo de ejemplo mínimo para probar el motor
+- [x] Guía "cómo añadir un tipo de documento" en `docs/`
 
 **Fase 4 — Piezas genéricas y datos (núcleo)**
 

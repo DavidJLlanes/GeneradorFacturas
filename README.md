@@ -35,6 +35,7 @@ src/
   canvas/      lienzo: editor, comandos, gestos, atajos, selección, imán, alinear, vista (ver docs/lienzo.md)
   ui/          interfaz: barra de herramientas, panel de capas, diálogo de papel, estilos base
   paper/       papeles: catálogo de tamaños, orientación, márgenes, adaptación de piezas (ver docs/papel.md)
+  documents/   un tipo de documento por carpeta; se descubren solos (ver docs/anadir-tipo.md)
   demo/        documento de prueba temporal (se retira en la Fase 4)
   main.ts      punto de entrada
 docs/          documentación (despliegue, lienzo)
