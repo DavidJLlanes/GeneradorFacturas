@@ -1,0 +1,75 @@
+import type { DataSchema } from '../../core/document-type/types';
+import { VAT_OPTIONS } from './vat';
+
+export const schema: DataSchema = {
+  version: 1,
+  fields: [
+    { key: 'serie', label: 'Serie', kind: 'text', group: 'Presupuesto' },
+    { key: 'numero', label: 'Número', kind: 'number', group: 'Presupuesto', required: true },
+    {
+      key: 'numeroPresupuesto',
+      label: 'Número completo',
+      kind: 'text',
+      group: 'Presupuesto',
+      computed: true,
+    },
+    { key: 'fecha', label: 'Fecha', kind: 'date', group: 'Presupuesto', required: true },
+    { key: 'validezDias', label: 'Validez (días)', kind: 'number', group: 'Presupuesto' },
+    {
+      key: 'validoHasta',
+      label: 'Válido hasta',
+      kind: 'date',
+      group: 'Presupuesto',
+      computed: true,
+    },
+
+    { key: 'emisor.logo', label: 'Logo', kind: 'image', group: 'Emisor' },
+    {
+      key: 'emisor.nombre',
+      label: 'Nombre o razón social',
+      kind: 'text',
+      group: 'Emisor',
+      required: true,
+    },
+    { key: 'emisor.nif', label: 'NIF', kind: 'text', group: 'Emisor' },
+    { key: 'emisor.direccion', label: 'Domicilio', kind: 'multiline', group: 'Emisor' },
+    { key: 'emisor.email', label: 'Email', kind: 'text', group: 'Emisor' },
+    { key: 'emisor.telefono', label: 'Teléfono', kind: 'text', group: 'Emisor' },
+
+    {
+      key: 'cliente.nombre',
+      label: 'Nombre o razón social',
+      kind: 'text',
+      group: 'Cliente',
+      required: true,
+    },
+    { key: 'cliente.nif', label: 'NIF', kind: 'text', group: 'Cliente' },
+    { key: 'cliente.direccion', label: 'Domicilio', kind: 'multiline', group: 'Cliente' },
+    { key: 'cliente.email', label: 'Email', kind: 'text', group: 'Cliente' },
+
+    {
+      key: 'lineas',
+      label: 'Líneas',
+      kind: 'lines',
+      group: 'Líneas',
+      columns: [
+        { key: 'concepto', label: 'Concepto', kind: 'text', width: 5 },
+        { key: 'cantidad', label: 'Cant.', kind: 'number', width: 1.1 },
+        { key: 'precio', label: 'Precio', kind: 'money', width: 1.8 },
+        { key: 'descuento', label: 'Dto. %', kind: 'number', width: 1.1 },
+        { key: 'iva', label: 'IVA', kind: 'choice', width: 1.2, options: VAT_OPTIONS },
+        { key: 'importe', label: 'Importe', kind: 'money', width: 1.9, computed: true },
+      ],
+    },
+
+    { key: 'baseTotal', label: 'Base imponible', kind: 'money', group: 'Totales', computed: true },
+    { key: 'iva21', label: 'IVA 21 %', kind: 'money', group: 'Totales', computed: true },
+    { key: 'iva10', label: 'IVA 10 %', kind: 'money', group: 'Totales', computed: true },
+    { key: 'iva4', label: 'IVA 4 %', kind: 'money', group: 'Totales', computed: true },
+    { key: 'ivaTotal', label: 'Total IVA', kind: 'money', group: 'Totales', computed: true },
+    { key: 'total', label: 'Total', kind: 'money', group: 'Totales', computed: true },
+
+    { key: 'condiciones', label: 'Condiciones', kind: 'multiline', group: 'Condiciones' },
+    { key: 'notas', label: 'Notas', kind: 'multiline', group: 'Condiciones' },
+  ],
+};
