@@ -30,8 +30,9 @@ export function attachKeyboardShortcuts(editor: Editor): () => void {
     }
     const shortcut = SHORTCUTS.find((s) => matches(s, e));
     if (!shortcut) return;
-    if (editor.ui.get().fillMode && !shortcut.view) return;
     e.preventDefault();
+    // Con datos solo valen los atajos de vista; el resto se anula (también Ctrl+A del navegador).
+    if (editor.ui.get().fillMode && !shortcut.view) return;
     shortcut.run(editor, e);
   };
 

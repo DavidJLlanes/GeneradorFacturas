@@ -23,6 +23,10 @@ Vive entero en `src/documents/factura/`. Es el tipo de referencia para crear los
 `clasica` (la de arranque) y `moderna` (banda de color). Se abren con `#plantilla=moderna`.
 Comparten las piezas de `templates/parts.ts`.
 
+**Varias páginas:** con muchas líneas la tabla crece y se parte repitiendo su cabecera; los totales salen
+en la última página. El pie y el número de factura se repiten en todas (la Moderna repite además la banda y
+el título). Ver `docs/paginas.md`.
+
 ## Límites actuales
 
 - No es un sistema de facturación: no impide saltar números ni garantiza inalterabilidad (Verifactu es de la versión 2). Consulta con tu gestoría antes de usar facturas generadas aquí.

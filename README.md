@@ -36,6 +36,7 @@ src/
   ui/          interfaz: barra de herramientas, panel de capas, diálogos de papel y colores, estilos base
   app/         arranque: elige el tipo y la plantilla y crea el editor
   paper/       papeles: catálogo de tamaños, orientación, márgenes, adaptación de piezas (ver docs/papel.md)
+  layout/      reparto del documento en páginas: tabla elástica, partida por filas, piezas repetidas (ver docs/paginas.md)
   pieces/      piezas genéricas, una carpeta por pieza (ver docs/piezas.md)
   styles/      paleta del documento, colores enlazados y temas (ver docs/estilos.md)
   fonts/       catálogo de fuentes locales y carga bajo demanda (ver docs/fuentes.md)
@@ -43,7 +44,7 @@ src/
   images/      reglas y lectura de imágenes subidas
   documents/   un tipo de documento por carpeta; se descubren solos (ver docs/anadir-tipo.md) (hoy: factura; ejemplo es interno)
   main.ts      punto de entrada
-docs/          documentación (despliegue, lienzo, papel, piezas, estilos, fuentes, tipos)
+docs/          documentación (despliegue, lienzo, papel, piezas, estilos, fuentes, páginas, tipos)
 scripts/       herramientas de construcción y despliegue
 ```
 

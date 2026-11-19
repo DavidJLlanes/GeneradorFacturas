@@ -35,11 +35,14 @@ export function createWorldView(): {
       page.style.height = `${mmToPx(doc.page.heightMm)}px`;
 
       const spacing = mmToPx(ui.snap.gridMm);
-      grid.style.display = ui.showGrid && spacing * zoom >= MIN_GRID_SPACING_PX ? 'block' : 'none';
+      // Con datos se ve el documento tal cual saldrá: sin rejilla ni márgenes de ayuda.
+      const helpers = !ui.fillMode;
+      grid.style.display =
+        helpers && ui.showGrid && spacing * zoom >= MIN_GRID_SPACING_PX ? 'block' : 'none';
       grid.style.backgroundSize = `${spacing}px ${spacing}px`;
 
       const m = doc.page.marginsMm;
-      margins.style.display = ui.showMargins ? 'block' : 'none';
+      margins.style.display = helpers && ui.showMargins ? 'block' : 'none';
       margins.style.inset = `${mmToPx(m.top)}px ${mmToPx(m.right)}px ${mmToPx(m.bottom)}px ${mmToPx(m.left)}px`;
 
       elements.update(model.items, model.context, paletteOf(doc));

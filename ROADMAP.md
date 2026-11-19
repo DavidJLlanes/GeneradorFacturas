@@ -152,10 +152,11 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 8 — Tabla elástica y paginación**
 
-- [ ] La tabla crece y empuja lo de debajo
-- [ ] Paginación con cabecera repetida
-- [ ] Totales en la última página (o en todas)
-- [ ] Cabecera y pie repetidos en cada página
+- [x] La tabla crece y empuja lo de debajo
+- [x] Paginación con cabecera repetida
+- [x] Totales en la última página
+- [x] Cabecera y pie repetidos en cada página (casilla "Repetir en cada página")
+- [ ] Texto "Página X de N" dentro del documento → llega con el PDF (fase 9)
 
 **Fase 9 — PDF**
 

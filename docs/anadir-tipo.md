@@ -46,3 +46,8 @@ carpeta), subirlo, y después usarlo desde el tipo. Nunca mezclar ambos cambios 
 - Si un campo calculado no tiene valor, el bloque de totales con `hideUnresolved` omite esa fila.
 
 Referencia completa: `src/documents/factura/`.
+
+## Varias páginas
+
+Marca con `repeat: true` las piezas de la plantilla que deban salir en todas las páginas (pie, número,
+membrete). La tabla crece y se reparte sola; lo de debajo la sigue. Ver `docs/paginas.md`.

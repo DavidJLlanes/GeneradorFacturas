@@ -45,3 +45,10 @@ Se guardan como data URL dentro del diseño. Una pieza imagen puede ligarse a un
 3. `npm run check`: la prueba de piezas valida el contrato.
 
 No se toca nada más.
+
+## Piezas que crecen y se reparten
+
+Una pieza puede declarar `measure(input)` (en `PieceDefinition`): devuelve su alto con los datos actuales
+como una cabecera fija (`headMm`) más una lista de unidades repartibles (`unitsMm`, p. ej. las filas).
+Con eso el motor de páginas (ver `docs/paginas.md`) la hace crecer y la parte entre páginas. Al dibujar, la
+pieza recibe `slice` (`from`/`to`) con las unidades que le tocan y siempre dibuja su cabecera.
