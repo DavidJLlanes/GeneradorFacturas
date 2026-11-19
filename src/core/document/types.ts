@@ -25,6 +25,8 @@ export interface DocElement extends Rect {
   name: string;
   locked: boolean;
   hidden: boolean;
+  /** Se repite en todas las páginas, en su misma posición (cabeceras, pies, membretes). */
+  repeat?: boolean;
   /** Tipo de pieza (id de una carpeta de `src/pieces/`). */
   kind: string;
   props: PieceProps;

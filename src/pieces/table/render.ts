@@ -1,9 +1,10 @@
-import type { ColumnSpec, LineRow } from '../../core/document-type/types';
+import type { ColumnSpec } from '../../core/document-type/types';
 import { formatCents } from '../../data/money';
 import { mmToPx } from '../../core/units/units';
 import { bool, num, str } from '../shared/props';
 import { applyFont } from '../shared/text-style';
 import type { PieceRenderInput } from '../types';
+import { tableData } from './table-rows';
 
 const PX_PER_PT = 96 / 72;
 const numberFormat = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 6 });
@@ -47,21 +48,21 @@ function message(node: HTMLElement, text: string): void {
 }
 
 // Tabla de líneas: las columnas las define el campo de líneas del esquema del tipo y las filas salen
-// de los datos. Sin datos (plantilla limpia) se dibujan filas vacías para ver el diseño.
-export function renderTable(node: HTMLElement, { props, schema, value }: PieceRenderInput): void {
+// de los datos. Sin datos (plantilla limpia) se dibujan filas vacías para ver el diseño. Repartida entre
+// páginas, dibuja solo sus filas `slice` pero siempre con la cabecera.
+export function renderTable(
+  node: HTMLElement,
+  { props, schema, value, slice }: PieceRenderInput,
+): void {
   node.style.border = 'none';
   node.style.background = 'transparent';
-  const field = schema?.fields.find((f) => f.key === str(props, 'field') && f.kind === 'lines');
-  const columns = field?.columns;
-  if (!columns || columns.length === 0) {
+  const data = tableData(props, schema, value);
+  if (!data) {
     message(node, 'Tabla: elige un campo de líneas');
     return;
   }
-
-  const raw = value(field.key);
-  const rows: readonly LineRow[] = Array.isArray(raw) ? (raw as LineRow[]) : [];
-  const rowHeight = mmToPx(Math.max(num(props, 'rowHeight'), 2));
-  const emptyRows = Math.max(0, Math.round(num(props, 'minRows')) - rows.length);
+  const { columns, rows } = data;
+  const rowHeight = mmToPx(data.rowHeightMm);
   const grid = str(props, 'grid');
   const line = `${mmToPx(num(props, 'gridWidth') || 0.2)}px solid ${str(props, 'gridColor')}`;
   const pad = num(props, 'cellPadding');
@@ -83,8 +84,11 @@ export function renderTable(node: HTMLElement, { props, schema, value }: PieceRe
       fontWeight: bool(props, 'headerBold') ? '700' : '400',
     }),
   );
-  const all = [...rows, ...Array.from({ length: emptyRows }, (): LineRow => ({}))];
-  all.forEach((row, r) => {
+  const from = slice?.from ?? 0;
+  const to = slice?.to ?? rows.length;
+  for (let r = from; r < to; r += 1) {
+    const row = rows[r] ?? {};
+    // La alternancia sigue la posición real de la fila, no la del trozo.
     const zebra = bool(props, 'zebra') && r % 2 === 1 ? str(props, 'zebraFill') : 'transparent';
     columns.forEach((c, i) => {
       const style: Partial<CSSStyleDeclaration> = { background: zebra };
@@ -92,6 +96,6 @@ export function renderTable(node: HTMLElement, { props, schema, value }: PieceRe
       if (grid === 'full' && i > 0) style.borderLeft = line;
       cells.push(cell(cellText(c, row[c.key]), c, pad, style));
     });
-  });
+  }
   node.replaceChildren(...cells);
 }

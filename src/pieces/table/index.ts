@@ -1,5 +1,6 @@
 import type { PieceDefinition } from '../types';
 import { FONT_PROP } from '../shared/font-prop';
+import { measureTable } from './measure';
 import { renderTable } from './render';
 
 const definition: PieceDefinition = {
@@ -63,6 +64,7 @@ const definition: PieceDefinition = {
     { key: 'rowHeight', label: 'Alto de fila (mm)', kind: 'number', min: 2, max: 50, step: 0.5 },
     { key: 'minRows', label: 'Filas mínimas', kind: 'number', min: 0, max: 100, step: 1 },
   ],
+  measure: measureTable,
   render: renderTable,
 };
 

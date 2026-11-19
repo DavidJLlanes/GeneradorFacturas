@@ -1,5 +1,6 @@
 import type { DataSchema, DocumentData } from '../core/document-type/types';
 import type { PieceProps } from '../core/document/types';
+import type { Measure, Slice } from '../layout/types';
 
 // Contrato de una pieza genérica. Cada pieza vive en `src/pieces/<kind>/` y exporta su definición
 // por defecto desde `index.ts`; el motor las descubre solas.
@@ -36,7 +37,15 @@ export interface PieceRenderInput {
   value(key: string): unknown;
   /** true con la vista "Con datos"; false con la plantilla limpia. */
   fillMode: boolean;
+  /** Solo si la pieza está repartida entre páginas: qué unidades (filas) dibujar. */
+  slice?: Slice;
 }
+
+// Datos con los que una pieza reparable mide su alto.
+export type PieceMeasureInput = Pick<
+  PieceRenderInput,
+  'props' | 'widthMm' | 'heightMm' | 'schema' | 'value' | 'fillMode'
+>;
 
 export type { DocumentData };
 
@@ -50,6 +59,11 @@ export interface PieceDefinition {
   inlineProp?: string;
   /** Al insertarla, se pega al borde superior o inferior de la zona útil y ocupa todo su ancho. */
   anchor?: 'top' | 'bottom';
+  /**
+   * Solo en piezas que pueden crecer y repartirse entre páginas (la tabla): su alto con los datos
+   * actuales. Si falta, la pieza mantiene su tamaño de diseño.
+   */
+  measure?(input: PieceMeasureInput): Measure | null;
   /** Dibuja la pieza dentro de `node`. Debe ser idempotente: se llama cada vez que algo cambia. */
   render(node: HTMLElement, input: PieceRenderInput): void;
 }
