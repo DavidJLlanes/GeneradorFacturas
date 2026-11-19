@@ -12,6 +12,8 @@ const el = (id: string, x: number, y: number, w: number, h: number): DocElement 
   h,
   locked: false,
   hidden: false,
+  kind: 'shape',
+  props: {},
 });
 
 describe('alinear', () => {

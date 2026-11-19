@@ -24,6 +24,8 @@ const el = (id: string, x: number, y = 0, extra: Partial<DocElement> = {}): DocE
   h: 10,
   locked: false,
   hidden: false,
+  kind: 'shape',
+  props: {},
   ...extra,
 });
 

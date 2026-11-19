@@ -1,26 +1,36 @@
 import { createPage } from '../core/document/page';
-import type { DocElement, DocumentModel } from '../core/document/types';
+import type { DocElement, DocumentModel, PieceProps } from '../core/document/types';
 
-// Documento de prueba para probar el lienzo. Se sustituirá cuando existan las piezas reales (Fase 4).
-const box = (id: string, name: string, x: number, y: number, w: number, h: number): DocElement => ({
-  id,
-  name,
-  x,
-  y,
-  w,
-  h,
-  locked: false,
-  hidden: false,
-});
+// Documento de prueba para probar el lienzo. Se sustituirá por el tipo Factura (Fase 5).
+const piece = (
+  id: string,
+  name: string,
+  kind: string,
+  props: PieceProps,
+  [x, y, w, h]: [number, number, number, number],
+): DocElement => ({ id, name, kind, props, x, y, w, h, locked: false, hidden: false });
 
 export function createDemoDocument(): DocumentModel {
   return {
     page: createPage(210, 297),
     elements: [
-      box('demo-1', 'Cabecera', 15, 15, 180, 30),
-      box('demo-2', 'Datos del cliente', 15, 55, 85, 35),
-      box('demo-3', 'Tabla', 15, 100, 180, 110),
-      box('demo-4', 'Totales', 120, 220, 75, 40),
+      piece(
+        'demo-1',
+        'Cabecera',
+        'text',
+        { text: 'FACTURA', fontSize: 26, bold: true },
+        [15, 15, 180, 30],
+      ),
+      piece(
+        'demo-2',
+        'Datos del cliente',
+        'text',
+        { text: 'Cliente\nCalle Mayor 1\nLeón' },
+        [15, 55, 85, 35],
+      ),
+      piece('demo-3', 'Tabla', 'shape', { filled: false }, [15, 100, 180, 110]),
+      piece('demo-5', 'Separador', 'line', {}, [15, 215, 180, 2]),
+      piece('demo-4', 'Totales', 'shape', { shape: 'rect', radius: 2 }, [120, 225, 75, 40]),
     ],
   };
 }

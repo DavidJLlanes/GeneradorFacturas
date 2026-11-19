@@ -14,12 +14,19 @@ export interface Page {
   marginsMm: Margins;
 }
 
+// Propiedades de una pieza: valores simples, serializables a JSON.
+export type PropValue = string | number | boolean;
+export type PieceProps = Readonly<Record<string, PropValue>>;
+
 // Elemento genérico de la pizarra. El orden en `elements` es el orden de apilado (el último, encima).
 export interface DocElement extends Rect {
   id: string;
   name: string;
   locked: boolean;
   hidden: boolean;
+  /** Tipo de pieza (id de una carpeta de `src/pieces/`). */
+  kind: string;
+  props: PieceProps;
 }
 
 export interface DocumentModel {

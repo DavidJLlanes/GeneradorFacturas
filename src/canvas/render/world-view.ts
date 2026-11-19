@@ -3,6 +3,9 @@ import { mmToPx } from '../../core/units/units';
 import type { EditorUiState } from '../editor/editor-state';
 import { createElementsLayer } from './elements-layer';
 
+// Hasta que existan datos del documento, los textos se muestran tal cual.
+const PLAIN_CONTEXT = { resolve: (text: string): string => text, version: 0 };
+
 // Separación mínima entre líneas de rejilla (px de pantalla) por debajo de la cual se oculta.
 const MIN_GRID_SPACING_PX = 4;
 
@@ -40,7 +43,7 @@ export function createWorldView(): {
       margins.style.display = ui.showMargins ? 'block' : 'none';
       margins.style.inset = `${mmToPx(m.top)}px ${mmToPx(m.right)}px ${mmToPx(m.bottom)}px ${mmToPx(m.left)}px`;
 
-      elements.update(doc.elements);
+      elements.update(doc.elements, PLAIN_CONTEXT);
     },
   };
 }

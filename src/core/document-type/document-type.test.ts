@@ -61,7 +61,18 @@ describe('validateDocumentType', () => {
   it('exige plantillas con papel válido y piezas sin ids repetidos', () => {
     const def = valid();
     expect(validateDocumentType({ ...def, templates: [] }, 'prueba').join()).toMatch(/plantilla/);
-    const el = { id: 'a', name: 'a', x: 0, y: 0, w: 1, h: 1, locked: false, hidden: false };
+    const el = {
+      id: 'a',
+      name: 'a',
+      x: 0,
+      y: 0,
+      w: 1,
+      h: 1,
+      locked: false,
+      hidden: false,
+      kind: 'shape',
+      props: {},
+    };
     const t = { id: 't', name: 't', document: { page: createPage(1, 297), elements: [el, el] } };
     const text = validateDocumentType({ ...def, templates: [t] }, 'prueba').join('\n');
     expect(text).toMatch(/fuera de rango/);

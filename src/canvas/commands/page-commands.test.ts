@@ -16,6 +16,8 @@ const box: DocElement = {
   h: 148.5,
   locked: false,
   hidden: false,
+  kind: 'shape',
+  props: {},
 };
 
 const make = () => {

@@ -17,6 +17,8 @@ const el = (id: string, x = 0): DocElement => ({
   h: 10,
   locked: false,
   hidden: false,
+  kind: 'shape',
+  props: {},
 });
 
 const docOf = (...ids: string[]): DocumentModel => ({
