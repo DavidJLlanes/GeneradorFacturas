@@ -1,3 +1,4 @@
+import type { Rng } from '../../random/rng';
 import type { DocumentModel } from '../document/types';
 
 // Contrato que cumple cada tipo de documento (factura, presupuesto, albarán…).
@@ -85,4 +86,9 @@ export interface DocumentTypeDefinition {
   templates: readonly DocumentTemplate[];
   /** Valores derivados de los datos (totales, impuestos…). Opcional: un albarán puede no tenerlos. */
   compute?: (data: DocumentData) => DocumentData;
+  /**
+   * Afina los datos ficticios del modo aleatorio. El motor genera valores por tipo de campo; un tipo
+   * lo usa solo para hacer concordar valores que dependen entre sí (por ejemplo, hora de inicio y fin).
+   */
+  refineRandomData?: (data: DocumentData, rng: Rng) => DocumentData;
 }
