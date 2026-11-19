@@ -19,7 +19,7 @@ la definición.
 | `anchor`                      | `top` o `bottom`: se pega a ese borde de la zona útil (cabecera, pie).                       |
 
 Piezas actuales: texto, forma, línea, imagen, cabecera, pie, código QR, tabla de líneas y totales.
-Lo compartido por varias piezas (estilo de texto, bandas) está en `src/pieces/shared/`, sin `index.ts`
+Lo compartido por varias piezas (estilo de texto, bandas, estilo de caja; ver `docs/estilos.md`) está en `src/pieces/shared/`, sin `index.ts`
 para que no se tome por una pieza.
 
 El texto se escribe siempre con `textContent`, nunca como HTML.

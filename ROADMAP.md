@@ -134,12 +134,12 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 6 — Estilos**
 
-- [ ] Colores y paleta global
-- [ ] Tipografías, tamaños, interlineado
-- [ ] Bordes, esquinas, sombras, fondos
-- [ ] Rejillas de tabla: cebra, líneas, cabecera de color
-- [ ] Encabezados y pies repetidos
-- [ ] Temas de partida con ajuste fino
+- [x] Colores y paleta global (colores enlazados `@principal`…, un paso de historial)
+- [x] Tamaños e interlineado (las familias tipográficas llegan en la fase 7)
+- [x] Bordes, esquinas, sombras, fondos y margen interior
+- [x] Rejillas de tabla: cebra, líneas con grosor, cabecera de color y en negrita opcional
+- [x] Temas de partida con ajuste fino (diálogo "Colores")
+- [ ] Encabezados y pies repetidos → pasa a la fase 8, junto a la paginación
 
 **Fase 7 — Fuentes locales**
 
@@ -154,6 +154,7 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 - [ ] La tabla crece y empuja lo de debajo
 - [ ] Paginación con cabecera repetida
 - [ ] Totales en la última página (o en todas)
+- [ ] Cabecera y pie repetidos en cada página
 
 **Fase 9 — PDF**
 
