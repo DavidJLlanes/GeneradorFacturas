@@ -1,9 +1,10 @@
 import type { PropValue } from '../../core/document/types';
 import type { PropSpec } from '../../pieces/types';
+import type { Palette } from '../../styles/palette';
 import { createImageField } from '../fields/image-field';
+import { createPaletteColorField } from '../fields/palette-color-field';
 import {
   checkField,
-  colorField,
   numberField,
   selectField,
   textareaField,
@@ -23,7 +24,7 @@ export interface PropControl {
 const clamp = (v: number, spec: PropSpec): number =>
   Math.min(spec.max ?? Infinity, Math.max(spec.min ?? -Infinity, v));
 
-export function createPropControl(spec: PropSpec): PropControl {
+export function createPropControl(spec: PropSpec, getPalette: () => Palette): PropControl {
   switch (spec.kind) {
     case 'toggle': {
       const { row, input } = checkField(spec.label);
@@ -51,13 +52,13 @@ export function createPropControl(spec: PropSpec): PropControl {
       };
     }
     case 'color': {
-      const { row, input } = colorField(spec.label);
+      const field = createPaletteColorField(spec.label, getPalette);
       return {
         key: spec.key,
-        row,
-        input,
-        set: (v) => void (input.value = typeof v === 'string' ? v : '#000000'),
-        onChange: (fn) => input.addEventListener('change', () => fn(input.value)),
+        row: field.row,
+        input: field.input,
+        set: (v) => field.set(typeof v === 'string' ? v : undefined),
+        onChange: (fn) => field.onChange(fn),
       };
     }
     case 'select': {

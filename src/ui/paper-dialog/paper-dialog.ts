@@ -1,7 +1,7 @@
 import type { Editor } from '../../canvas/editor/create-editor';
 import { changePage } from '../../canvas/commands/page-commands';
 import { createPaperForm } from './paper-form';
-import './paper-dialog.css';
+import '../dialog/dialog.css';
 
 let dialog: HTMLDialogElement | null = null;
 let load: ((editor: Editor) => void) | null = null;

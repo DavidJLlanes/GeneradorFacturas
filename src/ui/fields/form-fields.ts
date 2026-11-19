@@ -5,6 +5,14 @@ export interface Field<T extends HTMLElement> {
   input: T;
 }
 
+// Opción de un desplegable (con createElement, que funciona igual en el navegador y en las pruebas).
+export function option(label: string, value: string): HTMLOptionElement {
+  const opt = document.createElement('option');
+  opt.value = value;
+  opt.textContent = label;
+  return opt;
+}
+
 function wrap<T extends HTMLElement>(text: string, input: T): Field<T> {
   const row = document.createElement('label');
   row.className = 'pd-row';
@@ -39,7 +47,7 @@ export function selectField(
   const select = document.createElement('select');
   const groups = new Map<string, HTMLOptGroupElement>();
   for (const o of options) {
-    const opt = new Option(o.label, o.value);
+    const opt = option(o.label, o.value);
     let parent: HTMLElement = select;
     if (o.group) {
       let g = groups.get(o.group);

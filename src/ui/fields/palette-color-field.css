@@ -1,0 +1,20 @@
+.pcf-box {
+  display: grid;
+  grid-template-columns: 1fr 28px;
+  gap: 4px;
+  min-width: 0;
+}
+
+.pcf-box select {
+  min-width: 0;
+}
+
+.pcf-swatch {
+  width: 28px;
+  height: 26px;
+  padding: 0;
+}
+
+.pcf-swatch:disabled {
+  opacity: 0.6;
+}

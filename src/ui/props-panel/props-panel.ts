@@ -2,6 +2,7 @@ import { setProps, setRect } from '../../canvas/commands/piece-commands';
 import type { Editor } from '../../canvas/editor/create-editor';
 import type { DocElement } from '../../core/document/types';
 import { pieces } from '../../pieces/discover';
+import { paletteOf } from '../../styles/palette';
 import { createGeometryControls } from './geometry-controls';
 import { createPropControl, type PropControl } from './props-controls';
 import './props-panel.css';
@@ -49,7 +50,7 @@ export function createPropsPanel(editor: Editor): { element: HTMLElement; destro
     ];
     const ids = (): string[] => selected.map((e) => e.id);
     for (const spec of piece.props) {
-      const control = createPropControl(spec);
+      const control = createPropControl(spec, () => paletteOf(editor.doc()));
       control.onChange((value) => setProps(editor, ids(), { [spec.key]: value }));
       controls.push(control);
       nodes.push(control.row);
