@@ -6,9 +6,9 @@ export const BAND_DEFAULTS = {
   valign: 'middle',
   padding: 3,
   filled: false,
-  fill: '#f1f5f9',
+  fill: '@soft',
   rule: true,
-  ruleColor: '#374151',
+  ruleColor: '@primary',
 } as const;
 
 export const BAND_PROPS: readonly PropSpec[] = [
@@ -37,6 +37,7 @@ export const BAND_PROPS: readonly PropSpec[] = [
       { value: 'bottom', label: 'Abajo' },
     ],
   },
+  { key: 'lineHeight', label: 'Interlineado', kind: 'number', min: 0.8, max: 3, step: 0.05 },
   { key: 'padding', label: 'Margen lateral (mm)', kind: 'number', min: 0, max: 50, step: 0.5 },
   { key: 'filled', label: 'Fondo', kind: 'toggle' },
   { key: 'fill', label: 'Color de fondo', kind: 'color' },

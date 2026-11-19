@@ -5,7 +5,7 @@ const definition: PieceDefinition = {
   kind: 'line',
   name: 'Línea',
   defaultSize: { w: 80, h: 2 },
-  defaultProps: { orientation: 'horizontal', color: '#374151', thickness: 0.4, style: 'solid' },
+  defaultProps: { orientation: 'horizontal', color: '@primary', thickness: 0.4, style: 'solid' },
   props: [
     {
       key: 'orientation',

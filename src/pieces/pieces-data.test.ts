@@ -2,6 +2,8 @@
 import { describe, expect, it } from 'vitest';
 import type { DataSchema } from '../core/document-type/types';
 import { makeResolver } from '../data/make-resolver';
+import { DEFAULT_PALETTE } from '../styles/palette';
+import { resolveColorProps } from '../styles/resolve-color';
 import { pieces } from './discover';
 import { qrMatrix } from './qr/encode';
 
@@ -33,7 +35,7 @@ const draw = (
   const piece = pieces.get(kind)!;
   const resolve = fill ? makeResolver(schema, data) : (t: string): string => t;
   piece.render(node, {
-    props: { ...piece.defaultProps, ...props },
+    props: resolveColorProps({ ...piece.defaultProps, ...props }, piece.props, DEFAULT_PALETTE),
     widthMm: 100,
     heightMm: 60,
     resolve,
@@ -156,5 +158,55 @@ describe('totales: filas sin valor', () => {
     const node = draw('totals', { rows, hideUnresolved: false }, { total: 100 });
     expect(node.children.length).toBe(4);
     expect(node.textContent).toContain('{{recargo}}');
+  });
+});
+
+describe('estilos de caja y tabla', () => {
+  it('el texto aplica fondo, borde, esquinas, sombra e interlineado', () => {
+    const node = draw('text', {
+      filled: true,
+      fill: '#eeeeee',
+      bordered: true,
+      stroke: '#111111',
+      strokeWidth: 1,
+      radius: 3,
+      shadow: true,
+      padding: 2,
+      lineHeight: 1.6,
+    });
+    expect(node.style.background).toMatch(/#eeeeee|238/);
+    expect(node.style.border).toMatch(/solid/);
+    expect(node.style.borderRadius).not.toBe('0px');
+    expect(node.style.boxShadow).not.toBe('none');
+    expect(node.style.lineHeight).toBe('1.6');
+    expect(node.style.padding).not.toBe('0px');
+  });
+
+  it('por defecto el texto no tiene caja', () => {
+    const node = draw('text', {});
+    expect(node.style.border).not.toMatch(/solid/);
+    expect(node.style.boxShadow).toBe('none');
+  });
+
+  it('la forma admite sombra', () => {
+    expect(draw('shape', { shadow: true }).style.boxShadow).not.toBe('none');
+    expect(draw('shape', {}).style.boxShadow).toBe('none');
+  });
+
+  it('la imagen admite borde y esquinas', () => {
+    const node = draw('image', { bordered: true, radius: 2 });
+    expect(node.style.border).toMatch(/solid|dashed/);
+    expect(node.style.borderRadius).not.toBe('0px');
+  });
+
+  it('la cabecera de la tabla puede ir sin negrita y las líneas tener grosor propio', () => {
+    const thin = draw('table', { minRows: 1, headerBold: false, gridWidth: 0.1 });
+    const thick = draw('table', { minRows: 1, headerBold: true, gridWidth: 1 });
+    expect((thin.children[0] as HTMLElement).style.fontWeight).toBe('400');
+    expect((thick.children[0] as HTMLElement).style.fontWeight).toBe('700');
+    const px = (n: HTMLElement): number => parseFloat(n.style.borderBottom);
+    expect(px(thick.children[3] as HTMLElement)).toBeGreaterThan(
+      px(thin.children[3] as HTMLElement),
+    );
   });
 });

@@ -20,11 +20,12 @@ function cellText(column: ColumnSpec, value: string | number | undefined): strin
 const cell = (
   text: string,
   column: ColumnSpec,
+  paddingMm: number,
   style: Partial<CSSStyleDeclaration>,
 ): HTMLElement => {
   const div = document.createElement('div');
   div.textContent = text;
-  div.style.padding = `0 ${mmToPx(1.5)}px`;
+  div.style.padding = `0 ${mmToPx(paddingMm)}px`;
   div.style.display = 'flex';
   div.style.alignItems = 'center';
   div.style.justifyContent = column.kind === 'text' ? 'flex-start' : 'flex-end';
@@ -61,7 +62,8 @@ export function renderTable(node: HTMLElement, { props, schema, value }: PieceRe
   const rowHeight = mmToPx(Math.max(num(props, 'rowHeight'), 2));
   const emptyRows = Math.max(0, Math.round(num(props, 'minRows')) - rows.length);
   const grid = str(props, 'grid');
-  const line = `${mmToPx(0.2)}px solid ${str(props, 'gridColor')}`;
+  const line = `${mmToPx(num(props, 'gridWidth') || 0.2)}px solid ${str(props, 'gridColor')}`;
+  const pad = num(props, 'cellPadding');
 
   node.style.display = 'grid';
   node.style.gridTemplateColumns = columns.map((c) => `${c.width}fr`).join(' ');
@@ -73,10 +75,10 @@ export function renderTable(node: HTMLElement, { props, schema, value }: PieceRe
   node.style.overflow = 'hidden';
 
   const cells: HTMLElement[] = columns.map((c) =>
-    cell(c.label, c, {
+    cell(c.label, c, pad, {
       background: str(props, 'headerFill'),
       color: str(props, 'headerColor'),
-      fontWeight: '700',
+      fontWeight: bool(props, 'headerBold') ? '700' : '400',
     }),
   );
   const all = [...rows, ...Array.from({ length: emptyRows }, (): LineRow => ({}))];
@@ -86,7 +88,7 @@ export function renderTable(node: HTMLElement, { props, schema, value }: PieceRe
       const style: Partial<CSSStyleDeclaration> = { background: zebra };
       if (grid !== 'none') style.borderBottom = line;
       if (grid === 'full' && i > 0) style.borderLeft = line;
-      cells.push(cell(cellText(c, row[c.key]), c, style));
+      cells.push(cell(cellText(c, row[c.key]), c, pad, style));
     });
   });
   node.replaceChildren(...cells);

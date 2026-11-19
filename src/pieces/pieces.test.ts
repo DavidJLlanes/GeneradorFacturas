@@ -1,6 +1,8 @@
 // @vitest-environment happy-dom
 import { describe, expect, it } from 'vitest';
 import type { DocElement } from '../core/document/types';
+import { DEFAULT_PALETTE } from '../styles/palette';
+import { resolveColorProps } from '../styles/resolve-color';
 import { discoverPieces, pieces } from './discover';
 import { createPieceRegistry } from './registry';
 import type { PieceDefinition } from './types';
@@ -38,7 +40,7 @@ const draw = (kind: string, props = {}): HTMLElement => {
   const piece = pieces.get(kind)!;
   const e = el(kind, props);
   piece.render(node, {
-    props: pieces.propsOf(e),
+    props: resolveColorProps(pieces.propsOf(e), piece.props, DEFAULT_PALETTE),
     widthMm: e.w,
     heightMm: e.h,
     resolve: (t) => t,

@@ -24,15 +24,16 @@ export function applyTextStyle(node: HTMLElement, props: PieceProps): void {
   s.alignItems = ALIGN_ITEMS[str(props, 'valign')] ?? 'flex-start';
   s.whiteSpace = 'pre-wrap';
   s.overflow = 'hidden';
-  s.lineHeight = '1.25';
+  s.lineHeight = String(num(props, 'lineHeight') || 1.25);
 }
 
 // Propiedades de texto compartidas por las piezas que muestran texto.
 export const TEXT_STYLE_PROPS = {
   fontSize: 11,
-  color: '#1d2025',
+  color: '@text',
   bold: false,
   italic: false,
   align: 'left',
   valign: 'top',
+  lineHeight: 1.25,
 } as const;

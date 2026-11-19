@@ -8,12 +8,12 @@ const definition: PieceDefinition = {
   defaultProps: {
     rows: 'Base imponible | {{subtotal}}\nIVA | {{iva}}\nTotal | {{total}}',
     fontSize: 10,
-    color: '#1d2025',
+    color: '@text',
     rowHeight: 7,
     hideUnresolved: false,
     highlightLast: true,
-    highlightFill: '#e5e7eb',
-    ruleColor: '#374151',
+    highlightFill: '@soft',
+    ruleColor: '@primary',
   },
   props: [
     { key: 'rows', label: 'Filas (Etiqueta | {{campo}})', kind: 'multiline' },

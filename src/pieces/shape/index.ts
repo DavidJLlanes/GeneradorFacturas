@@ -1,4 +1,5 @@
 import type { PieceDefinition } from '../types';
+import { SHADOW_PROPS } from '../shared/box-style';
 import { renderShape } from './render';
 
 const definition: PieceDefinition = {
@@ -8,11 +9,12 @@ const definition: PieceDefinition = {
   defaultProps: {
     shape: 'rect',
     filled: true,
-    fill: '#e5e7eb',
+    fill: '@soft',
     bordered: true,
-    stroke: '#374151',
+    stroke: '@muted',
     strokeWidth: 0.3,
     radius: 0,
+    shadow: false,
   },
   props: [
     {
@@ -44,6 +46,7 @@ const definition: PieceDefinition = {
       max: 200,
       step: 0.5,
     },
+    ...SHADOW_PROPS,
   ],
   render: renderShape,
 };
