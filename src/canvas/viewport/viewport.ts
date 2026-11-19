@@ -29,6 +29,15 @@ export function screenToPage(vp: Viewport, p: Point): Point {
   return { x: pxToMm((p.x - vp.panX) / vp.zoom), y: pxToMm((p.y - vp.panY) / vp.zoom) };
 }
 
+// Rectángulo de la página (mm) llevado a píxeles de pantalla.
+export function rectToScreen(vp: Viewport, r: Rect): Rect {
+  const origin = pageToScreen(vp, r);
+  return { x: origin.x, y: origin.y, w: mmToPx(r.w) * vp.zoom, h: mmToPx(r.h) * vp.zoom };
+}
+
+// Distancia en píxeles de pantalla convertida a milímetros de página.
+export const screenDeltaToMm = (vp: Viewport, px: number): number => pxToMm(px / vp.zoom);
+
 // Cambia el zoom manteniendo fijo el punto de pantalla `anchor`.
 export function zoomAround(vp: Viewport, anchor: Point, targetZoom: number): Viewport {
   const zoom = clampZoom(targetZoom);
