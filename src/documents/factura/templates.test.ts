@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { fontById } from '../../fonts/catalog';
+import { PAGE_VARIABLES } from '../../data/page-variables';
 import { findVariables } from '../../data/variables';
 import { pieces } from '../../pieces/discover';
 import { paletteOf } from '../../styles/palette';
@@ -22,7 +23,8 @@ describe.each(definition.templates)('plantilla $name', (template) => {
       ['text', 'rows', 'content'].flatMap((prop) => findVariables(String(el.props[prop] ?? ''))),
     );
     expect(used.length).toBeGreaterThan(10);
-    for (const key of used) expect(keys.has(key), key).toBe(true);
+    const fromPage = new Set<string>(PAGE_VARIABLES);
+    for (const key of used) expect(keys.has(key) || fromPage.has(key), key).toBe(true);
   });
 
   it('los campos enlazados son del tipo adecuado', () => {

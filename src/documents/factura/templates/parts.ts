@@ -161,7 +161,7 @@ export const paymentBlock = (box: Box, t: Theme): DocElement =>
 export const footerBand = (box: Box, t: Theme): DocElement =>
   repeating(
     piece('pie', 'Pie', 'footer', box, {
-      text: `{{emisor.nombre}} · ${labels['nif']} {{emisor.nif}}`,
+      text: `{{emisor.nombre}} · ${labels['nif']} {{emisor.nif}} · Página {{pagina}} de {{paginas}}`,
       color: t.muted,
       ruleColor: t.accent,
     }),
