@@ -28,9 +28,10 @@ export function createDemoDocument(): DocumentModel {
         { text: 'Para: {{destinatario.nombre}}\nFecha: {{fecha}}' },
         [15, 55, 85, 35],
       ),
-      piece('demo-3', 'Tabla', 'shape', { filled: false }, [15, 100, 180, 110]),
+      piece('demo-3', 'Tabla', 'table', { minRows: 12 }, [15, 100, 180, 100]),
       piece('demo-5', 'Separador', 'line', {}, [15, 215, 180, 2]),
-      piece('demo-4', 'Totales', 'shape', { shape: 'rect', radius: 2 }, [120, 225, 75, 40]),
+      piece('demo-6', 'QR', 'qr', { content: '{{titulo}} · {{total}}' }, [15, 225, 30, 30]),
+      piece('demo-4', 'Totales', 'totals', {}, [120, 225, 75, 24]),
     ],
   };
 }

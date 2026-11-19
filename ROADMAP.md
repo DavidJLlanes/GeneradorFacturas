@@ -117,12 +117,12 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 4 — Piezas genéricas y datos (núcleo)**
 
-- [ ] Texto, imagen/logo, formas, líneas, cabecera y pie de página, QR
-- [ ] Tabla de líneas y bloque de totales genéricos, configurados por el tipo
-- [ ] Variables (`{{cliente.nombre}}`) y edición directa sobre la página
-- [ ] Panel de datos generado a partir del esquema del tipo
-- [ ] Subida de logo (PNG, JPG, SVG) con redimensionado
-- [ ] Importes en céntimos para evitar errores de redondeo
+- [x] Texto, imagen/logo, formas, líneas, cabecera y pie de página, QR
+- [x] Tabla de líneas y bloque de totales genéricos, configurados por el tipo
+- [x] Variables (`{{cliente.nombre}}`) y edición directa sobre la página
+- [x] Panel de datos generado a partir del esquema del tipo
+- [x] Subida de logo (PNG, JPG, SVG) con redimensionado
+- [x] Importes en céntimos para evitar errores de redondeo
 
 **Fase 5 — Tipo Factura (primer tipo, referencia)**
 

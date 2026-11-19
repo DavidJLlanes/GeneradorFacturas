@@ -6,3 +6,32 @@
   display: grid;
   gap: 6px;
 }
+
+.dl {
+  display: grid;
+  gap: 6px;
+}
+
+.dl-title {
+  font-size: 0.85rem;
+}
+
+.dl-list {
+  display: grid;
+  gap: 8px;
+}
+
+.dl-card {
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.dl-remove,
+.dl-add {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  justify-self: start;
+}

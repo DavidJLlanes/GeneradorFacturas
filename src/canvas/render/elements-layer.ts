@@ -1,3 +1,4 @@
+import type { DataSchema } from '../../core/document-type/types';
 import type { DocElement } from '../../core/document/types';
 import { mmToPx } from '../../core/units/units';
 import { pieces } from '../../pieces/discover';
@@ -6,6 +7,8 @@ import { pieces } from '../../pieces/discover';
 // (por ejemplo los datos del documento), para saber cuándo hay que redibujar piezas sin cambios.
 export interface PieceRenderContext {
   resolve(text: string): string;
+  schema: DataSchema | null;
+  value(key: string): unknown;
   version: unknown;
 }
 
@@ -51,6 +54,8 @@ export function createElementsLayer(): {
       widthMm: el.w,
       heightMm: el.h,
       resolve: context.resolve,
+      schema: context.schema,
+      value: context.value,
     });
   };
 

@@ -1,4 +1,5 @@
 import type { DocumentTypeDefinition } from '../../core/document-type/types';
+import { compute } from './calc';
 import { DEFAULT_PAPER_ID, DESCRIPTION, ID, NAME, NUMBERING } from './definition';
 import { labels } from './labels.es';
 import { schema } from './schema';
@@ -14,6 +15,7 @@ const definition: DocumentTypeDefinition = {
   schema,
   labels,
   templates: [baseTemplate],
+  compute,
 };
 
 export default definition;

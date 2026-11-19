@@ -42,6 +42,8 @@ const draw = (kind: string, props = {}): HTMLElement => {
     widthMm: e.w,
     heightMm: e.h,
     resolve: (t) => t,
+    schema: null,
+    value: () => undefined,
   });
   return node;
 };
@@ -130,7 +132,14 @@ describe('dibujo de piezas', () => {
     const render = (props: Record<string, string>, resolve: (t: string) => string): HTMLElement => {
       const node = document.createElement('div');
       const e = el('image', props);
-      piece.render(node, { props: pieces.propsOf(e), widthMm: 40, heightMm: 20, resolve });
+      piece.render(node, {
+        props: pieces.propsOf(e),
+        widthMm: 40,
+        heightMm: 20,
+        resolve,
+        schema: null,
+        value: () => undefined,
+      });
       return node;
     };
     const same = (t: string): string => t;

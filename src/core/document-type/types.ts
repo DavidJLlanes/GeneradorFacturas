@@ -3,7 +3,23 @@ import type { DocumentModel } from '../document/types';
 // Contrato que cumple cada tipo de documento (factura, presupuesto, albarán…).
 // Un tipo vive entero en `src/documents/<tipo>/` y exporta su definición por defecto.
 
-export type FieldKind = 'text' | 'multiline' | 'number' | 'money' | 'date' | 'image';
+export type FieldKind = 'text' | 'multiline' | 'number' | 'money' | 'date' | 'image' | 'lines';
+
+// Columna de un campo de tipo 'lines' (tabla de líneas: conceptos, cantidades, precios…).
+export type ColumnKind = 'text' | 'number' | 'money';
+
+export interface ColumnSpec {
+  key: string;
+  label: string;
+  kind: ColumnKind;
+  /** Anchura relativa respecto a las demás columnas. */
+  width: number;
+  /** Calculada por el tipo (en `compute`): no se edita a mano. */
+  computed?: boolean;
+}
+
+// Una línea de la tabla: valores por clave de columna. Los importes van en céntimos.
+export type LineRow = Readonly<Record<string, string | number>>;
 
 export interface FieldSpec {
   /** Clave con puntos, usada en variables: `cliente.nombre` → `{{cliente.nombre}}`. */
@@ -13,6 +29,10 @@ export interface FieldSpec {
   /** Bloque del panel de datos al que pertenece (p. ej. "Cliente"). */
   group: string;
   required?: boolean;
+  /** Solo para 'lines': las columnas de la tabla. */
+  columns?: readonly ColumnSpec[];
+  /** Calculado por el tipo: se muestra y se puede usar en variables, pero no se edita. */
+  computed?: boolean;
 }
 
 export interface DataSchema {

@@ -1,10 +1,33 @@
 import { presetById } from '../../paper/paper-presets';
 import { MAX_PAGE_MM, MIN_PAGE_MM } from '../../paper/size-limits';
-import type { DocumentTypeDefinition } from './types';
+import type { DocumentTypeDefinition, FieldSpec } from './types';
 
 const ID_PATTERN = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
 const KEY_PATTERN = /^[a-z][A-Za-z0-9]*(\.[a-z][A-Za-z0-9]*)*$/;
-const FIELD_KINDS = ['text', 'multiline', 'number', 'money', 'date', 'image'];
+const FIELD_KINDS = ['text', 'multiline', 'number', 'money', 'date', 'image', 'lines'];
+const COLUMN_KINDS = ['text', 'number', 'money'];
+
+type Report = (message: string) => number;
+
+function validateColumns(
+  field: string,
+  columns: NonNullable<FieldSpec['columns']>,
+  bad: Report,
+): void {
+  if (columns.length === 0) bad(`el campo de líneas "${field}" necesita columnas`);
+  const keys = columns.map((c) => c.key);
+  for (const key of keys.filter((k, i) => keys.indexOf(k) !== i)) {
+    bad(`columna repetida en "${field}": "${key}"`);
+  }
+  for (const c of columns) {
+    if (!KEY_PATTERN.test(c.key) || c.key.includes('.'))
+      bad(`clave de columna inválida en "${field}": "${c.key}"`);
+    if (!COLUMN_KINDS.includes(c.kind))
+      bad(`tipo de columna desconocido en "${field}": "${c.kind}"`);
+    if (!c.label.trim()) bad(`la columna "${c.key}" de "${field}" necesita etiqueta`);
+    if (!(c.width > 0)) bad(`la columna "${c.key}" de "${field}" necesita anchura positiva`);
+  }
+}
 
 const duplicates = (values: readonly string[]): string[] =>
   values.filter((v, i) => values.indexOf(v) !== i);
@@ -34,6 +57,9 @@ export function validateDocumentType(def: DocumentTypeDefinition, folder: string
   for (const f of def.schema.fields) {
     if (!FIELD_KINDS.includes(f.kind)) bad(`tipo de campo desconocido en "${f.key}": "${f.kind}"`);
     if (!f.label.trim() || !f.group.trim()) bad(`el campo "${f.key}" necesita etiqueta y grupo`);
+    if (f.kind !== 'lines' && f.columns)
+      bad(`el campo "${f.key}" tiene columnas pero no es de líneas`);
+    if (f.kind === 'lines') validateColumns(f.key, f.columns ?? [], bad);
   }
 
   if (def.templates.length === 0) bad('necesita al menos una plantilla');

@@ -12,6 +12,7 @@ function buildForm(
   const controls: DataControl[] = [];
   const groups = new Map<string, HTMLElement>();
   for (const field of schema.fields) {
+    if (field.computed) continue;
     const control = createDataControl(field);
     let section = groups.get(field.group);
     if (!section) {

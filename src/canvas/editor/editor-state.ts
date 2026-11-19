@@ -19,6 +19,8 @@ export interface EditorUiState {
   /** Datos del documento (no entran en el historial de diseño). */
   data: DocumentData;
   schema: DataSchema | null;
+  /** Cálculos del tipo: devuelve valores derivados (totales…) a partir de los datos. */
+  compute: ((data: DocumentData) => DocumentData) | null;
   /** Mostrar las variables rellenas con los datos (true) o la plantilla limpia (false). */
   fillMode: boolean;
 }
@@ -36,5 +38,6 @@ export const createInitialUiState = (): EditorUiState => ({
   spaceHeld: false,
   data: {},
   schema: null,
+  compute: null,
   fillMode: false,
 });

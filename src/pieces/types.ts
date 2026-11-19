@@ -1,3 +1,4 @@
+import type { DataSchema, DocumentData } from '../core/document-type/types';
 import type { PieceProps } from '../core/document/types';
 
 // Contrato de una pieza genérica. Cada pieza vive en `src/pieces/<kind>/` y exporta su definición
@@ -28,7 +29,13 @@ export interface PieceRenderInput {
   heightMm: number;
   /** Sustituye las variables `{{campo}}` de un texto por los datos del documento. */
   resolve(text: string): string;
+  /** Esquema de datos del tipo de documento (null si el documento no tiene datos). */
+  schema: DataSchema | null;
+  /** Valor sin formatear de un campo; solo con la vista "Con datos" activa (si no, undefined). */
+  value(key: string): unknown;
 }
+
+export type { DocumentData };
 
 export interface PieceDefinition {
   kind: string;

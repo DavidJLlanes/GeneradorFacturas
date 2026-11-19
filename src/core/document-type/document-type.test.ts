@@ -58,6 +58,42 @@ describe('validateDocumentType', () => {
     }
   });
 
+  it('valida las columnas de los campos de líneas', () => {
+    const def = valid();
+    const lines = (columns: unknown) =>
+      ({
+        ...def,
+        schema: {
+          version: 1,
+          fields: [{ key: 'l', label: 'L', kind: 'lines', group: 'g', columns }],
+        },
+      }) as DocumentTypeDefinition;
+    const ok = [{ key: 'a', label: 'A', kind: 'text', width: 1 }];
+    expect(validateDocumentType(lines(ok), 'prueba')).toEqual([]);
+    expect(validateDocumentType(lines([]), 'prueba').join()).toMatch(/necesita columnas/);
+    const bad = [ok[0], { ...ok[0] }, { key: 'b.c', label: '', kind: 'raro', width: 0 }];
+    const text = validateDocumentType(lines(bad), 'prueba').join('\n');
+    for (const part of [
+      'columna repetida',
+      'clave de columna inválida',
+      'tipo de columna',
+      'etiqueta',
+      'anchura',
+    ]) {
+      expect(text, part).toContain(part);
+    }
+    const notLines = {
+      ...def,
+      schema: {
+        version: 1,
+        fields: [{ key: 'x', label: 'X', kind: 'text', group: 'g', columns: ok }],
+      },
+    };
+    expect(validateDocumentType(notLines as DocumentTypeDefinition, 'prueba').join()).toMatch(
+      /no es de líneas/,
+    );
+  });
+
   it('exige plantillas con papel válido y piezas sin ids repetidos', () => {
     const def = valid();
     expect(validateDocumentType({ ...def, templates: [] }, 'prueba').join()).toMatch(/plantilla/);

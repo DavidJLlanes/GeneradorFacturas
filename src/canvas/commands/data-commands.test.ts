@@ -3,7 +3,7 @@ import { createPage } from '../../core/document/page';
 import type { DataSchema } from '../../core/document-type/types';
 import { createEditor } from '../editor/create-editor';
 import { createRenderContextProvider } from '../render/render-context';
-import { setDataValue, setSchema, toggleFillMode } from './data-commands';
+import { setDataSource, setDataValue, toggleFillMode } from './data-commands';
 
 const schema: DataSchema = {
   version: 1,
@@ -33,7 +33,7 @@ describe('datos del documento', () => {
 describe('contexto de dibujo', () => {
   it('plantilla limpia deja las variables; con datos las rellena', () => {
     const editor = make();
-    setSchema(editor, schema);
+    setDataSource(editor, { schema });
     setDataValue(editor, 'nombre', 'Ana');
     const provide = createRenderContextProvider();
     expect(provide(editor.ui.get()).resolve('Hola {{nombre}}')).toBe('Hola {{nombre}}');

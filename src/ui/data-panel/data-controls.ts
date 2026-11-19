@@ -1,16 +1,18 @@
+import type { DataValue } from '../../canvas/commands/data-commands';
 import type { FieldSpec } from '../../core/document-type/types';
 import { centsToInput, parseMoneyToCents } from '../../data/money';
+import { createLinesControl } from './lines-control';
 import { createImageField } from '../fields/image-field';
 import { dateField, numberField, textareaField, textField } from '../fields/form-fields';
 
 export interface DataControl {
   key: string;
   row: HTMLElement;
-  input: HTMLInputElement | HTMLTextAreaElement;
+  input: HTMLElement;
   /** Refleja el valor guardado en el control. */
   set(value: unknown): void;
   /** Avisa con el valor ya convertido (céntimos en importes) o undefined si se vació. */
-  onChange(listener: (value: string | number | undefined) => void): void;
+  onChange(listener: (value: DataValue) => void): void;
 }
 
 const show = (value: unknown): string =>
@@ -32,6 +34,8 @@ export function createDataControl(spec: FieldSpec): DataControl {
   });
 
   switch (spec.kind) {
+    case 'lines':
+      return createLinesControl(spec);
     case 'multiline': {
       const { row, input } = textareaField(label, 3);
       return make(

@@ -19,6 +19,8 @@ export function formatFieldValue(kind: FieldKind, value: unknown): string {
     }
     case 'image':
       return isImageDataUrl(value) ? value : '';
+    case 'lines':
+      return '';
     default:
       return String(value);
   }

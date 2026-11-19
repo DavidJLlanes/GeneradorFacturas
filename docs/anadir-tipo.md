@@ -12,9 +12,13 @@ ningún registro: el motor descubre `src/documents/<tipo>/index.ts` por sí solo
    Si cambias campos más adelante, sube `version`.
 4. En `labels.es.ts` pon los textos propios del tipo.
 5. En `templates/` crea las plantillas de partida (un archivo por plantilla) y añádelas en `index.ts`.
-6. Cálculos propios (totales, impuestos) van en `calc.ts` y se exponen como `compute` en `index.ts`.
+   - Un campo `kind: 'lines'` define una tabla de líneas con `columns` (clave, etiqueta, tipo, anchura).
+   - Un campo o columna con `computed: true` lo calcula el tipo: no aparece en el panel de datos.
+6. Cálculos propios (totales, impuestos) van en `calc.ts` y se exponen como `compute` en `index.ts`: recibe los datos y
+   devuelve los valores derivados (importes de línea, subtotal, IVA, total), siempre en céntimos.
    Un tipo sin precios no lo necesita.
-7. Piezas exclusivas del tipo, en `pieces/`, un archivo por pieza.
+7. Piezas exclusivas del tipo, en `pieces/`, un archivo por pieza. Las piezas genéricas ya existentes
+   (texto, tabla, totales, QR…) se usan en las plantillas; ver `docs/piezas.md`.
 
 ## Comprobaciones
 
