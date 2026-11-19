@@ -33,4 +33,6 @@ for (const font of catalog) {
   copyFileSync(join(pkg, 'LICENSE'), join(dest, 'LICENSE'));
 }
 
-console.log(`Fuentes: ${catalog.length} familias, ${count} archivos, ${(total / 1e6).toFixed(1)} MB`);
+console.log(
+  `Fuentes: ${catalog.length} familias, ${count} archivos, ${(total / 1e6).toFixed(1)} MB`,
+);
