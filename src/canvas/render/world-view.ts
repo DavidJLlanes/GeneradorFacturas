@@ -2,9 +2,7 @@ import type { DocumentModel } from '../../core/document/types';
 import { mmToPx } from '../../core/units/units';
 import type { EditorUiState } from '../editor/editor-state';
 import { createElementsLayer } from './elements-layer';
-
-// Hasta que existan datos del documento, los textos se muestran tal cual.
-const PLAIN_CONTEXT = { resolve: (text: string): string => text, version: 0 };
+import { createRenderContextProvider } from './render-context';
 
 // Separación mínima entre líneas de rejilla (px de pantalla) por debajo de la cual se oculta.
 const MIN_GRID_SPACING_PX = 4;
@@ -21,6 +19,7 @@ export function createWorldView(): {
   const grid = document.createElement('div');
   grid.className = 'cv-grid';
   const elements = createElementsLayer();
+  const renderContext = createRenderContextProvider();
   const margins = document.createElement('div');
   margins.className = 'cv-margins';
   page.append(grid, margins, elements.element);
@@ -43,7 +42,7 @@ export function createWorldView(): {
       margins.style.display = ui.showMargins ? 'block' : 'none';
       margins.style.inset = `${mmToPx(m.top)}px ${mmToPx(m.right)}px ${mmToPx(m.bottom)}px ${mmToPx(m.left)}px`;
 
-      elements.update(doc.elements, PLAIN_CONTEXT);
+      elements.update(doc.elements, renderContext(ui));
     },
   };
 }

@@ -1,0 +1,24 @@
+import type { FieldKind } from '../core/document-type/types';
+import { formatCents } from './money';
+
+const DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
+const numberFormat = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 6 });
+
+// Texto con el que se muestra un dato en el documento, según el tipo de campo.
+export function formatFieldValue(kind: FieldKind, value: unknown): string {
+  if (value === undefined || value === null || value === '') return '';
+  switch (kind) {
+    case 'money':
+      return typeof value === 'number' ? formatCents(value) : '';
+    case 'number':
+      return typeof value === 'number' ? numberFormat.format(value) : String(value);
+    case 'date': {
+      const match = DATE.exec(String(value));
+      return match ? `${match[3]}/${match[2]}/${match[1]}` : String(value);
+    }
+    case 'image':
+      return '';
+    default:
+      return String(value);
+  }
+}

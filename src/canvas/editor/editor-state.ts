@@ -1,3 +1,4 @@
+import type { DataSchema, DocumentData } from '../../core/document-type/types';
 import type { Rect } from '../../core/geometry/rect';
 import type { GuideLine } from '../snapping/guide-line';
 import type { SnapPreferences } from '../snapping/snap-settings';
@@ -15,6 +16,11 @@ export interface EditorUiState {
   marquee: Rect | null;
   panning: boolean;
   spaceHeld: boolean;
+  /** Datos del documento (no entran en el historial de diseño). */
+  data: DocumentData;
+  schema: DataSchema | null;
+  /** Mostrar las variables rellenas con los datos (true) o la plantilla limpia (false). */
+  fillMode: boolean;
 }
 
 export const createInitialUiState = (): EditorUiState => ({
@@ -28,4 +34,7 @@ export const createInitialUiState = (): EditorUiState => ({
   marquee: null,
   panning: false,
   spaceHeld: false,
+  data: {},
+  schema: null,
+  fillMode: false,
 });

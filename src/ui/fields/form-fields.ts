@@ -73,3 +73,9 @@ export function textareaField(text: string, rows = 3): Field<HTMLTextAreaElement
   input.rows = rows;
   return wrap(text, input);
 }
+
+export function dateField(text: string): Field<HTMLInputElement> {
+  const input = document.createElement('input');
+  input.type = 'date';
+  return wrap(text, input);
+}

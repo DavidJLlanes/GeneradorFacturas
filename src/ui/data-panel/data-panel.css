@@ -1,0 +1,8 @@
+.dp {
+  border-top: none;
+}
+
+.dp-group {
+  display: grid;
+  gap: 6px;
+}

@@ -34,6 +34,7 @@ const definition: PieceDefinition = {
       ],
     },
   ],
+  inlineProp: 'text',
   render: renderText,
 };
 

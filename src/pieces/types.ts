@@ -36,6 +36,8 @@ export interface PieceDefinition {
   defaultSize: { w: number; h: number };
   defaultProps: PieceProps;
   props: readonly PropSpec[];
+  /** Propiedad de texto que se edita directamente sobre la página con doble clic. */
+  inlineProp?: string;
   /** Dibuja la pieza dentro de `node`. Debe ser idempotente: se llama cada vez que algo cambia. */
   render(node: HTMLElement, input: PieceRenderInput): void;
 }
