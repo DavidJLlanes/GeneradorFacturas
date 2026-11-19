@@ -1,4 +1,5 @@
-import { fontById, fontStack } from '../../fonts/catalog';
+import { fontStack } from '../../fonts/catalog';
+import { fontLabel } from '../../fonts/font-label';
 import { ensureFont } from '../../fonts/load-font';
 import { pickFont } from '../font-picker/font-picker';
 
@@ -25,7 +26,7 @@ export function createFontField(label: string): FontField {
   const show = (id: string): void => {
     value = id;
     ensureFont(id);
-    button.textContent = fontById(id)?.name ?? 'Sistema';
+    button.textContent = fontLabel(id);
     button.style.fontFamily = fontStack(id);
   };
   show('');

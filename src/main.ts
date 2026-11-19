@@ -1,12 +1,26 @@
 import { chooseTemplate, chooseType } from './app/choose-type';
 import { createAppEditor } from './app/create-app-editor';
+import { restoreSession, templateOf } from './app/restore-session';
 import { documentTypes } from './core/document-type/discover';
+import { createBestStore } from './storage/local/idb-store';
+import { setSession } from './storage/session/session-context';
+import { attachAutosave } from './storage/local/autosave';
 import { mountApp } from './ui/mount-app';
 import './ui/base.css';
 
-const root = document.getElementById('app');
-if (root) {
+async function start(root: HTMLElement): Promise<void> {
   const hash = window.location.hash;
   const type = chooseType(documentTypes, hash);
-  mountApp(root, createAppEditor(type, chooseTemplate(type, hash)));
+  const store = await createBestStore();
+  setSession({ typeId: type.id, store });
+
+  const saved = await restoreSession(store, type, hash);
+  const editor = createAppEditor(type, saved ? templateOf(saved) : chooseTemplate(type, hash));
+  if (saved) editor.ui.update((s) => ({ ...s, data: saved.datos }));
+
+  mountApp(root, editor);
+  attachAutosave(editor, type.id, store);
 }
+
+const root = document.getElementById('app');
+if (root) void start(root);

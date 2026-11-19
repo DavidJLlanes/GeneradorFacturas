@@ -1,6 +1,7 @@
 import { CATEGORY_LABELS, fontStack, type FontEntry } from '../../fonts/catalog';
 import { ensureFont } from '../../fonts/load-font';
 import { searchFonts } from '../../fonts/search-fonts';
+import { customFontRows } from './custom-fonts-section';
 import '../dialog/dialog.css';
 import './font-picker.css';
 
@@ -86,6 +87,14 @@ function build(): void {
     const system = item('Fuente del sistema', 'inherit', SAMPLE, () => pick(''));
     if (current === '') system.classList.add('is-current');
     if (search.value.trim() === '') rows.push(system);
+    if (search.value.trim() === '') {
+      rows.push(
+        ...customFontRows(
+          (label, family, id) => customRow(label, family, id),
+          (id) => pick(id),
+        ),
+      );
+    }
     let last = '';
     for (const font of searchFonts(search.value)) {
       if (font.category !== last) {
@@ -110,6 +119,13 @@ function build(): void {
       if (watcher) watcher.observe(row);
       else ensureFont(id);
     }
+  };
+
+  const customRow = (label: string, family: string, id: string): HTMLElement => {
+    const row = item(label, family, SAMPLE, () => pick(id));
+    row.dataset['font'] = id;
+    if (id === current) row.classList.add('is-current');
+    return row;
   };
 
   const fontRow = (font: FontEntry): HTMLElement => {

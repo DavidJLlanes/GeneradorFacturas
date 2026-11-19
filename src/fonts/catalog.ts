@@ -1,4 +1,5 @@
 import data from './catalog.json';
+import { isCustomFontId } from './custom/custom-fonts';
 
 // Catálogo de fuentes alojadas en nuestro servidor (`public/fonts/`, generado por
 // `scripts/build-fonts.mjs` a partir de este mismo catálogo). Añadir una fuente: instalar su paquete
@@ -38,6 +39,7 @@ export const fontById = (id: string): FontEntry | undefined => FONTS.find((f) =>
 
 // Valor de `font-family` para una fuente del catálogo; sin id (o desconocido) se hereda la del sistema.
 export function fontStack(id: string): string {
+  if (isCustomFontId(id)) return `"${id}", sans-serif`;
   const font = fontById(id);
   return font ? `"${font.name}", ${FALLBACK[font.category]}` : 'inherit';
 }

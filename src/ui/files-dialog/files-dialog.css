@@ -1,0 +1,88 @@
+.fd {
+  width: min(94vw, 560px);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+.fd h3 {
+  margin: 14px 0 6px;
+  font-size: 0.85rem;
+}
+
+.fd-section {
+  display: grid;
+  gap: 8px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+.fd-status {
+  min-height: 1.2em;
+  margin: 0 0 4px;
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+.fd-name {
+  font: inherit;
+  padding: 5px 8px;
+  color: var(--text);
+  background: var(--control);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.fd-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.fd-card {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.fd-thumb {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.fd-thumb:not([src]) {
+  visibility: hidden;
+  aspect-ratio: auto;
+  height: 0;
+}
+
+.fd-card-name {
+  overflow: hidden;
+  font-size: 0.8rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fd-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.fd-danger {
+  justify-self: start;
+  color: #fff;
+  background: #b91c1c;
+  border-color: #b91c1c;
+}

@@ -40,6 +40,7 @@ src/
   pdf/         exportar a PDF con la impresión del navegador (ver docs/pdf.md)
   pieces/      piezas genéricas, una carpeta por pieza (ver docs/piezas.md)
   styles/      paleta del documento, colores enlazados y temas (ver docs/estilos.md)
+  storage/     archivo de diseño y de datos, almacenamiento local y autoguardado (ver docs/archivos.md)
   fonts/       catálogo de fuentes locales y carga bajo demanda (ver docs/fuentes.md)
   data/        importes en céntimos, variables y formato de datos
   images/      reglas y lectura de imágenes subidas

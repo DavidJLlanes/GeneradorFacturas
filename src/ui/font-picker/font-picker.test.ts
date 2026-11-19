@@ -20,7 +20,7 @@ describe('buscador de fuentes', () => {
   it('lista la del sistema y todas las del catálogo', async () => {
     const result = pickFont('');
     expect(items()).toHaveLength(FONTS.length + 1);
-    dialog().querySelector<HTMLButtonElement>('.pd-btn')!.click();
+    dialog().querySelector<HTMLButtonElement>('.pd-actions .pd-btn')!.click();
     expect(await result).toBeNull();
   });
 
@@ -48,7 +48,7 @@ describe('buscador de fuentes', () => {
     search.dispatchEvent(new Event('input'));
     expect(items()).toHaveLength(0);
     expect(dialog().textContent).toContain('Ninguna fuente coincide');
-    dialog().querySelector<HTMLButtonElement>('.pd-btn')!.click();
+    dialog().querySelector<HTMLButtonElement>('.pd-actions .pd-btn')!.click();
     await result;
   });
 });
@@ -73,5 +73,19 @@ describe('campo de fuente', () => {
     await new Promise((r) => setTimeout(r, 0));
     expect(changes).toEqual(['roboto']);
     expect(field.input.textContent).toBe('Roboto');
+  });
+});
+
+describe('mis fuentes', () => {
+  it('muestra el apartado, con su botón, solo cuando no se busca nada', async () => {
+    const result = pickFont('');
+    expect(dialog().textContent).toContain('Mis fuentes');
+    expect(dialog().textContent).toContain('Añadir fuente propia');
+    const search = dialog().querySelector<HTMLInputElement>('.fp-search')!;
+    search.value = 'lora';
+    search.dispatchEvent(new Event('input'));
+    expect(dialog().textContent).not.toContain('Mis fuentes');
+    dialog().querySelector<HTMLButtonElement>('.pd-actions .pd-btn')!.click();
+    await result;
   });
 });

@@ -147,7 +147,7 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 - [x] Subconjuntos latin y latin-ext en woff2, con licencias
 - [x] Script de construcción y carga bajo demanda
 - [x] Buscador con vista previa
-- [ ] Fuentes propias (`.ttf`, `.woff2`) → pasa a la fase 10, junto al archivo de diseño
+- [x] Fuentes propias (`.ttf`, `.woff2`) → hechas en la fase 10, junto al archivo de diseño
 - [ ] Incrustación en el PDF → pasa a la fase 9
 
 **Fase 8 — Tabla elástica y paginación**
@@ -167,12 +167,12 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 10 — Archivo de diseño y persistencia**
 
-- [ ] Exportar e importar diseño con su `tipoDocumento`; datos por separado
-- [ ] Fuentes propias (`.ttf`, `.woff2`) incrustadas en el archivo de diseño
-- [ ] Plantilla en IndexedDB que se reabre al entrar
-- [ ] Aviso informativo de almacenamiento local
-- [ ] Autoguardado, varias plantillas con miniaturas
-- [ ] Borrar todo con un clic y migración entre versiones
+- [x] Exportar e importar diseño con su `tipoDocumento`; datos por separado
+- [x] Fuentes propias (`.ttf`, `.woff2`) incrustadas en el archivo de diseño
+- [x] Plantilla en IndexedDB que se reabre al entrar
+- [x] Aviso informativo de almacenamiento local
+- [x] Autoguardado, varias plantillas con miniaturas
+- [x] Borrar todo con un clic y migración entre versiones
 
 **Fase 11 — Tipos: presupuesto, albarán, recibo**
 
