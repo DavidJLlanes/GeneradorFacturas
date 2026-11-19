@@ -32,3 +32,9 @@ Cada tipo vive solo en `src/documents/<tipo>/` (ver `docs/anadir-tipo.md`). Se a
 - **Parte**: `duracion` se calcula con las horas `HH:MM` y entiende que el trabajo pasó de medianoche si la hora de fin es anterior.
 - **Ticket**: los precios ya llevan IVA; `ivaIncluido` extrae la cuota del total según el tipo elegido.
 - **Carta, etiqueta y tarjeta** no son documentos numerados; su numeración solo cumple el contrato del tipo.
+
+## Plantillas
+
+Presupuesto, albarán, rectificativa, pedido, parte y encargo tienen además la plantilla **Moderna**
+(banda de color arriba), derivada de la clásica con `bandStyle`; ver `docs/galeria.md`. La factura
+tiene sus dos plantillas propias. Todas aparecen en la galería (botón **Galería**).

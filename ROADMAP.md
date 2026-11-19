@@ -190,10 +190,10 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 13 — Galería de plantillas**
 
-- [ ] Plantillas de cada tipo dentro de su propia carpeta
-- [ ] Galería con miniaturas, filtrable por tipo
-- [ ] Guía para aportar plantillas o tipos mediante pull request
-- [ ] Modo aleatorio: botón con selector de tipo que genera un diseño completo (plantilla + tema + variaciones de estilo + datos ficticios) para no empezar de cero; el motor es genérico y cada tipo aporta solo su generador de datos de ejemplo
+- [x] Plantillas de cada tipo dentro de su propia carpeta
+- [x] Galería con miniaturas, filtrable por tipo
+- [x] Guía para aportar plantillas o tipos mediante pull request
+- [x] Modo aleatorio: botón con selector de tipo que genera un diseño completo (plantilla + tema + variaciones de estilo + datos ficticios) para no empezar de cero; el motor es genérico y cada tipo aporta solo su generador de datos de ejemplo
 
 **Fase 14 — Modo lote**
 

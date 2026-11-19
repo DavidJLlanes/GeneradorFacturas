@@ -40,13 +40,14 @@ src/
   pdf/         exportar a PDF con la impresión del navegador (ver docs/pdf.md)
   pieces/      piezas genéricas, una carpeta por pieza (ver docs/piezas.md)
   styles/      paleta del documento, colores enlazados y temas (ver docs/estilos.md)
+  random/      modo aleatorio: datos ficticios por esquema y diseño al azar (ver docs/galeria.md)
   storage/     archivo de diseño y de datos, almacenamiento local y autoguardado (ver docs/archivos.md)
   fonts/       catálogo de fuentes locales y carga bajo demanda (ver docs/fuentes.md)
   data/        importes en céntimos, variables y formato de datos
   images/      reglas y lectura de imágenes subidas
-  documents/   un tipo de documento por carpeta; se descubren solos (ver docs/anadir-tipo.md) (hoy: factura; ejemplo es interno)
+  documents/   un tipo de documento por carpeta; se descubren solos (ver docs/anadir-tipo.md) (ver docs/tipos.md; ejemplo es interno)
   main.ts      punto de entrada
-docs/          documentación (despliegue, lienzo, papel, piezas, estilos, fuentes, páginas, tipos)
+docs/          documentación (despliegue, lienzo, papel, piezas, estilos, fuentes, páginas, tipos, galería y cómo aportar plantillas)
 scripts/       herramientas de construcción y despliegue
 ```
 
