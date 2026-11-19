@@ -1,0 +1,57 @@
+import type { DataSchema } from '../../core/document-type/types';
+
+export const schema: DataSchema = {
+  version: 1,
+  fields: [
+    { key: 'numero', label: 'Número', kind: 'number', group: 'Encargo', required: true },
+    {
+      key: 'numeroEncargo',
+      label: 'Número completo',
+      kind: 'text',
+      group: 'Encargo',
+      computed: true,
+    },
+    { key: 'fecha', label: 'Fecha', kind: 'date', group: 'Encargo', required: true },
+    { key: 'emisor.logo', label: 'Logo', kind: 'image', group: 'Profesional' },
+    {
+      key: 'emisor.nombre',
+      label: 'Nombre o razón social',
+      kind: 'text',
+      group: 'Profesional',
+      required: true,
+    },
+    { key: 'emisor.nif', label: 'NIF', kind: 'text', group: 'Profesional' },
+    { key: 'emisor.direccion', label: 'Domicilio', kind: 'multiline', group: 'Profesional' },
+    { key: 'emisor.email', label: 'Email', kind: 'text', group: 'Profesional' },
+    { key: 'emisor.telefono', label: 'Teléfono', kind: 'text', group: 'Profesional' },
+    {
+      key: 'cliente.nombre',
+      label: 'Nombre o razón social',
+      kind: 'text',
+      group: 'Cliente',
+      required: true,
+    },
+    { key: 'cliente.nif', label: 'NIF', kind: 'text', group: 'Cliente' },
+    { key: 'cliente.direccion', label: 'Domicilio', kind: 'multiline', group: 'Cliente' },
+    { key: 'cliente.email', label: 'Email', kind: 'text', group: 'Cliente' },
+    {
+      key: 'objeto',
+      label: 'Objeto del encargo',
+      kind: 'multiline',
+      group: 'Servicio',
+      required: true,
+    },
+    { key: 'alcance', label: 'Alcance y entregables', kind: 'multiline', group: 'Servicio' },
+    { key: 'plazo', label: 'Plazo estimado', kind: 'text', group: 'Servicio' },
+    { key: 'honorarios', label: 'Honorarios', kind: 'money', group: 'Importes', required: true },
+    { key: 'provision', label: 'Provisión de fondos', kind: 'money', group: 'Importes' },
+    {
+      key: 'pendiente',
+      label: 'Pendiente de pago',
+      kind: 'money',
+      group: 'Importes',
+      computed: true,
+    },
+    { key: 'condiciones', label: 'Condiciones', kind: 'multiline', group: 'Condiciones' },
+  ],
+};
