@@ -45,20 +45,20 @@ export const issuerDetails = (box: Box, t: Theme, color = t.muted): DocElement =
     color,
   });
 
-export const title = (box: Box, color: string): DocElement =>
+export const title = (box: Box, color: string, align = 'right'): DocElement =>
   text('titulo', 'Título', box, {
     text: labels['titulo'] ?? '',
     fontSize: 28,
     bold: true,
-    align: 'right',
+    align,
     color,
   });
 
-export const number = (box: Box, color: string): DocElement =>
+export const number = (box: Box, color: string, align = 'right'): DocElement =>
   text('numero', 'Número', box, {
     text: 'Nº {{numeroFactura}}',
     fontSize: 13,
-    align: 'right',
+    align,
     color,
   });
 
