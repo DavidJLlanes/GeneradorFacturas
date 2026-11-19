@@ -2,8 +2,10 @@ import type { Editor } from '../editor/create-editor';
 import { zoomToFit } from '../commands/view-commands';
 import { updateGuidesOverlay } from './guides-overlay';
 import { updateMarqueeOverlay } from './marquee-overlay';
+import { createPageNav } from './page-nav';
 import { createRulers } from './rulers';
 import { updateSelectionOverlay } from './selection-overlay';
+import { viewModelOf } from './view-model';
 import { createWorldView } from './world-view';
 import './canvas-view.css';
 
@@ -32,13 +34,16 @@ export function createCanvasView(editor: Editor): CanvasView {
   const marqueeLayer = div('cv-layer');
   overlay.append(guidesLayer, selectionLayer, marqueeLayer);
 
+  const pageNav = createPageNav(editor);
   stage.append(world.element, overlay);
-  root.append(div('cv-corner'), rulers.horizontal, rulers.vertical, stage);
+  root.append(div('cv-corner'), rulers.horizontal, rulers.vertical, stage, pageNav.element);
 
   const render = (): void => {
     const doc = editor.doc();
     const ui = editor.ui.get();
-    world.update(doc, ui);
+    const model = viewModelOf(editor);
+    world.update(doc, ui, model);
+    pageNav.update(model);
     updateGuidesOverlay(guidesLayer, ui);
     updateSelectionOverlay(selectionLayer, doc, ui);
     updateMarqueeOverlay(marqueeLayer, ui);

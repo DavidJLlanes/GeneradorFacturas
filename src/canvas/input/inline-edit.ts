@@ -54,6 +54,7 @@ function openEditor(editor: Editor, stage: HTMLElement, el: DocElement, prop: st
 // Enter inserta salto de línea; Ctrl+Enter o salir del cuadro guarda; Esc cancela.
 export function attachInlineEdit(editor: Editor, stage: HTMLElement): () => void {
   const onDoubleClick = (e: MouseEvent): void => {
+    if (editor.ui.get().fillMode) return;
     const point = screenToPage(editor.ui.get().viewport, stagePoint(stage, e));
     const el = hitTestElement(editor.doc(), point);
     const prop = el ? pieces.get(el.kind)?.inlineProp : undefined;

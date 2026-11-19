@@ -16,6 +16,9 @@ export function chooseGesture(ctx: GestureContext, e: PointerEvent): Gesture | n
 
   if (e.button === 1 || ui.spaceHeld) return startPanGesture(ctx, point);
 
+  // Con datos la página se ve repartida y no se edita: solo se desplaza la vista.
+  if (ui.fillMode) return startPanGesture(ctx, point);
+
   const handle = (e.target as HTMLElement | null)?.closest<HTMLElement>('[data-handle]')?.dataset
     .handle;
   if (isHandleId(handle)) return startResizeGesture(ctx, handle, point);

@@ -1,6 +1,6 @@
 import type { DocumentModel } from '../types';
 
-export type ElementFlag = 'locked' | 'hidden';
+export type ElementFlag = 'locked' | 'hidden' | 'repeat';
 
 export function setElementsFlag(
   doc: DocumentModel,
@@ -12,7 +12,7 @@ export function setElementsFlag(
   return {
     ...doc,
     elements: doc.elements.map((e) =>
-      target.has(e.id) && e[flag] !== value ? { ...e, [flag]: value } : e,
+      target.has(e.id) && (e[flag] ?? false) !== value ? { ...e, [flag]: value } : e,
     ),
   };
 }

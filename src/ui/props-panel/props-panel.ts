@@ -1,3 +1,4 @@
+import { setRepeat } from '../../canvas/commands/flag-commands';
 import { setProps, setRect } from '../../canvas/commands/piece-commands';
 import type { Editor } from '../../canvas/editor/create-editor';
 import type { DocElement } from '../../core/document/types';
@@ -5,6 +6,7 @@ import { pieces } from '../../pieces/discover';
 import { paletteOf } from '../../styles/palette';
 import { createGeometryControls } from './geometry-controls';
 import { createPropControl, type PropControl } from './props-controls';
+import { createRepeatControl, type RepeatControl } from './repeat-control';
 import './props-panel.css';
 
 const heading = (text: string): HTMLElement => {
@@ -29,11 +31,13 @@ export function createPropsPanel(editor: Editor): { element: HTMLElement; destro
   let structure = '';
   let controls: PropControl[] = [];
   let geometry: ReturnType<typeof createGeometryControls> | null = null;
+  let repeat: RepeatControl | null = null;
   let selected: DocElement[] = [];
 
   const rebuild = (kind: string | null): void => {
     controls = [];
     geometry = null;
+    repeat = null;
     const piece = kind ? pieces.get(kind) : undefined;
     if (selected.length === 0 || !piece) {
       const hint = document.createElement('p');
@@ -55,6 +59,9 @@ export function createPropsPanel(editor: Editor): { element: HTMLElement; destro
       controls.push(control);
       nodes.push(control.row);
     }
+    repeat = createRepeatControl();
+    repeat.onChange((value) => setRepeat(editor, ids(), value));
+    nodes.push(heading('Páginas'), repeat.row);
     if (selected.length === 1) {
       geometry = createGeometryControls((rect) => setRect(editor, selected[0]!.id, rect));
       nodes.push(heading('Posición y tamaño'), geometry.element);
@@ -78,6 +85,7 @@ export function createPropsPanel(editor: Editor): { element: HTMLElement; destro
     for (const c of controls) {
       if (document.activeElement !== c.input) c.set(props[c.key]);
     }
+    repeat?.set(selected);
     geometry?.set({ x: first.x, y: first.y, w: first.w, h: first.h });
   };
   render();

@@ -25,6 +25,8 @@ export interface EditorUiState {
   sample: DocumentData | null;
   /** Mostrar las variables rellenas con los datos (true) o la plantilla limpia (false). */
   fillMode: boolean;
+  /** Página que se muestra con la vista "Con datos" (0 = la primera). */
+  pageIndex: number;
 }
 
 export const createInitialUiState = (): EditorUiState => ({
@@ -43,4 +45,5 @@ export const createInitialUiState = (): EditorUiState => ({
   compute: null,
   sample: null,
   fillMode: false,
+  pageIndex: 0,
 });

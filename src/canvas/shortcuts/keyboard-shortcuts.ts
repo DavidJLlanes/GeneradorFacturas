@@ -30,6 +30,7 @@ export function attachKeyboardShortcuts(editor: Editor): () => void {
     }
     const shortcut = SHORTCUTS.find((s) => matches(s, e));
     if (!shortcut) return;
+    if (editor.ui.get().fillMode && !shortcut.view) return;
     e.preventDefault();
     shortcut.run(editor, e);
   };

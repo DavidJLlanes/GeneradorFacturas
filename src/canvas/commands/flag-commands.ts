@@ -20,3 +20,8 @@ export function toggleElementFlag(editor: Editor, id: string, flag: ElementFlag)
   if (!el) return;
   editor.apply(setElementsFlag(doc, [id], flag, !el[flag]));
 }
+
+// Marca o desmarca varias piezas para repetirse en todas las páginas.
+export function setRepeat(editor: Editor, ids: readonly string[], value: boolean): void {
+  editor.apply(setElementsFlag(editor.doc(), ids, 'repeat', value));
+}

@@ -7,6 +7,7 @@ import {
 } from '../commands/element-commands';
 import { toggleHideSelection, toggleLockSelection } from '../commands/flag-commands';
 import { redo, undo } from '../commands/history-commands';
+import { nextPage, previousPage } from '../commands/page-view-commands';
 import { bringForward, bringToFront, sendBackward, sendToBack } from '../commands/order-commands';
 import { zoomIn, zoomOut, zoomTo100, zoomToFit, zoomToSelection } from '../commands/view-commands';
 import type { Editor } from '../editor/create-editor';
@@ -20,6 +21,8 @@ export interface Shortcut {
   mod?: boolean;
   /** Si se indica, shift debe coincidir; si no, se ignora. */
   shift?: boolean;
+  /** Sigue activo con la vista "Con datos", que no se edita (zoom, página…). */
+  view?: boolean;
   run: (editor: Editor, e: KeyboardEvent) => void;
 }
 
@@ -46,9 +49,11 @@ export const SHORTCUTS: readonly Shortcut[] = [
   { keys: ['['], run: sendBackward },
   { keys: ['l'], mod: true, shift: true, run: toggleLockSelection },
   { keys: ['h'], mod: true, shift: true, run: toggleHideSelection },
-  { keys: ['+', '='], run: zoomIn },
-  { keys: ['-', '_'], run: zoomOut },
-  { codes: ['Digit1'], shift: true, run: zoomToFit },
-  { codes: ['Digit0'], shift: true, run: zoomTo100 },
+  { keys: ['+', '='], view: true, run: zoomIn },
+  { keys: ['-', '_'], view: true, run: zoomOut },
+  { codes: ['Digit1'], shift: true, view: true, run: zoomToFit },
+  { codes: ['Digit0'], shift: true, view: true, run: zoomTo100 },
   { codes: ['Digit2'], shift: true, run: zoomToSelection },
+  { keys: ['pageup'], view: true, run: previousPage },
+  { keys: ['pagedown'], view: true, run: nextPage },
 ];

@@ -75,3 +75,19 @@ describe('operaciones de documento', () => {
     expect(moveBackward(d, ['a'])).toBe(d);
   });
 });
+
+describe('repetir en cada página', () => {
+  it('marca y desmarca la propiedad sin tocar el resto', () => {
+    const base = docOf('a', 'b');
+    const on = setElementsFlag(base, [base.elements[0]!.id], 'repeat', true);
+    expect(on.elements[0]!.repeat).toBe(true);
+    expect(on.elements[1]).toBe(base.elements[1]);
+    const off = setElementsFlag(on, [base.elements[0]!.id], 'repeat', false);
+    expect(off.elements[0]!.repeat).toBe(false);
+  });
+
+  it('marcar algo que ya lo está devuelve los mismos elementos', () => {
+    const on = setElementsFlag(docOf('a'), ['a'], 'repeat', true);
+    expect(setElementsFlag(on, ['a'], 'repeat', true).elements[0]).toBe(on.elements[0]);
+  });
+});

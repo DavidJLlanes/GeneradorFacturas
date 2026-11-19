@@ -210,3 +210,52 @@
   outline: none;
   user-select: text;
 }
+
+.cv-pagenav {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  font-size: 0.8rem;
+  color: var(--ruler-text);
+  background: var(--ruler-bg);
+  border: 1px solid var(--grid-line);
+  border-radius: 999px;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.18);
+}
+
+.cv-pagenav[hidden] {
+  display: none;
+}
+
+.cv-pagenav-btn {
+  width: 26px;
+  height: 26px;
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.cv-pagenav-btn:hover:not(:disabled) {
+  background: var(--grid-line);
+}
+
+.cv-pagenav-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.cv-pagenav-label {
+  min-width: 7.5em;
+  text-align: center;
+}

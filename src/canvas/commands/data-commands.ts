@@ -34,7 +34,8 @@ export function setDataSource(
 // Rellena el documento con los datos de muestra del tipo y pasa a verlo relleno.
 export function loadSampleData(editor: Editor): void {
   const sample = editor.ui.get().sample;
-  if (sample) editor.ui.update((s) => ({ ...s, data: sample, fillMode: true }));
+  if (sample)
+    editor.ui.update((s) => ({ ...s, data: sample, fillMode: true, selection: [], pageIndex: 0 }));
 }
 
 export function clearData(editor: Editor): void {
@@ -42,5 +43,6 @@ export function clearData(editor: Editor): void {
 }
 
 export function toggleFillMode(editor: Editor): void {
-  editor.ui.update((s) => ({ ...s, fillMode: !s.fillMode }));
+  // La vista con datos no se edita: al entrar se suelta la selección y se vuelve a la primera página.
+  editor.ui.update((s) => ({ ...s, fillMode: !s.fillMode, selection: [], pageIndex: 0 }));
 }

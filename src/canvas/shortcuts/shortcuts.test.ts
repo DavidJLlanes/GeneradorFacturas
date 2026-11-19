@@ -12,4 +12,15 @@ describe('tabla de atajos', () => {
       }
     }
   });
+
+  it('con la vista "Con datos" solo siguen activos los atajos de vista', () => {
+    const active = SHORTCUTS.filter((s) => s.view).flatMap((s) => [
+      ...(s.keys ?? []),
+      ...(s.codes ?? []),
+    ]);
+    expect(active).toEqual(expect.arrayContaining(['+', '-', 'pageup', 'pagedown', 'Digit1']));
+    for (const edit of ['delete', 'backspace', 'arrowleft', 'd', 'a', 'z', 'l', 'h']) {
+      expect(active, edit).not.toContain(edit);
+    }
+  });
 });
