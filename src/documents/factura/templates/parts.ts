@@ -35,6 +35,9 @@ export const withFont = (elements: readonly DocElement[], fontFamily: string): D
     TEXT_KINDS.has(el.kind) ? { ...el, props: { fontFamily, ...el.props } } : el,
   );
 
+// Marca una pieza para repetirse en todas las páginas de la factura.
+export const repeating = (el: DocElement): DocElement => ({ ...el, repeat: true });
+
 export const logo = (box: Box): DocElement =>
   piece('logo', 'Logo', 'image', box, { field: 'emisor.logo' });
 
@@ -156,8 +159,10 @@ export const paymentBlock = (box: Box, t: Theme): DocElement =>
   });
 
 export const footerBand = (box: Box, t: Theme): DocElement =>
-  piece('pie', 'Pie', 'footer', box, {
-    text: `{{emisor.nombre}} · ${labels['nif']} {{emisor.nif}}`,
-    color: t.muted,
-    ruleColor: t.accent,
-  });
+  repeating(
+    piece('pie', 'Pie', 'footer', box, {
+      text: `{{emisor.nombre}} · ${labels['nif']} {{emisor.nif}}`,
+      color: t.muted,
+      ruleColor: t.accent,
+    }),
+  );

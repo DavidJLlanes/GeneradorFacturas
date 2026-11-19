@@ -17,6 +17,7 @@ import {
   title,
   totalsBlock,
   type Theme,
+  repeating,
   withFont,
 } from './parts';
 
@@ -40,12 +41,14 @@ export const moderna: DocumentTemplate = {
     },
     elements: withFont(
       [
-        piece('banda', 'Banda superior', 'shape', [0, 0, 210, 40], {
-          fill: theme.accent,
-          bordered: false,
-        }),
-        title([10, 9, 110, 13], WHITE, 'left'),
-        number([10, 24, 110, 7], WHITE, 'left'),
+        repeating(
+          piece('banda', 'Banda superior', 'shape', [0, 0, 210, 40], {
+            fill: theme.accent,
+            bordered: false,
+          }),
+        ),
+        repeating(title([10, 9, 110, 13], WHITE, 'left')),
+        repeating(number([10, 24, 110, 7], WHITE, 'left')),
         logo([150, 7, 50, 26]),
         issuerName([10, 48, 90, 7], theme),
         issuerDetails([10, 55, 90, 16], theme),

@@ -17,6 +17,7 @@ import {
   title,
   totalsBlock,
   type Theme,
+  repeating,
   withFont,
 } from './parts';
 
@@ -32,7 +33,7 @@ export const clasica: DocumentTemplate = {
       [
         logo([10, 10, 45, 22]),
         title([105, 10, 95, 13], theme.accent),
-        number([105, 24, 95, 7], theme.ink),
+        repeating(number([105, 24, 95, 7], theme.ink)),
         dates([105, 33, 95, 14], theme.muted),
         issuerName([10, 36, 90, 7], theme),
         issuerDetails([10, 43, 90, 16], theme),
