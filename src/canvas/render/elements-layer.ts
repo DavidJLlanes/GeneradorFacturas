@@ -73,7 +73,8 @@ export function createElementsLayer(): {
         node.style.width = `${mmToPx(el.w)}px`;
         node.style.height = `${mmToPx(el.h)}px`;
         node.style.zIndex = String(index);
-        node.style.display = el.hidden ? 'none' : '';
+        // Con el atributo `hidden` (y no con `display`) para no pisar el `display` que fija cada pieza.
+        node.hidden = el.hidden;
         node.classList.toggle('is-locked', el.locked);
         draw(node, el, context);
       });

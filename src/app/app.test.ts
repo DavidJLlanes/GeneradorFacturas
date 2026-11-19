@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { createPage } from '../core/document/page';
 import { createRegistry } from '../core/document-type/registry';
 import type { DocumentTypeDefinition } from '../core/document-type/types';
-import { chooseType } from './choose-type';
+import { chooseTemplate, chooseType } from './choose-type';
 import { createAppEditor } from './create-app-editor';
 
 const def = (id: string, extra: Partial<DocumentTypeDefinition> = {}): DocumentTypeDefinition => ({
@@ -54,5 +54,25 @@ describe('editor de la aplicación', () => {
 
   it('falla si el tipo no tiene plantillas', () => {
     expect(() => createAppEditor(def('x', { templates: [] }))).toThrow(/plantillas/);
+  });
+});
+
+describe('plantilla de arranque', () => {
+  const two = def('dos', {
+    templates: [
+      { id: 'a', name: 'A', document: { page: createPage(210, 297), elements: [] } },
+      { id: 'b', name: 'B', document: { page: createPage(148, 210), elements: [] } },
+    ],
+  });
+
+  it('la primera por defecto, la pedida con #plantilla=…, y la primera si no existe', () => {
+    expect(chooseTemplate(two, '').id).toBe('a');
+    expect(chooseTemplate(two, '#tipo=dos&plantilla=b').id).toBe('b');
+    expect(chooseTemplate(two, '#plantilla=nada').id).toBe('a');
+  });
+
+  it('el editor arranca con la plantilla elegida', () => {
+    const editor = createAppEditor(two, chooseTemplate(two, '#plantilla=b'));
+    expect(editor.doc().page.widthMm).toBe(148);
   });
 });
