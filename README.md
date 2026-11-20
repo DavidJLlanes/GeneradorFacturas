@@ -1,5 +1,7 @@
 <div align="center">
 
+<p align="center"><img src="docs/assets/generador-documentos-cover-v2.webp" alt="Generador de Documentos: diseña facturas y presupuestos en tu navegador" width="100%"></p>
+
 # Generador de Documentos
 
 **Diseña tu propia factura (y presupuestos, albaranes, recibos…) como en una pizarra, y descarga el PDF.**
