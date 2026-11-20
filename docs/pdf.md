@@ -19,4 +19,6 @@ Botón **PDF** de la barra → elegir contenido → «Abrir impresión» → des
 
 ## Límites
 
-Descarga directa sin diálogo (pdf-lib) queda como mejora opcional posterior.
+- La impresión del navegador es lo único que ofrece el botón «PDF». El PDF sin diálogo existe como motor (`src/pdf-file/`) y se usa en el modo lote (ver `docs/lote.md`).
+- El motor propio dibuja el texto como contornos de glifos (idéntico a pantalla con cualquier fuente, también las propias) y añade encima texto invisible para poder seleccionarlo y buscarlo. No incrusta las fuentes: el recorte de fuentes de `@pdf-lib/fontkit` falla con muchas fuentes con acentos.
+- Sombras: aproximadas con capas translúcidas. Subrayados, espaciado entre letras y rotaciones no se dibujan (el editor no los ofrece).

@@ -40,6 +40,8 @@ src/
   pdf/         exportar a PDF con la impresión del navegador (ver docs/pdf.md)
   pieces/      piezas genéricas, una carpeta por pieza (ver docs/piezas.md)
   styles/      paleta del documento, colores enlazados y temas (ver docs/estilos.md)
+  batch/       modo lote: CSV, asignación de columnas, ZIP y generación (ver docs/lote.md)
+  pdf-file/    PDF vectorial sin diálogo de impresión, a partir de las páginas maquetadas (ver docs/pdf.md)
   random/      modo aleatorio: datos ficticios por esquema y diseño al azar (ver docs/galeria.md)
   storage/     archivo de diseño y de datos, almacenamiento local y autoguardado (ver docs/archivos.md)
   fonts/       catálogo de fuentes locales y carga bajo demanda (ver docs/fuentes.md)

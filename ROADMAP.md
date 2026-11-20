@@ -195,11 +195,11 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 - [x] Guía para aportar plantillas o tipos mediante pull request
 - [x] Modo aleatorio: botón con selector de tipo que genera un diseño completo (plantilla + tema + variaciones de estilo + datos ficticios) para no empezar de cero; el motor es genérico y cada tipo aporta solo su generador de datos de ejemplo
 
-**Fase 14 — Modo lote**
+**Fase 14 — Modo lote (hecha)**
 
-- [ ] Importar CSV; las columnas dependen del esquema del tipo elegido
-- [ ] Asignar columnas a variables
-- [ ] Generar todos los PDF en un ZIP, con progreso y errores por fila
+- [x] Importar CSV; las columnas dependen del esquema del tipo elegido
+- [x] Asignar columnas a variables
+- [x] Generar todos los PDF en un ZIP, con progreso y errores por fila
 
 **Fase 15 — Extras**
 
@@ -220,4 +220,4 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 ## Fase 9 — PDF (hecha)
 
-PDF vectorial mediante la impresión del navegador (`src/pdf/`): modo relleno y modelo limpio, todos los papeles vía `@page`, `{{pagina}}`/`{{paginas}}`. Ver `docs/pdf.md`. Descarga directa con pdf-lib: opcional más adelante.
+PDF vectorial mediante la impresión del navegador (`src/pdf/`): modo relleno y modelo limpio, todos los papeles vía `@page`, `{{pagina}}`/`{{paginas}}`. Ver `docs/pdf.md`. El PDF sin diálogo se hizo en la Fase 14 (`src/pdf-file/`).

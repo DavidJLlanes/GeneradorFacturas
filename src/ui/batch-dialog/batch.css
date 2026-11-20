@@ -1,0 +1,59 @@
+.bt {
+  width: min(94vw, 560px);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.bt-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.bt-map {
+  display: grid;
+  gap: 4px;
+  max-height: 260px;
+  padding: 8px;
+  margin: 10px 0;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.bt-group {
+  margin-top: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted, #8a919c);
+  text-transform: uppercase;
+}
+
+.bt-row {
+  display: grid;
+  grid-template-columns: 1fr 190px;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.bt-row select,
+.bt .pd-row select {
+  font: inherit;
+  padding: 3px 6px;
+}
+
+.bt-errors {
+  max-height: 110px;
+  padding-left: 18px;
+  margin: 6px 0;
+  overflow-y: auto;
+  font-size: 0.78rem;
+  color: #c0392b;
+}
+
+.bt progress {
+  width: 100%;
+  margin: 8px 0 2px;
+}
