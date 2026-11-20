@@ -9,6 +9,7 @@ export function createToolbar(editor: Editor): { element: HTMLElement; destroy()
   const root = document.createElement('div');
   root.className = 'tb';
   root.setAttribute('role', 'toolbar');
+  root.setAttribute('aria-label', 'Herramientas');
 
   const title = document.createElement('strong');
   title.className = 'tb-title';
@@ -33,6 +34,11 @@ export function createToolbar(editor: Editor): { element: HTMLElement; destroy()
     for (const { spec, button } of entries) {
       const label = typeof spec.label === 'function' ? spec.label(editor) : spec.label;
       if (button.textContent !== label) button.textContent = label;
+      // El nombre es el texto visible (así coincide con lo que se ve y se dice por voz). Si solo hay un
+      // símbolo (↶, ↷, +, −), el nombre es la descripción.
+      if (/\p{L}/u.test(label)) button.removeAttribute('aria-label');
+      else if (/\d/.test(label)) button.setAttribute('aria-label', `${label}: ${spec.title}`);
+      else button.setAttribute('aria-label', spec.title);
       button.disabled = spec.enabled ? !spec.enabled(editor) : false;
       if (spec.pressed) button.setAttribute('aria-pressed', String(spec.pressed(editor)));
     }

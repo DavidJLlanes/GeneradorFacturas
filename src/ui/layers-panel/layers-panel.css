@@ -58,6 +58,13 @@
 
 .lp-name {
   flex: 1;
+  padding: 2px 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  background: none;
+  border: 0;
   min-width: 0;
   overflow: hidden;
   font-size: 0.85rem;

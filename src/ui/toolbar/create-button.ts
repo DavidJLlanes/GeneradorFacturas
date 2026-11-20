@@ -7,7 +7,6 @@ export function createButton(spec: ButtonSpec, editor: Editor): HTMLButtonElemen
   button.type = 'button';
   button.className = 'tb-btn';
   button.title = spec.title;
-  button.setAttribute('aria-label', spec.title);
   button.dataset.id = spec.id;
   button.addEventListener('click', () => spec.run(editor));
   // Evita que el botón robe el foco: así la barra espaciadora y las flechas siguen yendo al editor.

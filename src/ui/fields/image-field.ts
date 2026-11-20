@@ -27,6 +27,7 @@ export function createImageField(text: string): ImageField {
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = 'image/png,image/jpeg,image/svg+xml';
+  input.setAttribute('aria-label', text);
   const remove = document.createElement('button');
   remove.type = 'button';
   remove.className = 'pd-btn imgf-remove';

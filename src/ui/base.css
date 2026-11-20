@@ -28,3 +28,48 @@ body {
   color: var(--text);
   background: var(--bg);
 }
+
+/* Solo para lectores de pantalla. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip-path: inset(50%);
+}
+
+.skip-link {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 100;
+  padding: 6px 10px;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 6px;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* Foco siempre visible con el teclado. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

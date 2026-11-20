@@ -43,9 +43,12 @@ function createRow(editor: Editor, el: DocElement, selected: boolean): HTMLEleme
     () => toggleElementFlag(editor, el.id, 'locked'),
   );
 
-  const name = document.createElement('span');
+  // El nombre es un botón: así se puede elegir la capa con el teclado (Tab y Enter o Espacio).
+  const name = document.createElement('button');
+  name.type = 'button';
   name.className = 'lp-name';
   name.textContent = el.name;
+  name.setAttribute('aria-pressed', String(selected));
 
   row.append(eye, lock, name);
   row.addEventListener('click', (e) => {

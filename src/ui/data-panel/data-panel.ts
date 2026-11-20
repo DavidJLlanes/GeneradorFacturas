@@ -38,7 +38,10 @@ export function createDataPanel(editor: Editor): { element: HTMLElement; destroy
   root.className = 'pp dp';
   const body = document.createElement('div');
   body.className = 'pp-body';
-  root.append(body);
+  const heading = document.createElement('h2');
+  heading.className = 'sr-only';
+  heading.textContent = 'Datos del documento';
+  root.append(heading, body);
 
   let schema: DataSchema | null | undefined;
   let controls: DataControl[] = [];

@@ -23,6 +23,8 @@ export function attachKeyboardShortcuts(editor: Editor): () => void {
 
   const onKeyDown = (e: KeyboardEvent): void => {
     if (isTypingTarget(e.target)) return;
+    // Sobre un botón, Espacio lo pulsa (no activa la mano de desplazar).
+    if (e.key === ' ' && e.target instanceof HTMLButtonElement) return;
     if (e.key === ' ') {
       e.preventDefault();
       setSpace(true);
@@ -38,6 +40,7 @@ export function attachKeyboardShortcuts(editor: Editor): () => void {
 
   const onKeyUp = (e: KeyboardEvent): void => {
     if (e.key !== ' ') return;
+    if (e.target instanceof HTMLButtonElement && !editor.ui.get().spaceHeld) return;
     e.preventDefault();
     setSpace(false);
   };

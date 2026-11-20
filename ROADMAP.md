@@ -207,7 +207,7 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 - [ ] Idiomas
 - [x] PWA sin conexión
 - [ ] Móvil y tableta
-- [ ] Accesibilidad
+- [x] Accesibilidad (ver `docs/accesibilidad.md`)
 
 **Versión 2:** estudiar Verifactu (numeración inalterable, huella, QR oficial) y la factura electrónica entre empresas, como ampliación del tipo factura.
 
