@@ -206,7 +206,7 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 - [x] Monedas (por documento; ver `docs/monedas.md`)
 - [ ] Idiomas
 - [x] PWA sin conexión
-- [ ] Móvil y tableta
+- [x] Móvil y tableta
 - [x] Accesibilidad (ver `docs/accesibilidad.md`)
 
 **Versión 2:** estudiar Verifactu (numeración inalterable, huella, QR oficial) y la factura electrónica entre empresas, como ampliación del tipo factura.
@@ -216,7 +216,6 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 - Nombre definitivo del proyecto y de la carpeta pública (`/factura`); si el repo se renombra o se mantiene.
 - Cuántas familias de Google Fonts y con qué pesos.
 - PDF con librería propia o con impresión del navegador (prueba de concepto en la Fase 9).
-- Alcance en móvil: edición completa o modo reducido.
 - Licencia del repositorio.
 
 ## Fase 9 — PDF (hecha)

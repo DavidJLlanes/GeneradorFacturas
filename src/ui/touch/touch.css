@@ -1,0 +1,79 @@
+/* Pantallas táctiles (móvil y tableta): controles con tamaño de dedo, sin zoom raro y con las
+   zonas seguras de las pantallas con muesca. */
+
+@supports (height: 100dvh) {
+  html,
+  body,
+  #app {
+    height: 100dvh;
+  }
+}
+
+body {
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+select,
+summary {
+  touch-action: manipulation;
+}
+
+.cv,
+.cv-stage {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.app {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (pointer: coarse) {
+  .tb-btn,
+  .st-tab,
+  .pd-btn,
+  .lp-icon,
+  .lp-name {
+    min-height: 44px;
+  }
+
+  .tb-btn {
+    min-width: 44px;
+    padding-inline: 12px;
+  }
+
+  .lp-icon {
+    min-width: 44px;
+  }
+
+  .lp-row {
+    padding-block: 2px;
+  }
+
+  /* 16 px evita que iOS haga zoom al escribir en un campo. */
+  input,
+  select,
+  textarea {
+    min-height: 40px;
+    font-size: 16px !important;
+  }
+
+  .cv-handle {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cv-handle::after {
+    inset: -14px;
+  }
+
+  .pd {
+    max-height: 92dvh;
+    overflow-y: auto;
+  }
+}

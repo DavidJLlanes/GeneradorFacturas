@@ -10,9 +10,11 @@ import { createDataPanel } from './data-panel/data-panel';
 import { createLayersPanel } from './layers-panel/layers-panel';
 import { createPropsPanel } from './props-panel/props-panel';
 import { createSideTabs } from './side-tabs/side-tabs';
+import { attachDoubleTap } from './touch/double-tap';
 import { createToolbar } from './toolbar/toolbar';
 import { APP_NAME } from '../core/app-info';
 import './app-layout.css';
+import './touch/touch.css';
 
 // Monta la aplicación completa en `root`.
 export function mountApp(root: HTMLElement, editor: Editor): void {
@@ -64,6 +66,7 @@ export function mountApp(root: HTMLElement, editor: Editor): void {
   attachPointerInput(editor, view.stage);
   attachWheelInput(editor, view.stage);
   attachInlineEdit(editor, view.stage);
+  attachDoubleTap(view.stage);
   attachKeyboardShortcuts(editor);
   attachPrint(editor);
 }

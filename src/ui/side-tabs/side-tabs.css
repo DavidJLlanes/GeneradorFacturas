@@ -38,3 +38,15 @@
 .st-panel[hidden] {
   display: none;
 }
+
+@media (max-width: 720px) {
+  .st {
+    max-height: 46dvh;
+    border-top: 1px solid var(--border);
+    border-left: 0;
+  }
+
+  .st.is-collapsed .st-panel {
+    display: none;
+  }
+}
