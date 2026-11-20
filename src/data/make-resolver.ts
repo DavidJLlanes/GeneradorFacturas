@@ -7,11 +7,12 @@ export function makeResolver(
   schema: DataSchema | null,
   data: DocumentData,
   missing: MissingPolicy = 'keep',
+  currency?: string,
 ): (text: string) => string {
   const fields = new Map(schema?.fields.map((f) => [f.key, f]));
   const lookup = (key: string): string | undefined => {
     const field = fields.get(key);
-    const text = formatFieldValue(field?.kind ?? 'text', data[key], field?.options);
+    const text = formatFieldValue(field?.kind ?? 'text', data[key], field?.options, currency);
     return text === '' ? undefined : text;
   };
   return (text) => resolveVariables(text, lookup, missing);

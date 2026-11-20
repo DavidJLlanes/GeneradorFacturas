@@ -203,7 +203,8 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 
 **Fase 15 — Extras**
 
-- [ ] Idiomas y monedas
+- [x] Monedas (por documento; ver `docs/monedas.md`)
+- [ ] Idiomas
 - [x] PWA sin conexión
 - [ ] Móvil y tableta
 - [ ] Accesibilidad

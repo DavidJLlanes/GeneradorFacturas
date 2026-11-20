@@ -37,6 +37,8 @@ export interface PieceRenderInput {
   value(key: string): unknown;
   /** true con la vista "Con datos"; false con la plantilla limpia. */
   fillMode: boolean;
+  /** Moneda de los importes (código ISO). */
+  currency: string;
   /** Solo si la pieza está repartida entre páginas: qué unidades (filas) dibujar. */
   slice?: Slice;
 }

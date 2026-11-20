@@ -42,6 +42,7 @@ const draw = (
     schema,
     value: (key) => (fill ? data[key] : undefined),
     fillMode: fill,
+    currency: 'EUR',
   });
   return node;
 };

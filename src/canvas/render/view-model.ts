@@ -6,6 +6,7 @@ import { layoutDocument } from '../../layout/layout-document';
 import type { Layout, PlacedItem } from '../../layout/types';
 import type { Editor } from '../editor/create-editor';
 import type { EditorUiState } from '../editor/editor-state';
+import { currencyOf } from '../../data/currency';
 import type { PieceRenderContext } from './elements-layer';
 import { createRenderContextProvider } from './render-context';
 
@@ -30,7 +31,7 @@ function createProvider(): Provider {
   let last: { key: unknown; pageIndex: number; model: ViewModel } | null = null;
 
   return (doc, ui) => {
-    const context = contextOf(ui);
+    const context = contextOf(ui, currencyOf(doc));
 
     if (!ui.fillMode) {
       const items = doc.elements.map((e) => {

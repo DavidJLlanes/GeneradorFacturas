@@ -1,5 +1,6 @@
 import { rectOf } from '../core/document/element-rect';
 import type { DocumentModel } from '../core/document/types';
+import { currencyOf } from '../data/currency';
 import { withPageVariables } from '../data/page-variables';
 import { makeResolver } from '../data/make-resolver';
 import { createElementsLayer, type PieceRenderContext } from '../canvas/render/elements-layer';
@@ -27,6 +28,7 @@ const noValue = (): unknown => undefined;
 // Decide las páginas y los datos de lo que se va a imprimir. Las variables sin dato salen vacías: el
 // PDF no debe enseñar nunca `{{campo}}`.
 export function planPrint(doc: DocumentModel, ui: EditorUiState, mode: PrintMode): PrintPlan {
+  const currency = currencyOf(doc);
   if (mode === 'clean') {
     const items = doc.elements
       .filter((e) => !e.hidden)
@@ -35,10 +37,11 @@ export function planPrint(doc: DocumentModel, ui: EditorUiState, mode: PrintMode
       mode,
       pages: [{ items }],
       context: {
-        base: makeResolver(ui.schema, {}, 'empty'),
+        base: makeResolver(ui.schema, {}, 'empty', currency),
         schema: ui.schema,
         value: noValue,
         fillMode: false,
+        currency,
       },
     };
   }
@@ -49,10 +52,11 @@ export function planPrint(doc: DocumentModel, ui: EditorUiState, mode: PrintMode
     mode,
     pages: layout.pages,
     context: {
-      base: makeResolver(ui.schema, derived, 'empty'),
+      base: makeResolver(ui.schema, derived, 'empty', currency),
       schema: ui.schema,
       value,
       fillMode: true,
+      currency,
     },
   };
 }

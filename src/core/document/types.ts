@@ -37,4 +37,6 @@ export interface DocumentModel {
   elements: readonly DocElement[];
   /** Colores con nombre del documento; si falta, se usa la paleta por defecto. */
   palette?: Palette;
+  /** Moneda de los importes (código ISO, p. ej. `USD`); si falta, el euro. */
+  currency?: string;
 }

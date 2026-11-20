@@ -9,9 +9,13 @@ import { tableData } from './table-rows';
 const PX_PER_PT = 96 / 72;
 const numberFormat = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 6 });
 
-function cellText(column: ColumnSpec, value: string | number | undefined): string {
+function cellText(
+  column: ColumnSpec,
+  value: string | number | undefined,
+  currency: string,
+): string {
   if (value === undefined || value === '') return '';
-  if (column.kind === 'money') return typeof value === 'number' ? formatCents(value) : '';
+  if (column.kind === 'money') return typeof value === 'number' ? formatCents(value, currency) : '';
   if (column.kind === 'choice')
     return column.options?.find((o) => o.value === value)?.label ?? String(value);
   if (column.kind === 'number')
@@ -52,7 +56,7 @@ function message(node: HTMLElement, text: string): void {
 // páginas, dibuja solo sus filas `slice` pero siempre con la cabecera.
 export function renderTable(
   node: HTMLElement,
-  { props, schema, value, slice }: PieceRenderInput,
+  { props, schema, value, slice, currency }: PieceRenderInput,
 ): void {
   node.style.border = 'none';
   node.style.background = 'transparent';
@@ -94,7 +98,7 @@ export function renderTable(
       const style: Partial<CSSStyleDeclaration> = { background: zebra };
       if (grid !== 'none') style.borderBottom = line;
       if (grid === 'full' && i > 0) style.borderLeft = line;
-      cells.push(cell(cellText(c, row[c.key]), c, pad, style));
+      cells.push(cell(cellText(c, row[c.key], currency), c, pad, style));
     });
   }
   node.replaceChildren(...cells);

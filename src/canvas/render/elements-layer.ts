@@ -12,6 +12,7 @@ export interface PieceRenderContext {
   schema: DataSchema | null;
   value(key: string): unknown;
   fillMode: boolean;
+  currency: string;
   version: unknown;
 }
 
@@ -74,6 +75,7 @@ export function createElementsLayer(): {
       schema: context.schema,
       value: context.value,
       fillMode: context.fillMode,
+      currency: context.currency,
       ...(item.slice ? { slice: item.slice } : {}),
     });
   };

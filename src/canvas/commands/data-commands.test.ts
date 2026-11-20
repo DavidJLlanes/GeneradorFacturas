@@ -36,20 +36,20 @@ describe('contexto de dibujo', () => {
     setDataSource(editor, { schema });
     setDataValue(editor, 'nombre', 'Ana');
     const provide = createRenderContextProvider();
-    expect(provide(editor.ui.get()).resolve('Hola {{nombre}}')).toBe('Hola {{nombre}}');
+    expect(provide(editor.ui.get(), 'EUR').resolve('Hola {{nombre}}')).toBe('Hola {{nombre}}');
     toggleFillMode(editor);
-    expect(provide(editor.ui.get()).resolve('Hola {{nombre}}')).toBe('Hola Ana');
+    expect(provide(editor.ui.get(), 'EUR').resolve('Hola {{nombre}}')).toBe('Hola Ana');
   });
 
   it('reutiliza el contexto si no cambian datos, esquema ni modo (zoom, selección…)', () => {
     const editor = make();
     const provide = createRenderContextProvider();
-    const first = provide(editor.ui.get());
+    const first = provide(editor.ui.get(), 'EUR');
     editor.select([]);
     editor.setViewport({ zoom: 2, panX: 0, panY: 0 });
-    expect(provide(editor.ui.get())).toBe(first);
+    expect(provide(editor.ui.get(), 'EUR')).toBe(first);
     setDataValue(editor, 'a', '1');
-    expect(provide(editor.ui.get()).version).not.toBe(first.version);
+    expect(provide(editor.ui.get(), 'EUR').version).not.toBe(first.version);
   });
 });
 

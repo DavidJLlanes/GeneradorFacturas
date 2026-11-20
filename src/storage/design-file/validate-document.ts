@@ -1,4 +1,5 @@
 import type { DocElement, DocumentModel, Page, PieceProps } from '../../core/document/types';
+import { isCurrency } from '../../data/currency';
 import { PALETTE_KEYS, type Palette } from '../../styles/palette';
 
 type Obj = Record<string, unknown>;
@@ -80,5 +81,6 @@ export function readDocument(raw: unknown): DocumentModel {
     page: readPage(raw['page']),
     elements: raw['elements'].map(readElement),
   };
-  return palette ? { ...doc, palette } : doc;
+  const withPalette = palette ? { ...doc, palette } : doc;
+  return isCurrency(raw['currency']) ? { ...withPalette, currency: raw['currency'] } : withPalette;
 }

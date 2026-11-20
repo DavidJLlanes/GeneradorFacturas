@@ -10,11 +10,12 @@ export function formatFieldValue(
   kind: FieldKind,
   value: unknown,
   options?: readonly ChoiceOption[],
+  currency?: string,
 ): string {
   if (value === undefined || value === null || value === '') return '';
   switch (kind) {
     case 'money':
-      return typeof value === 'number' ? formatCents(value) : '';
+      return typeof value === 'number' ? formatCents(value, currency) : '';
     case 'number':
       return typeof value === 'number' ? numberFormat.format(value) : String(value);
     case 'date': {

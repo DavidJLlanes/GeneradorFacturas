@@ -22,6 +22,7 @@ const context = {
   schema: null,
   value: () => undefined,
   fillMode: false,
+  currency: 'EUR',
   version: 0,
 };
 const text = (extra: Partial<DocElement> = {}): DocElement => ({
