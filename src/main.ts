@@ -6,6 +6,7 @@ import { documentTypes } from './core/document-type/discover';
 import { createBestStore } from './storage/local/idb-store';
 import { setSession } from './storage/session/session-context';
 import { attachAutosave } from './storage/local/autosave';
+import { registerServiceWorker } from './pwa/register';
 import { mountApp } from './ui/mount-app';
 import './ui/base.css';
 
@@ -26,3 +27,4 @@ async function start(root: HTMLElement): Promise<void> {
 
 const root = document.getElementById('app');
 if (root) void start(root);
+registerServiceWorker();

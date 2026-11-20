@@ -204,7 +204,7 @@ Un JSON versionado (`*.documento.json`) con: `formato` y `version`, **`tipoDocum
 **Fase 15 — Extras**
 
 - [ ] Idiomas y monedas
-- [ ] PWA sin conexión
+- [x] PWA sin conexión
 - [ ] Móvil y tableta
 - [ ] Accesibilidad
 
