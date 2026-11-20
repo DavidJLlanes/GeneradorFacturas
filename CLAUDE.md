@@ -24,3 +24,8 @@ Estas reglas son de máxima importancia y se aplican en **cada iteración**, sin
 - Antes de crear o modificar código, decidir en qué carpeta y archivo vive cada pieza y si hace falta uno nuevo.
 - Revisar al final de cada iteración que ningún archivo haya crecido de forma innecesaria.
 - La estructura prevista está en `ROADMAP.md` (sección "Estructura de carpetas prevista").
+
+## README principal
+
+- El `README.md` es la portada de GitHub: detallado, con etiquetas (badges) de tecnologías.
+- **Se actualiza en cada cambio relevante** (función nueva, tipo de documento, tecnología, comando, estructura de carpetas, cifras como tests o tipos), en el mismo commit que el cambio.
